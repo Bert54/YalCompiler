@@ -32,7 +32,11 @@ public class BlocDInstructions extends ArbreAbstrait {
     
     @Override
     public String toMIPS() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        StringBuilder string = new StringBuilder("");
+        for (ArbreAbstrait a: this.programme) {
+            string.append(a.toMIPS());
+        }
+        return string.toString();
     }
 
 }

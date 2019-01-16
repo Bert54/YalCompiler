@@ -34,7 +34,7 @@ import yal.exceptions.AnalyseLexicaleException;
 %xstate Chaine
 
 idf = [A-Za-z_][A-Za-z_0-9]*
-
+commentDoubleSl = \/\/.*\n?
 csteE = [0-9]+
 guillemet = [\"]
 
@@ -56,5 +56,6 @@ espace = {finDeLigne}  | [ \t\f]
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
 
 {espace}               { }
+{commentDoubleSl}      { }
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
 

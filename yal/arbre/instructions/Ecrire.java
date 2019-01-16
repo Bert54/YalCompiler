@@ -18,7 +18,10 @@ public class Ecrire extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
-        string.append(this.exp.toMIPS());
+        string.append("li $v0, " + this.exp.toMIPS() + "\n");
+        string.append("move $a0, $v0\n");
+        string.append("li $v0, 1\n");
+        string.append("syscall\n");
         return string.toString();
     }
 
