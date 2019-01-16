@@ -11,7 +11,7 @@
     <description>Builds, tests, and runs the project yal.</description>
     <dirname property="module.yal.basedir" file="${ant.file.yal}"/>
     <property name="excludes" value="**/*.cup,**/*.jflex,**/*.odt,**/*.pdf"/>
-    <property name="src" value="${module.yal.basedir}/yal/analyse"/>
+    <property name="src" value="${module.yal.basedir}/analyse"/>
     <target name="init-cup" depends="clean">
         <echo message = "test des fichiers de cup" />
         <condition property="cup.needed" >
