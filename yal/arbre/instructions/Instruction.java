@@ -8,4 +8,16 @@ public abstract class Instruction extends ArbreAbstrait {
         super(n);
     }
 
+    /**
+     * Permet de passer a la ligne dans le code mips genere
+     * @return code mips d'un retour a la ligne
+     */
+    protected String sautDeLigne() {
+        StringBuilder string = new StringBuilder("");
+        string.append("\nli $v0, 4\n"); // Code du print pour le retour à la ligne
+        string.append("la $a0, ln\n");  // Saut à la ligne
+        string.append("syscall\n\n");   // Appel du saut de ligne
+        return string.toString();
+    }
+
 }

@@ -59,7 +59,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER ;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
@@ -81,8 +81,7 @@ LINST   ::=     LINST:li  INST:i
                    RESULT = li ; :}
         |
                 INST:i
-                {:
-                   BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
+                {: BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
                    b.ajouter(i) ;
                    RESULT = b ; :}
                 ;
@@ -92,9 +91,12 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |
                 DECLARATION:d POINTVIRGULE
                 {: RESULT = d; :}
+        |
+                LIRE POINTVIRGULE
+                {: RESULT = new Lire(0) ; :}
                 ;
     
-EXP    ::=      CSTENTIERE:c
+EXP    ::=     CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
                 ;
 

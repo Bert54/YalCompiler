@@ -22,9 +22,7 @@ public class Ecrire extends Instruction {
         string.append("move $a0, $v0\n");
         string.append("li $v0, 1\n");
         string.append("syscall\n");
-        string.append("li $v0, 4\n");   // Code du print pour le retour à la ligne
-        string.append("la $a0, ln\n");  // Saut à la ligne
-        string.append("syscall\n");     // Appel du saut de ligne
+        string.append(this.sautDeLigne());
         return string.toString();
     }
 
