@@ -4,11 +4,11 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.junit.Test;
 import yal.analyse.AnalyseurLexical;
 import yal.analyse.AnalyseurSyntaxique;
 import yal.arbre.ArbreAbstrait;
 import yal.exceptions.AnalyseException;
-import yal.tds.Valeurs;
 
 public class Yal {
 
@@ -16,6 +16,7 @@ public class Yal {
      * Constructeur du programme principal
      * @param nomFichier nom du fichier a tester
      */
+
     public Yal(String nomFichier) {
         try {
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(nomFichier)));
