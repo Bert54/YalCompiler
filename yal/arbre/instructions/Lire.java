@@ -3,7 +3,7 @@ package yal.arbre.instructions;
 public class Lire extends Instruction {
 
     /**
-     * Lecture d'une variable
+     * Constructeur d'une lecture de variable
      * @param n numero de ligne
      */
     public Lire(int n) {

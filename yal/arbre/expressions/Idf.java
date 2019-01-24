@@ -9,6 +9,11 @@ public class Idf extends Expression {
     private String nom;
     private int dep;
 
+    /**
+     * Constructeur d'un identificateur
+     * @param n numero de ligne
+     * @param nom nom de l'identificateur
+     */
     public Idf(int n, String nom) {
         super(n);
         this.nom = nom;

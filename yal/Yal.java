@@ -11,7 +11,11 @@ import yal.exceptions.AnalyseException;
 import yal.tds.Valeurs;
 
 public class Yal {
-    
+
+    /**
+     * Constructeur du programme principal
+     * @param nomFichier nom du fichier a tester
+     */
     public Yal(String nomFichier) {
         try {
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(nomFichier)));

@@ -3,7 +3,12 @@ package yal.arbre.expressions;
 public abstract class Constante extends Expression {
 
     protected String cste ;
-    
+
+    /**
+     * Constructeur d'une constante
+     * @param texte constante en chaine de caractères
+     * @param n numero de ligne
+     */
     protected Constante(String texte, int n) {
         super(n) ;
         cste = texte ;
