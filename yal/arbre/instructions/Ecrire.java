@@ -23,10 +23,10 @@ public class Ecrire extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
-        string.append("li $v0, " + this.exp.toMIPS() + "\n");
-        string.append("move $a0, $v0\n");
-        string.append("li $v0, 1\n");
-        string.append("syscall\n");
+        string.append("li $v0, " + this.exp.toMIPS() + "\n");   // code du print
+        string.append("move $a0, $v0\n");   // placement de $v0 dans $a0
+        string.append("li $v0, 1\n");       // code du print d'un entier
+        string.append("syscall\n");         // appel du système pour l'affichage de l'entier
         string.append(this.sautDeLigne());
         return string.toString();
     }

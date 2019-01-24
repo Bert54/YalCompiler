@@ -14,7 +14,7 @@ public class ConstanteEntiere extends Constante {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
-        string.append(this.cste);
+        string.append(this.cste);   // affichage de la constante
         return string.toString();
     }
 

@@ -28,7 +28,7 @@ public class Idf extends Expression {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
-        string.append(this.dep + "($s7)");
+        string.append(this.dep + "($s7)");  // $s7 étant la pile
         return string.toString();
     }
 }

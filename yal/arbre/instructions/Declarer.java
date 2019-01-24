@@ -28,8 +28,8 @@ public class Declarer extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
-        string.append("addi $sp, $sp, -4\n");
-        string.append("sw $zero, " + dep + "($s7)" + "\n");
+        string.append("addi $sp, $sp, -4\n");   // réservation de l'espace pour la variable
+        string.append("sw $zero, " + dep + "($s7)" + "\n"); // on place le registre 0 dans la variable
         return string.toString();
     }
 }

@@ -18,7 +18,7 @@ public class Lire extends Instruction {
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
         string.append("li $v0, 5\n");   // Code du read pour un entier
-        string.append("syscall\n");
+        string.append("syscall\n");     // appel système pour lire l'entier
         string.append(this.sautDeLigne());
         return string.toString();
     }
