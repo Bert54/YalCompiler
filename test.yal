@@ -3,16 +3,11 @@ debut
 
     entier a;
     entier b;
-    entier c;
-    entier d;
+
+    a = 5;
+    b = 33;
 
     ecrire 69; // Super nombre
-    ecrire 40;
-    ecrire 99999;
-
-    entier e;
-
-    ecrire 0;
 
     lire ;
 

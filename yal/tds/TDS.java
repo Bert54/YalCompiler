@@ -39,12 +39,20 @@ public class TDS {
     }
 
     public Symbole identifier(Entree e) throws VariableNonDeclareeException {
-        if (!table.containsKey(e)) {
-            throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
+        int typeE = 0;
+        int typeEn = 0;
+        if (e instanceof EntreeVariable) {
+            typeE = 0;
         }
-        else {
-            return this.table.get(e);
+        for (Entree en : this.table.keySet()) {
+            if (en instanceof EntreeVariable) {
+                typeEn = 0;
+            }
+            if (typeE == typeEn && en.getNom().equals(e.getNom())) {
+                return this.table.get(en);
+            }
         }
+        throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
     }
 
 }

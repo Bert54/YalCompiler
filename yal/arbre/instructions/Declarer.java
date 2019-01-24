@@ -7,24 +7,21 @@ import yal.tds.symbole.Symbole;
 public class Declarer extends Instruction {
 
     private String nom;
-    private EntreeVariable ev;
     private int dep;
 
     /**
      * Constructeur d'une declaration
      * @param n numero de ligne
      * @param nom nom de la variable
-     * @param ev
      */
-    public Declarer(int n, String nom, EntreeVariable ev) {
+    public Declarer(int n, String nom) {
         super(n);
-        this.ev = ev;
         this.nom = nom;
     }
 
     @Override
     public void verifier() {
-        Symbole s = TDS.getInstance().identifier(this.ev);
+        Symbole s = TDS.getInstance().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
         this.dep = s.getDeplacement();
     }
 

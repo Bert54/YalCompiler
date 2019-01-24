@@ -59,14 +59,14 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE ;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, INST ;
 non terminal Expression EXP ;
-non terminal Instruction DECL_VAR, DECLARATION ;
+non terminal Instruction DECL_VAR, DECLARATION, AFFECT ;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -81,7 +81,8 @@ LINST   ::=     LINST:li  INST:i
                    RESULT = li ; :}
         |
                 INST:i
-                {: BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
+                {:
+                   BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
                    b.ajouter(i) ;
                    RESULT = b ; :}
                 ;
@@ -94,9 +95,17 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |
                 LIRE POINTVIRGULE
                 {: RESULT = new Lire(0) ; :}
+        |
+                AFFECT:a POINTVIRGULE
+                {: RESULT = a; :}
                 ;
-    
-EXP    ::=     CSTENTIERE:c
+
+AFFECT  ::=     IDF:i EGALE EXP:e
+                {: Instruction aff = new Affectation(eleft+1, new Idf(ileft + 1, i), e);
+                   RESULT = aff; :}
+                ;
+
+EXP    ::=      CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
                 ;
 
@@ -105,9 +114,8 @@ DECLARATION ::= DECL_VAR:d
                 ;
 
 DECL_VAR ::=    ENTIER IDF:i
-                {: EntreeVariable ev = new EntreeVariable(i, ileft + 1);
-                   TDS.getInstance().ajouter(ev, new SymboleVariable(Valeurs.getInstance().getTaillePile()));
+                {: TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(Valeurs.getInstance().getTaillePile()));
                    Valeurs.getInstance().empiler();
-                   RESULT = new Declarer(ileft + 1, i, ev);
+                   RESULT = new Declarer(ileft + 1, i);
                 :}
                 ;

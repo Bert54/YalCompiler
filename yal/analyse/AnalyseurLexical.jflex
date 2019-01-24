@@ -47,9 +47,13 @@ espace = {finDeLigne}  | [ \t\f]
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
 
-"ecrire"                { return symbol(CodesLexicaux.ECRIRE); }
-"lire"                  { return symbol(CodesLexicaux.LIRE); }
 "entier"               { return symbol(CodesLexicaux.ENTIER); }
+
+"="                    { return symbol(CodesLexicaux.EGALE); }
+
+"ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
+
+"lire"                 { return symbol(CodesLexicaux.LIRE); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
