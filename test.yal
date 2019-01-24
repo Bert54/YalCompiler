@@ -1,6 +1,17 @@
 programme test
 debut
 
+    entier a;
+    entier b;
+    entier c;
+    entier d;
+
     ecrire 69; // Super nombre
+    ecrire 40;
+    ecrire 99999;
+
+    entier e;
+
+    ecrire 0;
 
 fin

@@ -28,6 +28,9 @@ public class BlocDInstructions extends ArbreAbstrait {
 
     @Override
     public void verifier() {
+        for (ArbreAbstrait a: this.programme) {
+            a.verifier();
+        }
     }
     
     @Override

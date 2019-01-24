@@ -8,6 +8,7 @@ import yal.analyse.AnalyseurLexical;
 import yal.analyse.AnalyseurSyntaxique;
 import yal.arbre.ArbreAbstrait;
 import yal.exceptions.AnalyseException;
+import yal.tds.Valeurs;
 
 public class Yal {
     
@@ -23,6 +24,7 @@ public class Yal {
             PrintWriter flot = new PrintWriter(new BufferedWriter(new FileWriter(nomSortie))) ;
             flot.println(".data\nln : 	.asciiz \"\\n\"");  // Constante pour le saut de ligne
             flot.println("\n.text\nmain :\n");
+            flot.println("move $s7,$sp\n");
             flot.println(arbre.toMIPS());
             flot.println("end :\n\n" +
                     "li $v0, 10\n" +
