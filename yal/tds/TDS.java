@@ -9,6 +9,7 @@ import yal.tds.symbole.Symbole;
 import java.util.HashMap;
 
 public class TDS {
+
     private static TDS instance = new TDS();
 
     public static TDS getInstance() {

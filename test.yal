@@ -8,7 +8,8 @@ debut
     b = 33;
 
     ecrire 69; // Super nombre
-
-    lire ;
+    ecrire a;
+    ecrire b;
+    lire a;
 
 fin

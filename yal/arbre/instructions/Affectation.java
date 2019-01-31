@@ -28,7 +28,7 @@ public class Affectation extends Instruction {
 
     @Override
     public String toMIPS() {
-        StringBuilder string = new StringBuilder("");
+        StringBuilder string = new StringBuilder("#Affectation\n");
         string.append("lw $v0, " + idf.toMIPS() + "\n");    // on charge la variable
         string.append("li $v0, " + exp.toMIPS() + "\n");    // code du print
         string.append("sw $v0, " + idf.toMIPS() + "\n");    // on empile la variable
