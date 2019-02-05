@@ -38,7 +38,7 @@ commentDoubleSl = \/\/.*\n?
 csteE = [0-9]+
 guillemet = [\"]
 operateur = [\*\-\+]
-operateurComp = (<|>|\=\=|!\=|<\=|>\=)
+operateurComp =  (<|>|\=\=|\!\=|<\=|>\=)
 
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
@@ -57,6 +57,8 @@ espace = {finDeLigne}  | [ \t\f]
 
 {operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
 
+{operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
+
 "="                    { return symbol(CodesLexicaux.EGALE); }
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
@@ -70,8 +72,6 @@ espace = {finDeLigne}  | [ \t\f]
 "("                    { return symbol(CodesLexicaux.PAROUVRANTE); }
 
 ")"                    { return symbol(CodesLexicaux.PARFERMANTE); }
-
-{operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
 
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
 

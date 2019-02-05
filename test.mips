@@ -6,29 +6,30 @@ main :
 
 move $s7,$sp
 
-#Ecriture
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, 0($s7)
+#Affectation
 li $v0, 5
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 2
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+tantque1: 
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 0
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 6
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
+beq $v0, $t8, fintantque1
+#Ecriture
+lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
@@ -42,6 +43,25 @@ li $v0, 4
 la $a0, ln
 syscall
 
+#Affectation
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+b tantque1
+fintantque1: 
 
 end :
 

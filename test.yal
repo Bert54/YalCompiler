@@ -4,7 +4,7 @@ debut
     //ecrire 5 + 2 * 6;
     entier a;
     a = 5;
-    tantque a > 0 repeter
+    tantque a != 0 repeter
         ecrire a;
         a = a - 1;
     fintantque

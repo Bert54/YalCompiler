@@ -28,7 +28,7 @@ public class BoucleWhile extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
-        string.append("tantque" + Valeurs.getInstance().getCompteurBoucle() + "\n");
+        string.append("tantque" + Valeurs.getInstance().getCompteurBoucle() + ": \n");
         string.append(this.expL.toMIPS());
         string.append("addi $sp, $sp, 4\n");
         string.append("lw $t8, 0($sp)\n");
@@ -56,7 +56,7 @@ public class BoucleWhile extends Instruction {
         }
         string.append(this.bloc.toMIPS());
         string.append("b tantque" + Valeurs.getInstance().getCompteurBoucle() + "\n");
-        string.append("fintantque" + Valeurs.getInstance().getCompteurBoucle() + "\n");
+        string.append("fintantque" + Valeurs.getInstance().getCompteurBoucle() + ": \n");
         Valeurs.getInstance().incrementerCompteurBoucle();
         return string.toString();
     }
