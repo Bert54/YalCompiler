@@ -59,14 +59,15 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, PAROUVRANTE, PARFERMANTE,  ;
-terminal String    IDF, CSTENTIERE, OPER ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE ;
+terminal String    IDF, CSTENTIERE, OPER, OPELOGIQUE ;
    
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, INST ;
 non terminal ExpressionBinaire EXP, EXPF;
-non terminal Instruction DECL_VAR, DECLARATION, AFFECT ;
+non terminal ExpressionLogique EXPLOG;
+non terminal Instruction DECL_VAR, DECLARATION, AFFECT, BOUCLE ;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -98,11 +99,18 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |
                 AFFECT:a POINTVIRGULE
                 {: RESULT = a; :}
+        |
+                BOUCLE:b
+                {: RESULT = b; :}
                 ;
 
+BOUCLE  ::=     TANTQUE EXPLOG:el REPETER LINST:li FINTANTQUE
+                {: RESULT = new BoucleWhile(elleft+1, li, el) ; :}
+                ;
+
+
 AFFECT  ::=     IDF:i EGALE EXP:e
-                {: Instruction aff = new Affectation(eleft+1, new Idf(ileft + 1, i), e);
-                   RESULT = aff; :}
+                {: RESULT = new Affectation(eleft+1, new Idf(ileft + 1, i), e); :}
                 ;
 
 EXP    ::=      EXP:g OPER:o EXPF:d
@@ -110,6 +118,10 @@ EXP    ::=      EXP:g OPER:o EXPF:d
        |
                 EXPF:d
                 {: RESULT = d; :}
+                ;
+
+EXPLOG  ::=     EXP:g OPELOGIQUE:o EXP:d
+                {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
                 ;
 
 EXPF   ::=      CSTENTIERE:c
@@ -124,8 +136,8 @@ DECLARATION ::= DECL_VAR:d
                 ;
 
 DECL_VAR ::=    ENTIER IDF:i
-                {: TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(Valeurs.getInstance().getTaillePile()));
+                {: TDS.getInstance().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile()));
                    Valeurs.getInstance().empiler();
-                   RESULT = new Declarer(ileft + 1, i);
+                   RESULT = new Declarer(ileft+1, i);
                 :}
                 ;

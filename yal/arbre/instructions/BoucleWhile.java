@@ -14,7 +14,7 @@ public class BoucleWhile extends Instruction {
      *
      * @param n numero de ligne
      */
-    protected BoucleWhile(int n, ArbreAbstrait aa, ExpressionLogique exp) {
+    public BoucleWhile(int n, ArbreAbstrait aa, ExpressionLogique exp) {
         super(n);
         this.expL = exp;
         this.bloc = aa;

@@ -49,15 +49,13 @@ espace = {finDeLigne}  | [ \t\f]
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
 
-"entier"               { return symbol(CodesLexicaux.ENTIER); }
-
 "tantque"              { return symbol(CodesLexicaux.TANTQUE); }
-
 "repeter"              { return symbol(CodesLexicaux.REPETER); }
-
 "fintantque"           { return symbol(CodesLexicaux.FINTANTQUE); }
 
-{operateurComp}        { return return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
+"entier"               { return symbol(CodesLexicaux.ENTIER); }
+
+{operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
 
 "="                    { return symbol(CodesLexicaux.EGALE); }
 
