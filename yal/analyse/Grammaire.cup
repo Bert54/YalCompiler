@@ -60,12 +60,12 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE ;
-terminal String    IDF, CSTENTIERE ;
+terminal String    IDF, CSTENTIERE, OPER ;
    
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, INST ;
-non terminal Expression EXP ;
+non terminal Expression EXP, EXPF;
 non terminal Instruction DECL_VAR, DECLARATION, AFFECT ;
 
 /* ----------------------------Grammar Section-------------------- */
@@ -93,8 +93,8 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 DECLARATION:d POINTVIRGULE
                 {: RESULT = d; :}
         |
-                LIRE EXP:e POINTVIRGULE
-                {: RESULT = new Lire(eleft + 1, e) ; :}
+                LIRE IDF:i POINTVIRGULE
+                {: RESULT = new Lire(ileft + 1, new Idf(ileft + 1, i)) ; :}
         |
                 AFFECT:a POINTVIRGULE
                 {: RESULT = a; :}
@@ -105,7 +105,14 @@ AFFECT  ::=     IDF:i EGALE EXP:e
                    RESULT = aff; :}
                 ;
 
-EXP    ::=      CSTENTIERE:c
+EXP    ::=      EXP:g OPER:o EXPF:d
+                {: RESULT = new Expression(gleft + 1, g, o, d); :}
+       |
+                EXPF:d
+                {: RESULT = d; :}
+                ;
+
+EXPF   ::=      CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
        |
                 IDF:i

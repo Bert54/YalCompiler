@@ -19,6 +19,10 @@ public class Idf extends Expression {
         this.nom = nom;
     }
 
+    public int getDeplacement() {
+        return this.dep;
+    }
+
     @Override
     public void verifier() {
         Symbole s = TDS.getInstance().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
@@ -28,7 +32,9 @@ public class Idf extends Expression {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
-        string.append(this.dep + "($s7)");  // $s7 étant la pile
+        string.append("lw $v0, " + this.dep + "($s7)\n");
+        string.append("sw $v0, 0($sp)\n");
+        string.append("addi $sp, $sp, -4\n");
         return string.toString();
     }
 }

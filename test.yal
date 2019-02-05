@@ -2,14 +2,11 @@ programme test
 debut
 
     entier a;
-    entier b;
-
-    a = 5;
-    b = 33;
-
-    ecrire 69; // Super nombre
+    a = 3 + 5;
     ecrire a;
-    ecrire b;
-    lire a;
+    entier b;
+    b = 5;
+    a = a + 3 + b;
+    ecrire a;
 
 fin

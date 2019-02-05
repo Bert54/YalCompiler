@@ -25,12 +25,9 @@ public class Ecrire extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("#Ecriture\n");
-        if(exp instanceof Idf) {    // On vérifie si on écrit une valeur d'une variable
-            string.append("lw $v0, " + this.exp.toMIPS() + "\n");   // code du print
-        }
-        else {
-            string.append("li $v0, " + this.exp.toMIPS() + "\n");   // code du print
-        }
+        string.append(this.exp.toMIPS());
+        string.append("addi $sp, $sp, 4\n");
+        string.append("lw $v0, 0($sp)\n");
         string.append("move $a0, $v0\n");   // placement de $v0 dans $a0
         string.append("li $v0, 1\n");       // code du print d'un entier
         string.append("syscall\n");         // appel du système pour l'affichage de l'entier

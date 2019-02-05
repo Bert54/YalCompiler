@@ -14,7 +14,9 @@ public class ConstanteEntiere extends Constante {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
-        string.append(this.cste);   // affichage de la constante
+        string.append("li $v0, " + this.cste + "\n");
+        string.append("sw $v0, 0($sp)\n");
+        string.append("addi $sp, $sp, -4\n");
         return string.toString();
     }
 

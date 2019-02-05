@@ -37,6 +37,7 @@ idf = [A-Za-z_][A-Za-z_0-9]*
 commentDoubleSl = \/\/.*\n?
 csteE = [0-9]+
 guillemet = [\"]
+operateur = [\+]
 
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
@@ -58,6 +59,8 @@ espace = {finDeLigne}  | [ \t\f]
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
+
+{operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
 
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
 

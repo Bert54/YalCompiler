@@ -1,0 +1,100 @@
+.data
+ln : 	.asciiz "\n"
+
+.text
+main :
+
+move $s7,$sp
+
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, 0($s7)
+#Affectation
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+#Ecriture
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -4($s7)
+#Affectation
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
+#Affectation
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+#Ecriture
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+
+end :
+
+li $v0, 10
+syscall 

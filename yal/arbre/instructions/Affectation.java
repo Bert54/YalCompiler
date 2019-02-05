@@ -29,9 +29,10 @@ public class Affectation extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("#Affectation\n");
-        string.append("lw $v0, " + idf.toMIPS() + "\n");    // on charge la variable
-        string.append("li $v0, " + exp.toMIPS() + "\n");    // code du print
-        string.append("sw $v0, " + idf.toMIPS() + "\n");    // on empile la variable
+        string.append(this.exp.toMIPS());
+        string.append("addi $sp, $sp, 4\n");
+        string.append("lw $v0, 0($sp)\n");    // on charge la variable
+        string.append("sw $v0, " + this.idf.getDeplacement() + "($s7)\n");
         return string.toString();
     }
 }
