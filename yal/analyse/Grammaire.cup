@@ -60,13 +60,13 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE ;
-terminal String    IDF, CSTENTIERE, OPER, OPELOGIQUE ;
+terminal String    IDF, CSTENTIERE, OPER, OPELOGIQUE, OPERMULT ;
    
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, INST ;
 non terminal ExpressionBinaire EXP, EXPF;
-non terminal ExpressionLogique EXPLOG;
+non terminal ExpressionLogique EXPLOG, EXPLOGF;
 non terminal Instruction DECL_VAR, DECLARATION, AFFECT, BOUCLE ;
 
 /* ----------------------------Grammar Section-------------------- */
@@ -120,7 +120,14 @@ EXP    ::=      EXP:g OPER:o EXPF:d
                 {: RESULT = d; :}
                 ;
 
-EXPLOG  ::=     EXP:g OPELOGIQUE:o EXP:d
+EXPLOG  ::=     EXPLOG:g OPERMULT:o EXPLOGF:d
+                {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
+       |
+                EXPLOGF:e
+                {: RESULT = e; :}
+                ;
+
+EXPLOGF ::=     EXP:g OPELOGIQUE:o EXP:d
                 {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
                 ;
 

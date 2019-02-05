@@ -6,7 +6,7 @@ public class ExpressionLogique extends Expression {
      *
      * @param n numero de ligne
      */
-    public ExpressionLogique(int n, ExpressionBinaire expg, String oper, ExpressionBinaire expd) {
+    public ExpressionLogique(int n, Expression expg, String oper, Expression expd) {
         super(n, expg, oper, expd);
     }
 

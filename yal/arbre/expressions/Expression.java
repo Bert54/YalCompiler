@@ -4,9 +4,9 @@ import yal.arbre.ArbreAbstrait;
 
 public abstract class Expression extends ArbreAbstrait {
 
-    protected ExpressionBinaire expg;
+    protected Expression expg;
     protected String oper;
-    protected ExpressionBinaire expd;
+    protected Expression expd;
 
     /**
      * Constructeur de l'arbre abstrait
@@ -17,7 +17,7 @@ public abstract class Expression extends ArbreAbstrait {
         super(n);
     }
 
-    public Expression(int n, ExpressionBinaire expg, String oper, ExpressionBinaire expd) {
+    public Expression(int n, Expression expg, String oper, Expression expd) {
         super(n);
         this.expg = expg;
         this.oper = oper;

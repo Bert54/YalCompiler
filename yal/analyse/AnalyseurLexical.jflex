@@ -39,6 +39,7 @@ csteE = [0-9]+
 guillemet = [\"]
 operateur = [\*\-\+]
 operateurComp =  (<|>|\=\=|\!\=|<\=|>\=)
+operateurLogiqueMult = et|ou
 
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
@@ -58,6 +59,8 @@ espace = {finDeLigne}  | [ \t\f]
 {operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
 
 {operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
+
+{operateurLogiqueMult} { return symbol(CodesLexicaux.OPERMULT, yytext()); }
 
 "="                    { return symbol(CodesLexicaux.EGALE); }
 

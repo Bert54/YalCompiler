@@ -10,7 +10,7 @@ public class ExpressionBinaire extends Expression {
         super(n) ;
     }
 
-    public ExpressionBinaire(int n, ExpressionBinaire expg, String oper, ExpressionBinaire expd) {
+    public ExpressionBinaire(int n, Expression expg, String oper, Expression expd) {
         super(n, expg, oper, expd);
     }
 

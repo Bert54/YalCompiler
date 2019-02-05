@@ -9,6 +9,9 @@ move $s7,$sp
 #Déclaration
 addi $sp, $sp, -4 
 sw $zero, 0($s7)
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -4($s7)
 #Affectation
 li $v0, 5
 sw $v0, 0($sp)
@@ -20,14 +23,25 @@ tantque1:
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 0
+li $v0, 14
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -4($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-beq $v0, $t8, fintantque1
 #Ecriture
 lw $v0, 0($s7)
 sw $v0, 0($sp)
@@ -54,7 +68,7 @@ addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sub $v0, $v0, $t8
+add $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4

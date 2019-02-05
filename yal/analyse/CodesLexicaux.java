@@ -22,6 +22,7 @@ public class CodesLexicaux {
   public static final int ENTIER = 8;
   public static final int EOF = 0;
   public static final int PAROUVRANTE = 13;
+  public static final int OPERMULT = 19;
   public static final int error = 1;
   public static final int OPER = 17;
   public static final int DEBUT = 3;
@@ -46,7 +47,8 @@ public class CodesLexicaux {
   "IDF",
   "CSTENTIERE",
   "OPER",
-  "OPELOGIQUE"
+  "OPELOGIQUE",
+  "OPERMULT"
   };
 }
 
