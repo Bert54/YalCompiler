@@ -18,6 +18,9 @@ public class TDS {
 
     private HashMap<Entree, Symbole> table;
 
+    /**
+     * Constructeur
+     */
     private TDS() {
         this.table = new HashMap<>();
     }

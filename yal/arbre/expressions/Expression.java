@@ -9,8 +9,7 @@ public abstract class Expression extends ArbreAbstrait {
     protected Expression expd;
 
     /**
-     * Constructeur de l'arbre abstrait
-     *
+     * Constructeur d'une expression simple
      * @param n numero de ligne
      */
     protected Expression(int n) {
@@ -19,6 +18,13 @@ public abstract class Expression extends ArbreAbstrait {
         this.expg = null;
     }
 
+    /**
+     * Constructeur d'une expression
+     * @param n numero de ligne
+     * @param expg operande gauche
+     * @param oper operateur
+     * @param expd operande droit
+     */
     public Expression(int n, Expression expg, String oper, Expression expd) {
         super(n);
         this.expg = expg;

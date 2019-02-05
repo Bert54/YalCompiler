@@ -1,18 +1,15 @@
 programme test
 debut
 
+    //ecrire 5 + 2 * 6;
     entier a;
     entier b;
     a = 5;
-    b = 5;
-    tantque a > 0 et b > 3 repeter
+    b = 1;
+    tantque a > 0 repeter
         ecrire a;
+        ecrire b;
         a = a - 1;
-    fintantque
-    b = b - 1;
-    tantque a < 5 repeter
-        ecrire a;
-        a = a + 1;
     fintantque
 
 fin

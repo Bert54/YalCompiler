@@ -6,7 +6,7 @@ public abstract class Constante extends ExpressionBinaire {
 
     /**
      * Constructeur d'une constante
-     * @param texte constante en chaine de caractères
+     * @param texte constante en chaine de caracteres
      * @param n numero de ligne
      */
     protected Constante(String texte, int n) {

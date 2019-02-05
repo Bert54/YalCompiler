@@ -19,6 +19,10 @@ public class Idf extends ExpressionBinaire {
         this.nom = nom;
     }
 
+    /**
+     * Getter sur le deplacement de la variable dans la pile
+     * @return deplacement dans la pile
+     */
     public int getDeplacement() {
         return this.dep;
     }

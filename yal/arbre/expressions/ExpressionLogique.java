@@ -3,10 +3,13 @@ package yal.arbre.expressions;
 import yal.tds.Valeurs;
 
 public class ExpressionLogique extends Expression {
+
     /**
-     * Constructeur de l'arbre abstrait
-     *
+     * Constructeur d'une expression logique
      * @param n numero de ligne
+     * @param expg operande gauche
+     * @param oper operateur
+     * @param expd operande droit
      */
     public ExpressionLogique(int n, Expression expg, String oper, Expression expd) {
         super(n, expg, oper, expd);

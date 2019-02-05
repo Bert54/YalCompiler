@@ -3,13 +3,20 @@ package yal.arbre.expressions;
 public class ExpressionBinaire extends Expression {
 
     /**
-     * Constructeur d'une expression
+     * Constructeur d'une expression binaire simple
      * @param n numero de ligne
      */
     protected ExpressionBinaire(int n) {
         super(n) ;
     }
 
+    /**
+     * Constructeur d'une expression binaire
+     * @param n numero de ligne
+     * @param expg operande gauche
+     * @param oper operateur
+     * @param expd operande droit
+     */
     public ExpressionBinaire(int n, Expression expg, String oper, Expression expd) {
         super(n, expg, oper, expd);
     }

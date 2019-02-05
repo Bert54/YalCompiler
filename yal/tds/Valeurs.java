@@ -18,6 +18,9 @@ public class Valeurs {
 
     private int compteurComparaisonLogique;
 
+    /**
+     * Constructeur
+     */
     private Valeurs() {
         this.taillePile = 0;
         this.compteurBoucle = 1;
@@ -25,7 +28,7 @@ public class Valeurs {
     }
 
     /**
-     * Retourne la taille de la pile
+     * Getter sur la taille de la pile
      * @return la taille de la pile
      */
     public int getTaillePile() {
@@ -33,31 +36,45 @@ public class Valeurs {
     }
 
     /**
-     * Incrémente la taille de la pile
+     * Incremente la taille de la pile
      */
     public void empiler() {
         this.taillePile -= 4;
     }
 
     /**
-     * Décrémente la taille de la pile
+     * Decremente la taille de la pile
      */
     public void depiler() {
         this.taillePile += 4;
     }
 
+    /**
+     * Incremente le compteur du nombre de boucles utilises
+     */
     public void incrementerCompteurBoucle() {
         this.compteurBoucle++;
     }
 
+    /**
+     * Getter sur le nombre de boucles utilises
+     * @return nombre de boucles
+     */
     public int getCompteurBoucle() {
         return this.compteurBoucle;
     }
 
+    /**
+     * Incremente le compteur du nombre de comparaisons effectuees
+     */
     public void incrementerCompteurComparaisonLogique() {
         this.compteurComparaisonLogique++;
     }
 
+    /**
+     * Getter sur le nombre de comparaisons effectuees
+     * @return nombre de comparaisons
+     */
     public int getCompteurComparaisonLogique() {
         return this.compteurComparaisonLogique;
     }

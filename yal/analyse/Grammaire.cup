@@ -59,7 +59,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, MOINS, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE ;
 terminal String    IDF, CSTENTIERE, OPER, OPELOGIQUE, OPERMULT ;
    
 /* Non terminals used in the grammar section.  */
@@ -116,8 +116,8 @@ AFFECT  ::=     IDF:i EGALE EXP:e
 EXP    ::=      EXP:g OPER:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
-                EXPF:d
-                {: RESULT = d; :}
+                EXPF:e
+                {: RESULT = e; :}
                 ;
 
 EXPLOG  ::=     EXPLOG:g OPERMULT:o EXPLOGF:d
