@@ -1,26 +1,17 @@
 package yal.arbre.expressions;
 
-import yal.arbre.ArbreAbstrait;
-
-public class Expression extends ArbreAbstrait {
-
-    protected Expression expg;
-    protected String oper;
-    protected Expression expd;
+public class ExpressionBinaire extends Expression {
 
     /**
      * Constructeur d'une expression
      * @param n numero de ligne
      */
-    protected Expression(int n) {
+    protected ExpressionBinaire(int n) {
         super(n) ;
     }
 
-    public Expression(int n, Expression expg, String oper, Expression expd) {
-        super(n);
-        this.expg = expg;
-        this.oper = oper;
-        this.expd = expd;
+    public ExpressionBinaire(int n, ExpressionBinaire expg, String oper, ExpressionBinaire expd) {
+        super(n, expg, oper, expd);
     }
 
     @Override
@@ -41,6 +32,13 @@ public class Expression extends ArbreAbstrait {
         switch (oper) {
             case "+":
                 string.append("add $v0, $v0, $t8\n");
+                break;
+            case "-":
+                string.append("sub $v0, $v0, $t8\n");
+                break;
+            case "*":
+                string.append("mult $v0, $t8\n");
+                string.append("mflo $v0\n");
                 break;
             default:
                 System.out.println("Fuck you");

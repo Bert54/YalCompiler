@@ -59,13 +59,13 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, PAROUVRANTE, PARFERMANTE,  ;
 terminal String    IDF, CSTENTIERE, OPER ;
    
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, INST ;
-non terminal Expression EXP, EXPF;
+non terminal ExpressionBinaire EXP, EXPF;
 non terminal Instruction DECL_VAR, DECLARATION, AFFECT ;
 
 /* ----------------------------Grammar Section-------------------- */
@@ -106,7 +106,7 @@ AFFECT  ::=     IDF:i EGALE EXP:e
                 ;
 
 EXP    ::=      EXP:g OPER:o EXPF:d
-                {: RESULT = new Expression(gleft + 1, g, o, d); :}
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
                 EXPF:d
                 {: RESULT = d; :}

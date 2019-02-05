@@ -52,25 +52,25 @@ public class AnalyseurSyntaxique extends java_cup.runtime.lr_parser {
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
     "\000\037\000\004\004\005\001\002\000\004\002\041\001" +
-    "\002\000\004\014\006\001\002\000\004\005\007\001\002" +
-    "\000\012\010\010\011\014\012\015\014\011\001\002\000" +
-    "\006\014\033\015\031\001\002\000\004\013\030\001\002" +
-    "\000\014\006\ufffe\010\ufffe\011\ufffe\012\ufffe\014\ufffe\001" +
-    "\002\000\004\007\027\001\002\000\004\014\025\001\002" +
-    "\000\004\014\024\001\002\000\014\006\023\010\010\011" +
-    "\014\012\015\014\011\001\002\000\004\007\ufff4\001\002" +
+    "\002\000\004\016\006\001\002\000\004\005\007\001\002" +
+    "\000\012\010\010\011\014\012\015\016\011\001\002\000" +
+    "\006\016\033\017\031\001\002\000\004\013\030\001\002" +
+    "\000\014\006\ufffe\010\ufffe\011\ufffe\012\ufffe\016\ufffe\001" +
+    "\002\000\004\007\027\001\002\000\004\016\025\001\002" +
+    "\000\004\016\024\001\002\000\014\006\023\010\010\011" +
+    "\014\012\015\016\011\001\002\000\004\007\ufff4\001\002" +
     "\000\004\007\021\001\002\000\014\006\ufffc\010\ufffc\011" +
-    "\ufffc\012\ufffc\014\ufffc\001\002\000\014\006\uffff\010\uffff" +
-    "\011\uffff\012\uffff\014\uffff\001\002\000\004\002\000\001" +
+    "\ufffc\012\ufffc\016\ufffc\001\002\000\014\006\uffff\010\uffff" +
+    "\011\uffff\012\uffff\016\uffff\001\002\000\004\002\000\001" +
     "\002\000\004\007\ufff3\001\002\000\004\007\026\001\002" +
-    "\000\014\006\ufffb\010\ufffb\011\ufffb\012\ufffb\014\ufffb\001" +
-    "\002\000\014\006\ufffa\010\ufffa\011\ufffa\012\ufffa\014\ufffa" +
-    "\001\002\000\006\014\033\015\031\001\002\000\006\007" +
-    "\ufff6\016\ufff6\001\002\000\006\007\ufff7\016\ufff7\001\002" +
-    "\000\006\007\ufff5\016\ufff5\001\002\000\006\007\ufff9\016" +
-    "\035\001\002\000\006\014\033\015\031\001\002\000\006" +
-    "\007\ufff8\016\ufff8\001\002\000\006\007\040\016\035\001" +
-    "\002\000\014\006\ufffd\010\ufffd\011\ufffd\012\ufffd\014\ufffd" +
+    "\000\014\006\ufffb\010\ufffb\011\ufffb\012\ufffb\016\ufffb\001" +
+    "\002\000\014\006\ufffa\010\ufffa\011\ufffa\012\ufffa\016\ufffa" +
+    "\001\002\000\006\016\033\017\031\001\002\000\006\007" +
+    "\ufff6\020\ufff6\001\002\000\006\007\ufff7\020\ufff7\001\002" +
+    "\000\006\007\ufff5\020\ufff5\001\002\000\006\007\ufff9\020" +
+    "\035\001\002\000\006\016\033\017\031\001\002\000\006" +
+    "\007\ufff8\020\ufff8\001\002\000\006\007\040\020\035\001" +
+    "\002\000\014\006\ufffd\010\ufffd\011\ufffd\012\ufffd\016\ufffd" +
     "\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
@@ -260,7 +260,7 @@ class CUP$AnalyseurSyntaxique$actions {
               ArbreAbstrait RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)).right;
-		Expression e = (Expression)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)).value;
+		ExpressionBinaire e = (ExpressionBinaire)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)).value;
 		 RESULT = new Ecrire(e, eleft + 1) ; 
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("INST",2, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
             }
@@ -311,7 +311,7 @@ class CUP$AnalyseurSyntaxique$actions {
 		String i = (String)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)).value;
 		int eleft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
-		Expression e = (Expression)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
+		ExpressionBinaire e = (ExpressionBinaire)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
 		 Instruction aff = new Affectation(eleft+1, new Idf(ileft + 1, i), e);
                    RESULT = aff; 
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("AFFECT",7, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
@@ -321,17 +321,17 @@ class CUP$AnalyseurSyntaxique$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 9: // EXP ::= EXP OPER EXPF 
             {
-              Expression RESULT =null;
+              ExpressionBinaire RESULT =null;
 		int gleft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)).left;
 		int gright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)).right;
-		Expression g = (Expression)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)).value;
+		ExpressionBinaire g = (ExpressionBinaire)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)).value;
 		int oleft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)).left;
 		int oright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)).right;
 		String o = (String)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)).value;
 		int dleft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
-		Expression d = (Expression)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
-		 RESULT = new Expression(gleft + 1, g, o, d); 
+		ExpressionBinaire d = (ExpressionBinaire)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
+		 RESULT = new ExpressionBinaire(gleft + 1, g, o, d); 
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("EXP",3, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
             }
           return CUP$AnalyseurSyntaxique$result;
@@ -339,10 +339,10 @@ class CUP$AnalyseurSyntaxique$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 10: // EXP ::= EXPF 
             {
-              Expression RESULT =null;
+              ExpressionBinaire RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
-		Expression d = (Expression)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
+		ExpressionBinaire d = (ExpressionBinaire)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
 		 RESULT = d; 
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("EXP",3, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
             }
@@ -351,7 +351,7 @@ class CUP$AnalyseurSyntaxique$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 11: // EXPF ::= CSTENTIERE 
             {
-              Expression RESULT =null;
+              ExpressionBinaire RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
@@ -363,7 +363,7 @@ class CUP$AnalyseurSyntaxique$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 12: // EXPF ::= IDF 
             {
-              Expression RESULT =null;
+              ExpressionBinaire RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;

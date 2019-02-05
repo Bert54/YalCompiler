@@ -1,6 +1,6 @@
 package yal.arbre.expressions;
 
-public abstract class Constante extends Expression {
+public abstract class Constante extends ExpressionBinaire {
 
     protected String cste ;
 

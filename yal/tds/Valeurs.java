@@ -14,8 +14,11 @@ public class Valeurs {
 
     private int taillePile; // Taille actuelle de la pile
 
+    private int compteurBoucle;
+
     private Valeurs() {
         this.taillePile = 0;
+        this.compteurBoucle = 1;
     }
 
     /**
@@ -39,5 +42,14 @@ public class Valeurs {
     public void depiler() {
         this.taillePile += 4;
     }
+
+    public void incrementerCompteurBoucle() {
+        this.compteurBoucle++;
+    }
+
+    public int getCompteurBoucle() {
+        return this.compteurBoucle;
+    }
+
 
 }

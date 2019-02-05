@@ -1,18 +1,17 @@
 package yal.arbre.instructions;
 
-import yal.arbre.expressions.Expression;
-import yal.arbre.expressions.Idf;
+import yal.arbre.expressions.ExpressionBinaire;
 
 public class Ecrire extends Instruction {
 
-    protected Expression exp ;
+    protected ExpressionBinaire exp ;
 
     /**
      * Constructeur d'une ecriture
      * @param e expression a ecrire
      * @param n numero de ligne
      */
-    public Ecrire (Expression e, int n) {
+    public Ecrire (ExpressionBinaire e, int n) {
         super(n) ;
         exp = e ;
     }

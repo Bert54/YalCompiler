@@ -1,12 +1,12 @@
 package yal.arbre.instructions;
 
-import yal.arbre.expressions.Expression;
+import yal.arbre.expressions.ExpressionBinaire;
 import yal.arbre.expressions.Idf;
 
 public class Affectation extends Instruction {
 
     private Idf idf;
-    private Expression exp;
+    private ExpressionBinaire exp;
 
     /**
      * Constructeur d'une affectation
@@ -14,7 +14,7 @@ public class Affectation extends Instruction {
      * @param idf identificateur
      * @param exp expression
      */
-    public Affectation(int n, Idf idf, Expression exp) {
+    public Affectation(int n, Idf idf, ExpressionBinaire exp) {
         super(n);
         this.idf = idf;
         this.exp = exp;

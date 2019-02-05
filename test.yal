@@ -1,12 +1,6 @@
 programme test
 debut
 
-    entier a;
-    a = 3 + 5;
-    ecrire a;
-    entier b;
-    b = 5;
-    a = a + 3 + b;
-    ecrire a;
+    ecrire 5 + 2 * 6;
 
 fin

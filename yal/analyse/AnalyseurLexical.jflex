@@ -37,7 +37,8 @@ idf = [A-Za-z_][A-Za-z_0-9]*
 commentDoubleSl = \/\/.*\n?
 csteE = [0-9]+
 guillemet = [\"]
-operateur = [\+]
+operateur = [\*\-\+]
+operateurComp = (<|>|\=\=|!\=|<\=|>\=)
 
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
@@ -50,6 +51,14 @@ espace = {finDeLigne}  | [ \t\f]
 
 "entier"               { return symbol(CodesLexicaux.ENTIER); }
 
+"tantque"              { return symbol(CodesLexicaux.TANTQUE); }
+
+"repeter"              { return symbol(CodesLexicaux.REPETER); }
+
+"fintantque"           { return symbol(CodesLexicaux.FINTANTQUE); }
+
+{operateurComp}        { return return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
+
 "="                    { return symbol(CodesLexicaux.EGALE); }
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
@@ -59,6 +68,10 @@ espace = {finDeLigne}  | [ \t\f]
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
+
+"("                    { return symbol(CodesLexicaux.PAROUVRANTE); }
+
+")"                    { return symbol(CodesLexicaux.PARFERMANTE); }
 
 {operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
 

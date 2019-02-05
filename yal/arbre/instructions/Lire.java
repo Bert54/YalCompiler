@@ -1,6 +1,5 @@
 package yal.arbre.instructions;
 
-import yal.arbre.expressions.Expression;
 import yal.arbre.expressions.Idf;
 
 public class Lire extends Instruction {
