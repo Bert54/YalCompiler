@@ -16,9 +16,12 @@ public class Valeurs {
 
     private int compteurBoucle;
 
+    private int compteurComparaisonLogique;
+
     private Valeurs() {
         this.taillePile = 0;
         this.compteurBoucle = 1;
+        this.compteurComparaisonLogique = 1;
     }
 
     /**
@@ -49,6 +52,14 @@ public class Valeurs {
 
     public int getCompteurBoucle() {
         return this.compteurBoucle;
+    }
+
+    public void incrementerCompteurComparaisonLogique() {
+        this.compteurComparaisonLogique++;
+    }
+
+    public int getCompteurComparaisonLogique() {
+        return this.compteurComparaisonLogique;
     }
 
 

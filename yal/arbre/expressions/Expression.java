@@ -15,6 +15,8 @@ public abstract class Expression extends ArbreAbstrait {
      */
     protected Expression(int n) {
         super(n);
+        this.expd = null;
+        this.expg = null;
     }
 
     public Expression(int n, Expression expg, String oper, Expression expd) {

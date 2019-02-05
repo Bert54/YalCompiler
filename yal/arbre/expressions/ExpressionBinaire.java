@@ -40,8 +40,6 @@ public class ExpressionBinaire extends Expression {
                 string.append("mult $v0, $t8\n");
                 string.append("mflo $v0\n");
                 break;
-            default:
-                System.out.println("Fuck you");
         }
         string.append("sw $v0, 0($sp)\n");
         string.append("addi $sp, $sp, -4\n");

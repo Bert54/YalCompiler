@@ -19,29 +19,136 @@ addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 sw $v0, 0($s7)
+#Affectation
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
 tantque1: 
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 14
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 3
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-lw $v0, -4($s7)
+li $v0, 0
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
+ble $v0, $t8, condcompafaux1
+condcompavrai1: 
+li $v0, 1
+b fincondcompa1
+condcompafaux1: 
+li $v0, 0
+fincondcompa1: 
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+ble $v0, $t8, condcompafaux2
+condcompavrai2: 
+li $v0, 1
+b fincondcompa2
+condcompafaux2: 
+li $v0, 0
+fincondcompa2: 
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+and $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+beqz $v0, fintantque1
+#Ecriture
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Affectation
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+b tantque1
+fintantque1: 
+#Affectation
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
+tantque2: 
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+bge $v0, $t8, condcompafaux3
+condcompavrai3: 
+li $v0, 1
+b fincondcompa3
+condcompafaux3: 
+li $v0, 0
+fincondcompa3: 
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+beqz $v0, fintantque2
 #Ecriture
 lw $v0, 0($s7)
 sw $v0, 0($sp)
@@ -74,8 +181,8 @@ addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 sw $v0, 0($s7)
-b tantque1
-fintantque1: 
+b tantque2
+fintantque2: 
 
 end :
 
