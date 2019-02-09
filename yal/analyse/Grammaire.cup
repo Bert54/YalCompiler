@@ -59,7 +59,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, MOINS, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI ;
 terminal String    IDF, CSTENTIERE, OPER, OPELOGIQUE, OPERMULT ;
    
 /* Non terminals used in the grammar section.  */
@@ -67,7 +67,7 @@ terminal String    IDF, CSTENTIERE, OPER, OPELOGIQUE, OPERMULT ;
 non terminal ArbreAbstrait PROG, LINST, INST ;
 non terminal ExpressionBinaire EXP, EXPF;
 non terminal ExpressionLogique EXPLOG, EXPLOGF;
-non terminal Instruction DECL_VAR, DECLARATION, AFFECT, BOUCLE ;
+non terminal Instruction DECL_VAR, DECLARATION, AFFECT, BOUCLE, CONDITION ;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -102,12 +102,21 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |
                 BOUCLE:b
                 {: RESULT = b; :}
+        |
+                CONDITION:c
+                {: RESULT = c; :}
                 ;
 
 BOUCLE  ::=     TANTQUE EXPLOG:el REPETER LINST:li FINTANTQUE
                 {: RESULT = new BoucleWhile(elleft+1, li, el) ; :}
                 ;
 
+CONDITION ::=   SI EXPLOG:e ALORS LINST:lia FINSI
+                {: RESULT = new Condition(eleft+1,e,lia); :}
+        |
+                SI EXPLOG:e ALORS LINST:lia SINON LINST:lib FINSI
+                {: RESULT = new Condition(eleft+1,e,lia,lib); :}
+                ;
 
 AFFECT  ::=     IDF:i EGALE EXP:e
                 {: RESULT = new Affectation(eleft+1, new Idf(ileft + 1, i), e); :}

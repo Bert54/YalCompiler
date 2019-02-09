@@ -49,10 +49,15 @@ espace = {finDeLigne}  | [ \t\f]
 "programme"            { return symbol(CodesLexicaux.PROGRAMME); }
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
-
+"si"			{ return symbol(CodesLexicaux.SI); }
+"alors"			{ return symbol(CodesLexicaux.ALORS); }
+"sinon"			{ return symbol(CodesLexicaux.SINON); }
+"finsi"			{ return symbol(CodesLexicaux.FINSI); }
 "tantque"              { return symbol(CodesLexicaux.TANTQUE); }
 "repeter"              { return symbol(CodesLexicaux.REPETER); }
 "fintantque"           { return symbol(CodesLexicaux.FINTANTQUE); }
+
+
 
 "entier"               { return symbol(CodesLexicaux.ENTIER); }
 
@@ -63,6 +68,10 @@ espace = {finDeLigne}  | [ \t\f]
 {operateurLogiqueMult} { return symbol(CodesLexicaux.OPERMULT, yytext()); }
 
 "="                    { return symbol(CodesLexicaux.EGALE); }
+
+"<"                    { return symbol(CodesLexicaux.INF); }
+
+">"                    { return symbol(CodesLexicaux.SUP); }
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 

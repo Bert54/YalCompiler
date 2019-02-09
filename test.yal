@@ -5,11 +5,25 @@ debut
     entier a;
     entier b;
     a = 5;
-    b = 1;
-    tantque a > 0 repeter
-        ecrire a;
-        ecrire b;
-        a = a - 1;
-    fintantque
-
+    b = 17;
+    si a < 14 alors
+	ecrire a;
+    sinon
+	ecrire b;
+    finsi
+    si a > 14 alors
+    ecrire a;
+    sinon
+    ecrire b;
+    finsi
+    si a == 14 alors
+    ecrire a;
+    sinon
+    ecrire b;
+    finsi
+    si a != 14 alors
+    ecrire a;
+    sinon
+    ecrire b;
+    finsi
 fin

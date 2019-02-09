@@ -65,6 +65,7 @@ public class ExpressionLogique extends Expression {
             string.append("li $v0, 0\n");
             string.append("fincondcompa" + Valeurs.getInstance().getCompteurComparaisonLogique() + ": \n");
             Valeurs.getInstance().incrementerCompteurComparaisonLogique();
+
         }
         string.append("sw $v0, 0($sp)\n");
         string.append("addi $sp, $sp, -4\n");
