@@ -5,4 +5,29 @@ debut
     c = 11 * (3 + 2);
     ecrire c;
 
+    //ecrire 5 + 2 * 6;
+    entier a;
+    entier b;
+    a = 5;
+    b = 17;
+    si a < 14 alors
+	ecrire a;
+    sinon
+	ecrire b;
+    finsi
+    si a > 14 alors
+    ecrire a;
+    sinon
+    ecrire b;
+    finsi
+    si a == 14 alors
+    ecrire a;
+    sinon
+    ecrire b;
+    finsi
+    si a != 14 alors
+    ecrire a;
+    sinon
+    ecrire b;
+    finsi
 fin

@@ -18,6 +18,8 @@ public class Valeurs {
 
     private int compteurComparaisonLogique;
 
+    private int compteurCondition;
+
     /**
      * Constructeur
      */
@@ -79,5 +81,11 @@ public class Valeurs {
         return this.compteurComparaisonLogique;
     }
 
+    public void incrementerCompteurCondition(){
+        this.compteurCondition++;
+    }
 
+    public int getCompteurCondition() {
+        return this.compteurCondition;
+    }
 }
