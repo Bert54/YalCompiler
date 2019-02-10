@@ -8,27 +8,31 @@ package yal.analyse;
 /** CUP generated class containing symbol constants. */
 public class CodesLexicaux {
   /* terminals */
-  public static final int IDF = 16;
+  public static final int IDF = 20;
   public static final int PARFERMANTE = 15;
-  public static final int CSTENTIERE = 17;
+  public static final int CSTENTIERE = 21;
   public static final int LIRE = 8;
   public static final int EXPNEG = 6;
   public static final int ECRIRE = 7;
+  public static final int ALORS = 17;
   public static final int TANTQUE = 11;
   public static final int REPETER = 12;
-  public static final int OPELOGIQUE = 20;
+  public static final int OPELOGIQUE = 24;
   public static final int POINTVIRGULE = 5;
   public static final int FINTANTQUE = 13;
+  public static final int SINON = 18;
   public static final int EGALE = 10;
   public static final int ENTIER = 9;
   public static final int EOF = 0;
   public static final int PAROUVRANTE = 14;
-  public static final int OPERMULT = 21;
+  public static final int SI = 16;
+  public static final int OPERMULT = 25;
   public static final int error = 1;
-  public static final int OPER = 18;
+  public static final int OPER = 22;
   public static final int DEBUT = 3;
+  public static final int FINSI = 19;
   public static final int FIN = 4;
-  public static final int OPERT = 19;
+  public static final int OPERT = 23;
   public static final int PROGRAMME = 2;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -47,6 +51,10 @@ public class CodesLexicaux {
   "FINTANTQUE",
   "PAROUVRANTE",
   "PARFERMANTE",
+  "SI",
+  "ALORS",
+  "SINON",
+  "FINSI",
   "IDF",
   "CSTENTIERE",
   "OPER",
