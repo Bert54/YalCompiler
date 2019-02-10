@@ -35,9 +35,10 @@ import yal.exceptions.AnalyseLexicaleException;
 
 idf = [A-Za-z_][A-Za-z_0-9]*
 commentDoubleSl = \/\/.*\n?
-csteE = [0-9]+
+csteE = \-?[0-9]+
 guillemet = [\"]
-operateur = [\*\-\+]
+operateur = [\*\/]
+operateurT = [\+\-]
 operateurComp =  (<|>|\=\=|\!\=|<\=|>\=)
 operateurLogiqueMult = et|ou
 
@@ -58,7 +59,11 @@ espace = {finDeLigne}  | [ \t\f]
 
 {operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
 
+
 {operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
+{operateurT}            { return symbol(CodesLexicaux.OPERT, yytext()); }
+
+"-"                    { return symbol(CodesLexicaux.EXPNEG); }
 
 {operateurLogiqueMult} { return symbol(CodesLexicaux.OPERMULT, yytext()); }
 

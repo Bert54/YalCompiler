@@ -30,13 +30,15 @@ public class ExpressionBinaire extends Expression {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("");
+        // Génération du code des expressions de gauche et droite avant toute chose
         string.append(this.expg.toMIPS());
         string.append(this.expd.toMIPS());
+        // Récupération des résultats des exp gauche et droite
         string.append("addi $sp, $sp, 4\n");
         string.append("lw $t8, 0($sp)\n");
         string.append("addi $sp, $sp, 4\n");
         string.append("lw $v0, 0($sp)\n");
-        switch (oper) {
+        switch (oper) { // opération entre les deux expressions
             case "+":
                 string.append("add $v0, $v0, $t8\n");
                 break;
@@ -45,6 +47,10 @@ public class ExpressionBinaire extends Expression {
                 break;
             case "*":
                 string.append("mult $v0, $t8\n");
+                string.append("mflo $v0\n");
+                break;
+            case "/":
+                string.append("div $v0, $t8\n");
                 string.append("mflo $v0\n");
                 break;
         }
