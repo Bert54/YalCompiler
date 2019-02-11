@@ -28,7 +28,7 @@ sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-beqz $v0, sinon0
+beqz $v0, sinon1
 #Ecriture
 li $v0, 1
 sw $v0, 0($sp)
@@ -44,8 +44,8 @@ li $v0, 4
 la $a0, ln
 syscall
 
-b finCond0
-sinon0: #Ecriture
+b finCond1
+sinon1: #Ecriture
 li $v0, 0
 sw $v0, 0($sp)
 addi $sp, $sp, -4
@@ -60,7 +60,7 @@ li $v0, 4
 la $a0, ln
 syscall
 
-finCond0:
+finCond1:
 end :
 
 li $v0, 10

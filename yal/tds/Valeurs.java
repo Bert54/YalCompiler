@@ -29,6 +29,7 @@ public class Valeurs {
         this.taillePile = 0;
         this.compteurBoucle = 1;
         this.compteurComparaisonLogique = 1;
+        this.compteurCondition = 1;
         this.compteurExpresionLogiqueNot = 1;
     }
 
@@ -84,18 +85,32 @@ public class Valeurs {
         return this.compteurComparaisonLogique;
     }
 
+    /**
+     * Incrémente le compteur de conditions
+     */
     public void incrementerCompteurCondition(){
         this.compteurCondition++;
     }
 
+    /**
+     * Récupère le compteur de conditions
+     * @return compteur de conditions
+     */
     public int getCompteurCondition() {
         return this.compteurCondition;
     }
 
+    /**
+     * Incrémente le compteur d'inversion d'expression logique
+     */
     public void incrementerCompteurExpressionLogiqueNot() {
         this.compteurExpresionLogiqueNot++;
     }
 
+    /**
+     * Recupère le compteur d'inversion d'expression logique
+     * @return compteur d'inversion d'expression logique
+     */
     public int getCompteurExpresionLogiqueNot() {
         return compteurExpresionLogiqueNot;
     }
