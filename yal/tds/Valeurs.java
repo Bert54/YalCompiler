@@ -20,6 +20,8 @@ public class Valeurs {
 
     private int compteurCondition;
 
+    private int compteurExpresionLogiqueNot;
+
     /**
      * Constructeur
      */
@@ -27,6 +29,7 @@ public class Valeurs {
         this.taillePile = 0;
         this.compteurBoucle = 1;
         this.compteurComparaisonLogique = 1;
+        this.compteurExpresionLogiqueNot = 1;
     }
 
     /**
@@ -87,5 +90,13 @@ public class Valeurs {
 
     public int getCompteurCondition() {
         return this.compteurCondition;
+    }
+
+    public void incrementerCompteurExpressionLogiqueNot() {
+        this.compteurExpresionLogiqueNot++;
+    }
+
+    public int getCompteurExpresionLogiqueNot() {
+        return compteurExpresionLogiqueNot;
     }
 }

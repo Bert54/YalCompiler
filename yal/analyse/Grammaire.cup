@@ -59,8 +59,8 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, EXPNEG, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE , SI, ALORS, SINON, FINSI;
-terminal String    IDF, CSTENTIERE, OPER, OPERT, OPELOGIQUE, OPERMULT ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, EXPNEG, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
+terminal String    IDF, CSTENTIERE, OPER, OPERT, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU ;
 
 /* Non terminals used in the grammar section.  */
 
@@ -69,13 +69,14 @@ non terminal ExpressionBinaire EXP, EXPF;
 non terminal ExpressionLogique EXPLOG, EXPLOGF;
 non terminal Instruction DECL_VAR, DECLARATION, AFFECT, BOUCLE, CONDITION ;
 
-
-precedence left OPERMULT;
+precedence left OPERMULTOU;
+precedence left OPERMULTET;
+precedence left OPELOGIQUET;
 precedence left OPELOGIQUE;
 precedence left OPER;
 precedence left OPERT;
 precedence left PAROUVRANTE, PARFERMANTE;
-precedence left EXPNEG;
+precedence left NON;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -152,10 +153,19 @@ EXP    ::=      EXP:g OPER:o EXPF:d
                 {: RESULT = e; :}
                 ;
 
-EXPLOG  ::=     EXPLOG:g OPERMULT:o EXPLOGF:d
+EXPLOG  ::=     EXPLOG:g OPERMULTET:o EXPLOGF:d
                 {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
        |
-                EXPLOG:g OPERMULT:o PAROUVRANTE EXPLOGF:d PARFERMANTE
+                EXPLOG:g OPERMULTOU:o EXPLOGF:d
+                {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
+       |
+                NON EXPLOG:e
+                {: RESULT = new ExpressionLogiqueNon(eleft+1, e); :}
+       |
+                EXPLOG:g OPERMULTET:o PAROUVRANTE EXPLOGF:d PARFERMANTE
+                {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
+       |
+                EXPLOG:g OPERMULTOU:o PAROUVRANTE EXPLOGF:d PARFERMANTE
                 {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
        |
                 PAROUVRANTE EXPLOG:e PARFERMANTE
@@ -167,6 +177,9 @@ EXPLOG  ::=     EXPLOG:g OPERMULT:o EXPLOGF:d
 
 EXPLOGF ::=     EXP:g OPELOGIQUE:o EXP:d
                 {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
+       |
+                EXP:g OPELOGIQUET:o EXP:d
+                       {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
                 ;
 
 EXPF   ::=      CSTENTIERE:c

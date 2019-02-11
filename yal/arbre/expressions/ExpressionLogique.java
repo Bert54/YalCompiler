@@ -5,6 +5,14 @@ import yal.tds.Valeurs;
 public class ExpressionLogique extends Expression {
 
     /**
+     * Constructeur d'une expression logique simple
+     * @param n numero de ligne
+     */
+    protected ExpressionLogique(int n) {
+        super(n) ;
+    }
+
+    /**
      * Constructeur d'une expression logique
      * @param n numero de ligne
      * @param expg operande gauche
@@ -49,14 +57,8 @@ public class ExpressionLogique extends Expression {
                 case ">":
                     string.append("ble $v0, $t8, condcompafaux" + Valeurs.getInstance().getCompteurComparaisonLogique() + "\n");
                     break;
-                case "<=":
-                    string.append("bgt $v0, $t8, condcompafaux" + Valeurs.getInstance().getCompteurComparaisonLogique() + "\n");
-                    break;
                 case "==":
                     string.append("bne $v0, $t8, condcompafaux" + Valeurs.getInstance().getCompteurComparaisonLogique() + "\n");
-                    break;
-                case ">=":
-                    string.append("blt $v0, $t8, condcompafaux" + Valeurs.getInstance().getCompteurComparaisonLogique() + "\n");
                     break;
                 case "!=":
                     string.append("beq $v0, $t8, condcompafaux" + Valeurs.getInstance().getCompteurComparaisonLogique() + "\n");

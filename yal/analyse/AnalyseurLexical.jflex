@@ -39,8 +39,8 @@ csteE = \-?[0-9]+
 guillemet = [\"]
 operateur = [\*\/]
 operateurT = [\+\-]
-operateurComp =  (<|>|\=\=|\!\=|<\=|>\=)
-operateurLogiqueMult = et|ou
+operateurComp =  (<|>)
+operateurCompT = (\=\=|\!\=)
 
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
@@ -50,10 +50,11 @@ espace = {finDeLigne}  | [ \t\f]
 "programme"            { return symbol(CodesLexicaux.PROGRAMME); }
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
-"si"			{ return symbol(CodesLexicaux.SI); }
-"alors"			{ return symbol(CodesLexicaux.ALORS); }
-"sinon"			{ return symbol(CodesLexicaux.SINON); }
-"finsi"			{ return symbol(CodesLexicaux.FINSI); }
+"si"			       { return symbol(CodesLexicaux.SI); }
+"alors"			       { return symbol(CodesLexicaux.ALORS); }
+"sinon"			       { return symbol(CodesLexicaux.SINON); }
+"finsi"		           { return symbol(CodesLexicaux.FINSI); }
+"non"                  { return symbol(CodesLexicaux.NON); }
 "tantque"              { return symbol(CodesLexicaux.TANTQUE); }
 "repeter"              { return symbol(CodesLexicaux.REPETER); }
 "fintantque"           { return symbol(CodesLexicaux.FINTANTQUE); }
@@ -63,14 +64,16 @@ espace = {finDeLigne}  | [ \t\f]
 "entier"               { return symbol(CodesLexicaux.ENTIER); }
 
 {operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
+{operateurCompT}        { return symbol(CodesLexicaux.OPELOGIQUET, yytext()); }
 
 
 {operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
-{operateurT}            { return symbol(CodesLexicaux.OPERT, yytext()); }
+{operateurT}           { return symbol(CodesLexicaux.OPERT, yytext()); }
 
 "-"                    { return symbol(CodesLexicaux.EXPNEG); }
 
-{operateurLogiqueMult} { return symbol(CodesLexicaux.OPERMULT, yytext()); }
+"et"                   { return symbol(CodesLexicaux.OPERMULTET); }
+"ou"                   { return symbol(CodesLexicaux.OPERMULTOU); }
 
 "="                    { return symbol(CodesLexicaux.EGALE); }
 
