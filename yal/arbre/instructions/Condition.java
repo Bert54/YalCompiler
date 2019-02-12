@@ -38,7 +38,9 @@ public class Condition extends Instruction {
     public void verifier() {
         exp.verifier();
         alors.verifier();
-        sinon.verifier();
+        if(sinon != null) {
+            sinon.verifier();
+        }
     }
 
     @Override
@@ -52,8 +54,10 @@ public class Condition extends Instruction {
         string.append("beqz $v0, sinon" + Valeurs.getInstance().getCompteurCondition() + "\n");
         string.append(alors.toMIPS());
         string.append("b finCond"+Valeurs.getInstance().getCompteurCondition()+"\n");
-        string.append("sinon" + Valeurs.getInstance().getCompteurCondition()+ ": ");
-        string.append(this.sinon.toMIPS());
+        string.append("sinon" + Valeurs.getInstance().getCompteurCondition() + ": \n");
+        if(sinon != null) {
+            string.append(this.sinon.toMIPS());
+        }
         string.append("finCond"+Valeurs.getInstance().getCompteurCondition()+":");
         Valeurs.getInstance().incrementerCompteurCondition();
 

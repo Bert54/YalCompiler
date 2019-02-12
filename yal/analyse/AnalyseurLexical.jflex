@@ -72,8 +72,8 @@ espace = {finDeLigne}  | [ \t\f]
 
 "-"                    { return symbol(CodesLexicaux.EXPNEG); }
 
-"et"                   { return symbol(CodesLexicaux.OPERMULTET); }
-"ou"                   { return symbol(CodesLexicaux.OPERMULTOU); }
+"et"                   { return symbol(CodesLexicaux.OPERMULTET, yytext()); }
+"ou"                   { return symbol(CodesLexicaux.OPERMULTOU, yytext()); }
 
 "="                    { return symbol(CodesLexicaux.EGALE); }
 

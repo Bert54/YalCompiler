@@ -1,10 +1,17 @@
 programme test
 debut
-
-    si 3 > 5 alors
-        ecrire 1;
+    entier a;
+    entier b;
+    b = 24;
+    si 3 != 5 alors
+        si 4 > 3 ou 5 < 1 alors
+            ecrire 2;
+        sinon
+            ecrire 5;
+        finsi
     sinon
-        ecrire 0;
+        ecrire 24;
     finsi
+
 
 fin
