@@ -17,12 +17,18 @@ public class TDS {
     }
 
     private HashMap<Entree, Symbole> table;
+    private int compteurBloc;
+    private TableLocale tableLocaleCourante;
+    private final TableLocale racine;
 
     /**
      * Constructeur
      */
     private TDS() {
         this.table = new HashMap<>();
+        this.compteurBloc = 0;
+        this.racine = new TableLocale(compteurBloc);
+        this.tableLocaleCourante = racine;
     }
 
     /**
@@ -80,5 +86,15 @@ public class TDS {
         }
         throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
     }
+
+    public void entrerBloc(){
+        compteurBloc++;
+        TableLocale tableLocale = new TableLocale(compteurBloc);
+        tableLocale.setPere(tableLocaleCourante);
+        tableLocaleCourante.ajouterFille(tableLocale);
+        tableLocaleCourante = tableLocale;
+    }
+
+
 
 }
