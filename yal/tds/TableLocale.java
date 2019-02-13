@@ -19,10 +19,11 @@ public class TableLocale {
         /**
          * Constructeur de Table locale
          */
-        public TableLocale(int numBloc) {
+        public TableLocale(int numBloc, TableLocale pere) {
             this.table = new HashMap<>();
             this.filles = new ArrayList<>();
             this.numBloc = numBloc;
+            this.pere = pere;
         }
 
         /**
@@ -89,8 +90,8 @@ public class TableLocale {
         filles.add(fille);
     }
 
-    public void setPere(TableLocale pere){
-        this.pere = pere;
+    public TableLocale getTableLocalPere() {
+        return this.pere;
     }
 
 }

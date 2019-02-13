@@ -201,7 +201,7 @@ DECLARATION ::= DECL_VAR:d
                 ;
 
 DECL_VAR ::=    ENTIER IDF:i
-                {: TDS.getInstance().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile()));
+                {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile()));
                    Valeurs.getInstance().empiler();
                    RESULT = new Declarer(ileft+1, i);
                 :}
