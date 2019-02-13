@@ -6,7 +6,10 @@ main :
 
 move $s7,$sp
 
-#Condition
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, 0($s7)
+#Affectation
 li $v0, 3
 sw $v0, 0($sp)
 addi $sp, $sp, -4
@@ -14,23 +17,44 @@ li $v0, 5
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-ble $v0, $t8, condcompafaux1
-condcompavrai1: 
-li $v0, 1
-b fincondcompa1
-condcompafaux1: 
-li $v0, 0
-fincondcompa1: 
+add $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-beqz $v0, sinon1
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
 #Ecriture
-li $v0, 1
+lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
@@ -44,23 +68,7 @@ li $v0, 4
 la $a0, ln
 syscall
 
-b finCond1
-sinon1: #Ecriture
-li $v0, 0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
 
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-finCond1:
 end :
 
 li $v0, 10

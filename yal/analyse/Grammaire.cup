@@ -59,8 +59,8 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, EXPNEG, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
-terminal String    IDF, CSTENTIERE, OPER, OPERT, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
+terminal String    IDF, CSTENTIERE, OPER, OPERT, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU, EXPNEG ;
 
 /* Non terminals used in the grammar section.  */
 
@@ -77,6 +77,7 @@ precedence left OPER;
 precedence left OPERT;
 precedence left PAROUVRANTE, PARFERMANTE;
 precedence left NON;
+
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -134,7 +135,10 @@ AFFECT  ::=     IDF:i EGALE EXP:e
 EXP    ::=      EXP:g OPER:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
-                EXPNEG PAROUVRANTE EXP:e PARFERMANTE
+                EXP:g OPER:o EXPNEG EXPF:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
+       |
+                EXPNEG EXP:e
                 {: RESULT = new ExpressionBinaireNegative(eleft + 1, e); :}
        |
                 EXP:g OPER:o PAROUVRANTE EXP:d PARFERMANTE
@@ -142,6 +146,9 @@ EXP    ::=      EXP:g OPER:o EXPF:d
        |
                 EXP:g OPERT:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
+       |
+                EXP:g OPERT:o EXPNEG EXPF:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
        |
                 EXP:g OPERT:o PAROUVRANTE EXP:d PARFERMANTE
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
@@ -179,7 +186,7 @@ EXPLOGF ::=     EXP:g OPELOGIQUE:o EXP:d
                 {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
        |
                 EXP:g OPELOGIQUET:o EXP:d
-                       {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
+                {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
                 ;
 
 EXPF   ::=      CSTENTIERE:c
