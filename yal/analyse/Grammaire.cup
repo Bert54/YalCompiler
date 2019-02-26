@@ -59,15 +59,18 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, FONCTION, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
 terminal String    IDF, CSTENTIERE, OPER, OPERT, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU, EXPNEG ;
 
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST ;
+non terminal ArbreAbstrait PROG, LINST, INST;
 non terminal ExpressionBinaire EXP, EXPF;
 non terminal ExpressionLogique EXPLOG, EXPLOGF;
-non terminal Instruction DECL_VAR, DECLARATION, AFFECT, BOUCLE, CONDITION ;
+non terminal Instruction DECL_VAR, DECL_FONCTION, DECLARATION, AFFECT, BOUCLE, CONDITION ;
+non terminal ArrayList<Declarer> PARAMETRES;
+
+//
 
 precedence left OPERMULTOU;
 precedence left OPERMULTET;
@@ -83,7 +86,7 @@ precedence left NON;
  
 start with PROG ;
 
-PROG    ::=     PROGRAMME  IDF  DEBUT  LINST:li  FIN
+PROG    ::=     PROGRAMME  IDF  DEBUT  LINST:li FIN
                 {: RESULT = li ; :}
                 ;
 
@@ -101,7 +104,7 @@ LINST   ::=     LINST:li  INST:i
 INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 {: RESULT = new Ecrire(e, eleft + 1) ; :}
         |
-                DECLARATION:d POINTVIRGULE
+                DECLARATION:d
                 {: RESULT = d; :}
         |
                 LIRE IDF:i POINTVIRGULE
@@ -198,9 +201,24 @@ EXPF   ::=      CSTENTIERE:c
 
 DECLARATION ::= DECL_VAR:d
                 {: RESULT = d ; :}
+       |
+                DECL_FONCTION:d
+                {: RESULT = d; :}
                 ;
 
-DECL_VAR ::=    ENTIER IDF:i
+DECL_FONCTION ::= FONCTION IDF:i PARAMETRES:p DEBUT LINST:li FIN
+                {:  TDS.getInstance().entrerBloc();
+                    Instruction in = new DeclarerFonction(ileft+1, i, p, li);
+                    TDS.getInstance().sortieBloc();
+                    RESULT = in;
+                :}
+                ;
+
+PARAMETRES    ::= PAROUVRANTE:p PARFERMANTE
+                {: RESULT = new ArrayList<>(); :}
+                ;
+
+DECL_VAR ::=    ENTIER IDF:i POINTVIRGULE
                 {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile()));
                    Valeurs.getInstance().empiler();
                    RESULT = new Declarer(ileft+1, i);

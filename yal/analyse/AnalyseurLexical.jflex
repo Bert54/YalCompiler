@@ -86,6 +86,8 @@ espace = {finDeLigne}  | [ \t\f]
 
 "lire"                 { return symbol(CodesLexicaux.LIRE); }
 
+"fonction"             { return symbol(CodesLexicaux.FONCTION); }
+
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
 "("                    { return symbol(CodesLexicaux.PAROUVRANTE); }

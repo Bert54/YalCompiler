@@ -5,4 +5,11 @@ debut
     b = --(3 + -5);
     ecrire b;
 
+    fonction bite()
+    debut
+
+        ecrire b;
+
+    fin
+
 fin

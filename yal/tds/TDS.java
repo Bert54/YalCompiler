@@ -38,6 +38,12 @@ public class TDS {
         tableLocaleCourante = tableLocale;
     }
 
+    public void entrerBlocVerifier() {
 
+    }
+
+    public void sortieBlocVerifier() {
+
+    }
 
 }
