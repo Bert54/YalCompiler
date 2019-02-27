@@ -31,4 +31,6 @@ public abstract class Entree {
         return this.nom;
     }
 
+    public abstract int getNbParams();
+
 }

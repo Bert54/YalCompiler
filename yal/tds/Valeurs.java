@@ -22,6 +22,8 @@ public class Valeurs {
 
     private int compteurExpresionLogiqueNot;
 
+    private int nbRetourner;
+
     /**
      * Constructeur
      */
@@ -31,6 +33,7 @@ public class Valeurs {
         this.compteurComparaisonLogique = 1;
         this.compteurCondition = 1;
         this.compteurExpresionLogiqueNot = 1;
+        this.nbRetourner = 0;
     }
 
     /**
@@ -114,4 +117,5 @@ public class Valeurs {
     public int getCompteurExpresionLogiqueNot() {
         return compteurExpresionLogiqueNot;
     }
+
 }

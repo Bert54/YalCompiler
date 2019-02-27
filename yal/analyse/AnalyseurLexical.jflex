@@ -63,14 +63,13 @@ espace = {finDeLigne}  | [ \t\f]
 
 "entier"               { return symbol(CodesLexicaux.ENTIER); }
 
+{operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
+{operateurT}           { return symbol(CodesLexicaux.OPERT, yytext()); }
+
 "-"                    { return symbol(CodesLexicaux.EXPNEG, yytext()); }
 
 {operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
 {operateurCompT}        { return symbol(CodesLexicaux.OPELOGIQUET, yytext()); }
-
-
-{operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
-{operateurT}           { return symbol(CodesLexicaux.OPERT, yytext()); }
 
 
 "et"                   { return symbol(CodesLexicaux.OPERMULTET, yytext()); }
@@ -87,6 +86,8 @@ espace = {finDeLigne}  | [ \t\f]
 "lire"                 { return symbol(CodesLexicaux.LIRE); }
 
 "fonction"             { return symbol(CodesLexicaux.FONCTION); }
+
+"retourne"            { return symbol(CodesLexicaux.RETOURNER); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 

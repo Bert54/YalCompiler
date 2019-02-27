@@ -15,6 +15,7 @@ public class TableLocale {
         private int numBloc;
         private TableLocale pere;
         private ArrayList<TableLocale> filles;
+        private int nbRetour;
 
         /**
          * Constructeur de Table locale
@@ -24,6 +25,7 @@ public class TableLocale {
             this.filles = new ArrayList<>();
             this.numBloc = numBloc;
             this.pere = pere;
+            this.nbRetour = 0;
         }
 
         /**
@@ -42,14 +44,14 @@ public class TableLocale {
             int typeE = 0;
             int typeEn = 0;
             if (e instanceof EntreeVariable) {
-                typeE = 0;
+                typeE = 1;
             }
             for (Entree en : this.table.keySet()) {
                 if (en instanceof EntreeVariable) {
-                    typeEn = 0;
+                    typeEn = 1;
                 }
                 if (typeE == typeEn && en.getNom().equals(e.getNom())) {
-                    throw new DoubleDeclarationException(e.getLigne(), "Variable déjà déclarée");
+                    throw new DoubleDeclarationException("Variable déjà déclarée : " + e.getNom());
                 }
             }
             this.table.put(e, s);
@@ -69,17 +71,17 @@ public class TableLocale {
             int typeE = 0;
             int typeEn = 0;
             if (e instanceof EntreeVariable) {
-                typeE = 0;
+                typeE = 1;
             }
             for (Entree en : this.table.keySet()) {
                 if (en instanceof EntreeVariable) {
-                    typeEn = 0;
+                    typeEn = 1;
                 }
                 if (typeE == typeEn && en.getNom().equals(e.getNom())) {
                     return this.table.get(en);
                 }
             }
-            throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
+            throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée : " + e.getNom());
         }
 
     /**
@@ -92,6 +94,23 @@ public class TableLocale {
 
     public TableLocale getTableLocalPere() {
         return this.pere;
+    }
+
+    public int getNumBloc() {
+        return this.numBloc;
+    }
+
+    public int getNbRetour() {
+        return this.nbRetour;
+    }
+
+    public void incrementerNbRetour() {
+        this.nbRetour++;
+    }
+
+    //TODO Convertir ça en itérateur
+    public ArrayList<TableLocale> getFilles() {
+        return this.filles;
     }
 
 }

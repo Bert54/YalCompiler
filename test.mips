@@ -17,37 +17,10 @@ li $v0, 5
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, 2
-mult $v0, $t8
-mflo $t8
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, 2
-mult $v0, $t8
-mflo $t8
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, 2
-mult $v0, $t8
-mflo $t8
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
@@ -68,6 +41,9 @@ li $v0, 4
 la $a0, ln
 syscall
 
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -8($s7)
 
 end :
 

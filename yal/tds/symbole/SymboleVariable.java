@@ -20,4 +20,9 @@ public class SymboleVariable extends Symbole {
         return this.dep;
     }
 
+    @Override
+    public int getNumBloc() {
+        return 0;
+    }
+
 }
