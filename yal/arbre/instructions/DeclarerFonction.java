@@ -4,7 +4,6 @@ import yal.arbre.ArbreAbstrait;
 import yal.exceptions.RetournerManquantException;
 import yal.tds.TDS;
 import yal.tds.entree.EntreeFonction;
-import yal.tds.entree.EntreeVariable;
 import yal.tds.symbole.Symbole;
 
 import java.util.ArrayList;

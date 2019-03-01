@@ -9,7 +9,7 @@ debut
     debut
 
         entier b;
-        b = 7 - 3 * 2 * (1 + 1)
+        b = 7 - 3 * 2 * (1 + 1);
         retourne b;
 
     fin
@@ -24,5 +24,9 @@ debut
         retourne b;
 
     fin
-    retourne a;
+
+    entier etron;
+
+    etron = penis();
+
 fin
