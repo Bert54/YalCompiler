@@ -100,6 +100,14 @@ public class TableLocale {
         return this.numBloc;
     }
 
+    /**
+     *
+     * @return le nombre de variable locale
+     */
+    public int getNbVariable(){
+        return table.size();
+    }
+
     public int getNbRetour() {
         return this.nbRetour;
     }

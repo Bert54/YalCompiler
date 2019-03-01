@@ -51,6 +51,21 @@ public class DeclarerFonction extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder();
+        string.append("#Déclaration fonction");
+        string.append(this.nom + this.params.size() + ": ");
+        // Adresse de retour
+        string.append("sw $ra, ($sp)\n");
+        string.append("addi $sp, $sp, -4)\n");
+        // Sauvegarde de la base locale
+        string.append("sw $s7, ($sp)\n");
+        string.append("addi $sp, $sp, -4\n");
+        // Empiler le numéro de région
+        string.append("li $v0, " + this.numBloc + "\n");
+        string.append("sw $vo, ($sp)\n");
+        string.append("addi $sp, $sp, -4\n");
+        // Initialisation de la base locale
+        string.append("move $s7, $sp\n");
+        string.append(this.corps.toMIPS());
         return string.toString();
     }
 
