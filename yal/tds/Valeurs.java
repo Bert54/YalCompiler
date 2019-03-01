@@ -24,6 +24,8 @@ public class Valeurs {
 
     private int nbRetourner;
 
+    private int nbFonctionPasse;
+
     /**
      * Constructeur
      */
@@ -34,6 +36,7 @@ public class Valeurs {
         this.compteurCondition = 1;
         this.compteurExpresionLogiqueNot = 1;
         this.nbRetourner = 0;
+        this.nbFonctionPasse = 0;
     }
 
     /**
@@ -116,6 +119,14 @@ public class Valeurs {
      */
     public int getCompteurExpresionLogiqueNot() {
         return compteurExpresionLogiqueNot;
+    }
+
+    public void incrementerNbFontionPasse() {
+        this.nbFonctionPasse++;
+    }
+
+    public int getNbFonctionPasse() {
+        return this.nbFonctionPasse;
     }
 
 }

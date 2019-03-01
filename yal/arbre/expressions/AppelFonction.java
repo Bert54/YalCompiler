@@ -1,10 +1,7 @@
 package yal.arbre.expressions;
 
-import yal.arbre.instructions.Declarer;
-import yal.exceptions.RetournerManquantException;
 import yal.tds.TDS;
 import yal.tds.entree.EntreeFonction;
-import yal.tds.symbole.Symbole;
 
 import java.util.ArrayList;
 
@@ -33,6 +30,10 @@ public class AppelFonction extends ExpressionBinaire {
 
     @Override
     public String toMIPS() {
-        return null;
+        StringBuilder string = new StringBuilder();
+        // Pour notre cher Dylan : une étiquette de fonction est représenté par : nomFonction+nbparamètres
+        string.append("addi $sp, $sp, -4\n");
+        string.append("jal " + this.nom + this.parametres.size() + "\n");
+        return string.toString();
     }
 }

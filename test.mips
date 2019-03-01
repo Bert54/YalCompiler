@@ -6,16 +6,45 @@ main :
 
 move $s7,$sp
 
+#Déclaration fonction
+j fonctionskip0
+un0: sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+#Retourne de la fonction 
+addi $sp,$sp,4
+lw $v0, 0($sp)
+addi $sp,$sp,8
+lw $t8,8($s7)
+addi $sp,$sp, 4
+lw $ra,($sp)
+addi $sp,$sp,8
+move $s7, $t8
+sw $v0,($sp)
+addi $sp,$sp,-4
+jr $ra
+fonctionskip0:
 #Déclaration
 addi $sp, $sp, -4 
 sw $zero, 0($s7)
 #Affectation
-li $v0, 3
+li $v0, 20
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 5
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+#Affectation
+lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+addi $sp, $sp, -4
+jal un0
 addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
@@ -41,16 +70,6 @@ li $v0, 4
 la $a0, ln
 syscall
 
-#Déclaration
-addi $sp, $sp, -4 
-sw $zero, -8($s7)
-#Déclaration
-addi $sp, $sp, -4 
-sw $zero, -16($s7)
-#Affectation
-nulladdi $sp, $sp, 4
-lw $v0, 0($sp)
-sw $v0, -16($s7)
 
 end :
 

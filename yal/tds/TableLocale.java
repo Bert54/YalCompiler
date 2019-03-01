@@ -105,7 +105,7 @@ public class TableLocale {
      * @return le nombre de variable locale
      */
     public int getNbVariable(){
-        return table.size();
+        return table.size()-1;
     }
 
     public int getNbRetour() {

@@ -3,6 +3,7 @@ package yal.arbre.instructions;
 import yal.arbre.ArbreAbstrait;
 import yal.exceptions.RetournerManquantException;
 import yal.tds.TDS;
+import yal.tds.Valeurs;
 import yal.tds.entree.EntreeFonction;
 import yal.tds.symbole.Symbole;
 
@@ -50,21 +51,24 @@ public class DeclarerFonction extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder();
-        string.append("#Déclaration fonction");
+        string.append("#Déclaration fonction\n");
+        string.append("j fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +"\n");
         string.append(this.nom + this.params.size() + ": ");
         // Adresse de retour
         string.append("sw $ra, ($sp)\n");
-        string.append("addi $sp, $sp, -4)\n");
+        string.append("addi $sp, $sp, -4\n");
         // Sauvegarde de la base locale
         string.append("sw $s7, ($sp)\n");
         string.append("addi $sp, $sp, -4\n");
         // Empiler le numéro de région
         string.append("li $v0, " + this.numBloc + "\n");
-        string.append("sw $vo, ($sp)\n");
+        string.append("sw $v0, ($sp)\n");
         string.append("addi $sp, $sp, -4\n");
         // Initialisation de la base locale
         string.append("move $s7, $sp\n");
         string.append(this.corps.toMIPS());
+        string.append("fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +":\n");
+        Valeurs.getInstance().incrementerNbFontionPasse();
         return string.toString();
     }
 

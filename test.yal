@@ -1,32 +1,15 @@
 programme test
 debut
 
-    entier a;
-    a = 3 + 5;
-    ecrire a;
-
-    fonction bite()
+    fonction un()
     debut
-
-        entier b;
-        b = 7 - 3 * 2 * (1 + 1);
-        retourne b;
-
+        retourne 10 - 3 * 2;
     fin
 
-    entier b;
+    entier bite;
+    bite = 20;
 
-    fonction penis()
-    debut
-
-        entier b;
-        b =  b - 10;
-        retourne b;
-
-    fin
-
-    entier etron;
-
-    etron = penis();
+    bite = bite + un();
+    ecrire bite;
 
 fin
