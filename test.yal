@@ -1,15 +1,28 @@
 programme test
 debut
 
-    entier b;
-    b = --(3 + -5);
-    ecrire b;
+    entier a;
+    a = 3 + 5;
+    ecrire a;
 
     fonction bite()
     debut
 
-        ecrire b;
+        entier b;
+        b = 7 - 3 * 2 * (1 + 1)
+        retourne b;
 
     fin
 
+    entier b;
+
+    fonction penis()
+    debut
+
+        entier b;
+        b =  b - 10;
+        retourne b;
+
+    fin
+    retourne a;
 fin

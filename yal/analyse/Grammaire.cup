@@ -59,15 +59,16 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, FONCTION, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, FONCTION, ECRIRE, LIRE, ENTIER, EGALE, RETOURNER, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
 terminal String    IDF, CSTENTIERE, OPER, OPERT, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU, EXPNEG ;
 
 /* Non terminals used in the grammar section.  */
 
+non terminal String FONCTIONT;
 non terminal ArbreAbstrait PROG, LINST, LINSTF, INST;
 non terminal ExpressionBinaire EXP, EXPF;
 non terminal ExpressionLogique EXPLOG, EXPLOGF;
-non terminal Instruction DECL_VAR, DECL_FONCTION, DECLARATION, AFFECT, BOUCLE, CONDITION ;
+non terminal Instruction DECL_VAR, DECL_FONCTION, DECLARATION, AFFECT, BOUCLE, CONDITION, RETOURNE ;
 non terminal ArrayList<Declarer> PARAMETRES;
 
 //
@@ -78,6 +79,7 @@ precedence left OPELOGIQUET;
 precedence left OPELOGIQUE;
 precedence left OPER;
 precedence left OPERT;
+precedence left EXPNEG;
 precedence left PAROUVRANTE, PARFERMANTE;
 precedence left NON;
 
@@ -146,6 +148,13 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |
                 CONDITION:c
                 {: RESULT = c; :}
+        |
+                RETOURNE:r POINTVIRGULE
+                {: RESULT = r; :}
+                ;
+
+RETOURNE ::=    RETOURNER EXP:e
+                {: RESULT = new Retourne(eleft+1, e); :}
                 ;
 
 BOUCLE  ::=     TANTQUE EXPLOG:el REPETER LINST:li FINTANTQUE
@@ -231,15 +240,19 @@ DECLARATION ::= DECL_VAR:d
                 {: RESULT = d ; :}
        |
                 DECL_FONCTION:d
-                {: RESULT = d; :}
+                {:  Instruction in = d;
+                    TDS.getInstance().sortieBloc();
+                    RESULT = d; :}
                 ;
 
-DECL_FONCTION ::= FONCTION IDF:i PARAMETRES:p DEBUT LINSTF:li FIN
-                {:  TDS.getInstance().entrerBloc();
-                    Instruction in = new DeclarerFonction(ileft+1, i, p, li);
-                    TDS.getInstance().sortieBloc();
-                    RESULT = in;
+DECL_FONCTION ::= FONCTIONT IDF:i PARAMETRES:p DEBUT LINSTF:li FIN
+                {:  TDS.getInstance().ajouter(new EntreeFonction(i, ileft+1, p.size()), new SymboleFonction(TDS.getInstance().getTableLocaleCourante().getNumBloc()));
+                    RESULT = new DeclarerFonction(ileft+1, i, p, li);
                 :}
+                ;
+
+FONCTIONT     ::= FONCTION
+                {: TDS.getInstance().entreeBloc(); :}
                 ;
 
 PARAMETRES    ::= PAROUVRANTE:p PARFERMANTE
