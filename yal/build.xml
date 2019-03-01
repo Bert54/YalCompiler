@@ -34,7 +34,7 @@
         <java classname="java_cup.Main" fork="yes" failonerror="yes" >
             <arg line="-symbols CodesLexicaux -parser AnalyseurSyntaxique ${src}/Grammaire.cup" />
             <classpath>
-                <pathelement path="${java.class.path}:/opt/java_cup/java-cup-11b.jar" />
+                <pathelement path="${java.class.path}:/Users/dylan/Desktop/jflex-1.7.0/jflex-1.7.0/lib/java-cup-11b.jar" />
             </classpath>
         </java>
         <move file="AnalyseurSyntaxique.java" tofile="${src}/AnalyseurSyntaxique.java" />
@@ -63,7 +63,7 @@
         <java classname="jflex.Main" fork="yes" failonerror="yes" >
             <arg line="${src}/AnalyseurLexical.jflex" />
             <classpath>
-                <pathelement path="${java.class.path}:/opt/jflex/jflex-full-1.7.0.jar" />
+                <pathelement path="${java.class.path}:/Users/dylan/Desktop/jflex-1.7.0/jflex-1.7.0/lib/jflex-full-1.7.0.jar" />
             </classpath>
         </java>
     </target>
