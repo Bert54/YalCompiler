@@ -10,12 +10,22 @@ public class AppelFonction extends ExpressionBinaire {
     private String nom;
     private ArrayList<ExpressionBinaire> parametres;
 
+    /**
+     * Constructeur d'un appel de fonction
+     * @param n numero de ligne
+     * @param nom nom de la fonction
+     * @param params liste des parametres
+     */
     public AppelFonction(int n, String nom, ArrayList<ExpressionBinaire> params) {
         super(n);
         this.nom = nom;
         this.parametres = params;
     }
 
+    /**
+     * Ajout d'un parametre a la fonction
+     * @param exp expression a ajouter
+     */
     public void ajouter(ExpressionBinaire exp) {
         this.parametres.add(exp);
     }
@@ -31,7 +41,7 @@ public class AppelFonction extends ExpressionBinaire {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder();
-        // Pour notre cher Dylan : une étiquette de fonction est représenté par : nomFonction+nbparamètres
+        // Une étiquette de fonction est représentée par : nomFonction+nbparamètres
         string.append("addi $sp, $sp, -4\n");
         string.append("jal " + this.nom + this.parametres.size() + "\n");
         return string.toString();

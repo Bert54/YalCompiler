@@ -26,6 +26,13 @@ public class DeclarerFonction extends Instruction {
         this.nom = nom;
     }
 
+    /**
+     * Constructeur d'une declaration
+     * @param n numero de ligne
+     * @param nom nom de la variable
+     * @param parametres liste des parametres
+     * @param corps corps de la fonction
+     */
     public DeclarerFonction(int n, String nom, ArrayList<Declarer> parametres, ArbreAbstrait corps) {
         super(n);
         this.nom = nom;
@@ -52,8 +59,8 @@ public class DeclarerFonction extends Instruction {
     public String toMIPS() {
         StringBuilder string = new StringBuilder();
         string.append("#Déclaration fonction\n");
-        string.append("j fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +"\n");
-        string.append(this.nom + this.params.size() + ": ");
+        string.append("j fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +"\n");  // Permet de sauter la fonction
+        string.append(this.nom + this.params.size() + ": ");    // Etiquette
         // Adresse de retour
         string.append("sw $ra, ($sp)\n");
         string.append("addi $sp, $sp, -4\n");

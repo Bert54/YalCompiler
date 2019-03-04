@@ -8,6 +8,11 @@ public class Retourne extends Instruction {
 
     ExpressionBinaire exp;
 
+    /**
+     * Constructeur d'un retour de fonction
+     * @param n numero de ligne
+     * @param exp type de retour
+     */
     public Retourne(int n, ExpressionBinaire exp) {
         super(n);
         this.exp = exp;
@@ -24,7 +29,7 @@ public class Retourne extends Instruction {
 
     @Override
     public String toMIPS() {
-        StringBuilder sb = new StringBuilder("#Retourne de la fonction \n");
+        StringBuilder sb = new StringBuilder("#Retour de la fonction \n");
         sb.append(this.exp.toMIPS());
         sb.append("addi $sp,$sp, 4\n");
         sb.append("lw $v0, 0($sp)\n");
