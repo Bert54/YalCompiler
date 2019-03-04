@@ -11,7 +11,7 @@ public class Retourne extends Instruction {
     /**
      * Constructeur d'un retour de fonction
      * @param n numero de ligne
-     * @param exp type de retour
+     * @param exp expression de retour
      */
     public Retourne(int n, ExpressionBinaire exp) {
         super(n);
