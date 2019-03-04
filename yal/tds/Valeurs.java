@@ -121,10 +121,17 @@ public class Valeurs {
         return compteurExpresionLogiqueNot;
     }
 
+    /**
+     * Incrémente le compteur du passeur de fonctions
+     */
     public void incrementerNbFontionPasse() {
         this.nbFonctionPasse++;
     }
 
+    /**
+     * Récupère le compeur du passeur de fonctions
+     * @return compteur du passeur de fonctions
+     */
     public int getNbFonctionPasse() {
         return this.nbFonctionPasse;
     }

@@ -29,7 +29,7 @@ public class TableLocale {
         }
 
         /**
-         * Ajoute une entrée dans la TDS
+         * Ajoute une entrée dans la table locale
          * @param e L'entrée correspondant au symbole
          * @param s Le symbole résultant de l'entrée
          * @throws DoubleDeclarationException Exception déclenchée lors d'une double déclaration
@@ -58,7 +58,7 @@ public class TableLocale {
         }
 
         /**
-         * Récupère un sylbole dans la TDS associée à une entrée
+         * Récupère un sylbole dans la table locale associée à une entrée
          * @param e L'entrée du symbole à récupérer
          * @return Le symbole associé à l'entrée
          * @throws VariableNonDeclareeException Exception déclenchée lors de la manipulation
@@ -92,10 +92,19 @@ public class TableLocale {
         filles.add(fille);
     }
 
+
+    /**
+     * Récupère la table locale du bloc englobant
+     * @return la table locale du bloc englobant
+     */
     public TableLocale getTableLocalPere() {
         return this.pere;
     }
 
+    /**
+     * Récupère le numéro de ce bloc
+     * @return le numéro de ce bloc
+     */
     public int getNumBloc() {
         return this.numBloc;
     }
@@ -108,10 +117,17 @@ public class TableLocale {
         return table.size()-1;
     }
 
+    /**
+     * Retourne le nombre d'instruction retourner trouvés dans ce bloc
+     * @return le nombre d'instruction retourner trouvés dans ce bloc
+     */
     public int getNbRetour() {
         return this.nbRetour;
     }
 
+    /**
+     * Méthode d'incrémentation du nombre d'instruction retourner dans ce bloc
+     */
     public void incrementerNbRetour() {
         this.nbRetour++;
     }

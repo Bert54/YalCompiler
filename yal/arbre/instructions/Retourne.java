@@ -25,8 +25,8 @@ public class Retourne extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder("#Retourne de la fonction \n");
-        this.exp.toMIPS();
-        sb.append("addi $sp,$sp,4\n");
+        sb.append(this.exp.toMIPS());
+        sb.append("addi $sp,$sp, 4\n");
         sb.append("lw $v0, 0($sp)\n");
         int nbEmpilement = TDS.getInstance().getTableLocaleCourante().getNbVariable()*4 + 8;
         // Restauration du pointeur de la pile
@@ -34,15 +34,15 @@ public class Retourne extends Instruction {
         // Restauration de la base locale
         // TODO (8+4*nbParam quand il y aura les param)
         // Attention: ceci n'est pas un dépilement
-        sb.append("lw $t8,8($s7)\n");
+        sb.append("lw $t8, 0($sp)\n");
         sb.append("addi $sp,$sp, 4\n");
         // Restaurer le compteur ordinal
         sb.append("lw $ra,($sp)\n");
         // On stocke la valeur de retour
-        sb.append("addi $sp,$sp,8\n");
+        sb.append("addi $sp, $sp, 4\n");
         sb.append("move $s7, $t8\n");
-        sb.append("sw $v0,($sp)\n");
-        sb.append("addi $sp,$sp,-4\n");
+        sb.append("sw $v0, ($sp)\n");
+        sb.append("addi $sp, $sp, -4\n");
         sb.append("jr $ra\n");
         return sb.toString();
     }

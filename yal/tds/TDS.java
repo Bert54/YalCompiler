@@ -31,16 +31,25 @@ public class TDS {
         this.tableLocaleCourante = this.racine;
     }
 
+    /**
+     * Sortie d'un bloc lors de l'analyse syntaxique
+     */
     public void sortieBloc() {
         this.tableLocaleCourante = this.tableLocaleCourante.getTableLocalPere();
     }
 
-
+    /**
+     * Récupère la table courante actuellement active
+     * @return la table courante actuellement active
+     */
     public TableLocale getTableLocaleCourante() {
         return this.tableLocaleCourante;
     }
 
 
+    /**
+     * Entrée dans un bloc lors de l'analyse syntaxique
+     */
     public void entreeBloc(){
         compteurBloc++;
         TableLocale tableLocale = new TableLocale(compteurBloc, this.tableLocaleCourante);
@@ -48,6 +57,10 @@ public class TDS {
         tableLocaleCourante = tableLocale;
     }
 
+    /**
+     * Entrée dans un bloc lors de l'analyse sémantique
+     * @param numBloc le numéro du bloc dans lequel entrer
+     */
     public void entreeBlocVerifier(int numBloc) {
         TableLocale table = null;
         for (TableLocale tl: this.tableLocaleCourante.getFilles()) {
@@ -62,6 +75,11 @@ public class TDS {
         this.tableLocaleCourante = this.tableLocaleCourante.getTableLocalPere();
     }
 
+    /**
+     * Méthode d'ajout d'une nouvelle entrée de bloc avec son symbole correspondant
+     * @param e la nouvelle entrée
+     * @param s le nouveau symbole associé à l'entrée
+     */
     public void ajouter(Entree e, Symbole s) {
         int typeE = 0;
         int typeEn = 0;
@@ -79,6 +97,13 @@ public class TDS {
         this.table.put(e, s);
     }
 
+
+    /**
+     * Méthode d'identification d'un bloc
+     * @param e l'entrée à identifier
+     * @return le symbole correspondant à l'entrée
+     * @throws FonctionNonDeclareeException Exception déclenchée lors de l'identification d'un appel de fonction non déclarée
+     */
     public Symbole identifier(Entree e) {
         int typeE = 0;
         int typeEn = 0;

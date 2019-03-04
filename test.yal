@@ -3,7 +3,9 @@ debut
 
     fonction un()
     debut
-        retourne 10 - 3 * 2;
+        entier b;
+        b = 20 * 3 - 100;
+        retourne b + 30;
     fin
 
     entier bite;

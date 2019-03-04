@@ -16,19 +16,6 @@ li $v0, 1
 sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s7, $sp
-#Retourne de la fonction 
-addi $sp,$sp,4
-lw $v0, 0($sp)
-addi $sp,$sp,8
-lw $t8,8($s7)
-addi $sp,$sp, 4
-lw $ra,($sp)
-addi $sp,$sp,8
-move $s7, $t8
-sw $v0,($sp)
-addi $sp,$sp,-4
-jr $ra
-fonctionskip0:
 #Déclaration
 addi $sp, $sp, -4 
 sw $zero, 0($s7)
@@ -36,11 +23,68 @@ sw $zero, 0($s7)
 li $v0, 20
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 100
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 sw $v0, 0($s7)
-#Affectation
+#Retourne de la fonction 
 lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 30
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp,8
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+addi $sp, $sp, 4
+move $s7, $t8
+sw $v0, ($sp)
+addi $sp, $sp, -4
+jr $ra
+fonctionskip0:
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -4($s7)
+#Affectation
+li $v0, 20
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
+#Affectation
+lw $v0, -4($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, -4
@@ -54,9 +98,9 @@ sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sw $v0, 0($s7)
+sw $v0, -4($s7)
 #Ecriture
-lw $v0, 0($s7)
+lw $v0, -4($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
