@@ -3,15 +3,13 @@ debut
 
     fonction un()
     debut
-        entier b;
-        b = 20 * 3 - 100;
-        retourne b + 30;
+        retourne 20 * 3 - 100;
     fin
 
     entier bite;
     bite = 20;
 
-    bite = bite + un();
+    bite = bite + un() + un();
     ecrire bite;
 
 fin

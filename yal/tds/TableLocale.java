@@ -8,8 +8,9 @@ import yal.tds.symbole.Symbole;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
-public class TableLocale {
+public class TableLocale implements Iterable<TableLocale> {
 
         private HashMap<Entree, Symbole> table;
         private int numBloc;
@@ -132,9 +133,12 @@ public class TableLocale {
         this.nbRetour++;
     }
 
-    //TODO Convertir ça en itérateur
-    public ArrayList<TableLocale> getFilles() {
-        return this.filles;
+    /**
+     * Itérateur sur les tables des blocs englobés par celui-ci
+     * @return l'itérateur des tables englobés
+     */
+    public Iterator<TableLocale> iterator() {
+        return this.filles.iterator();
     }
 
 }

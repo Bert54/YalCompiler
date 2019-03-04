@@ -63,7 +63,7 @@ public class TDS {
      */
     public void entreeBlocVerifier(int numBloc) {
         TableLocale table = null;
-        for (TableLocale tl: this.tableLocaleCourante.getFilles()) {
+        for (TableLocale tl: this.tableLocaleCourante) {
             if (tl.getNumBloc() == numBloc) {
                 table = tl;
             }
@@ -71,6 +71,9 @@ public class TDS {
         this.tableLocaleCourante = table;
     }
 
+    /**
+     * Méthode de sortie d'un bloc lors de l'analyse sémantique. Ici, on rècupre donc juste la table locale englobante
+     */
     public void sortieBlocVerifier() {
         this.tableLocaleCourante = this.tableLocaleCourante.getTableLocalPere();
     }
@@ -79,10 +82,12 @@ public class TDS {
      * Méthode d'ajout d'une nouvelle entrée de bloc avec son symbole correspondant
      * @param e la nouvelle entrée
      * @param s le nouveau symbole associé à l'entrée
+     * @throws DoubleDeclarationException Exception déclenché lors de l'ajout d'une fonction déjà présente avec le même nombre de paramètres
      */
     public void ajouter(Entree e, Symbole s) {
         int typeE = 0;
         int typeEn = 0;
+        // Utilisation de instanceof : voir la classe TableLocale.
         if (e instanceof EntreeFonction) {
             typeE = 1;
         }
@@ -110,6 +115,7 @@ public class TDS {
         if (e instanceof EntreeFonction) {
             typeE = 1;
         }
+        // Utilisation de instanceof : voir la classe TableLocale.
         for (Entree en : this.table.keySet()) {
             if (en instanceof EntreeFonction) {
                 typeEn = 1;
