@@ -43,7 +43,13 @@ public class AppelFonction extends ExpressionBinaire {
         StringBuilder string = new StringBuilder();
         // Une étiquette de fonction est représentée par : nomFonction+nbparamètres
         string.append("addi $sp, $sp, -4\n");
+        for (ExpressionBinaire exp: this.parametres) {
+            string.append(exp.toMIPS());
+        }
         string.append("jal " + this.nom + this.parametres.size() + "\n");
+        for (int i = 0 ; i < this.parametres.size() ; i++) {
+            string.append("addi $sp, $sp, 4\n");
+        }
         return string.toString();
     }
 }

@@ -3,6 +3,7 @@ package yal.arbre.instructions;
 import yal.arbre.expressions.ExpressionBinaire;
 import yal.exceptions.RetournerIllegalException;
 import yal.tds.TDS;
+import yal.tds.Valeurs;
 
 public class Retourne extends Instruction {
 
@@ -33,11 +34,13 @@ public class Retourne extends Instruction {
         sb.append(this.exp.toMIPS());
         sb.append("addi $sp,$sp, 4\n");
         sb.append("lw $v0, 0($sp)\n");
-        int nbEmpilement = TDS.getInstance().getTableLocaleCourante().getNbVariable()*4 + 8;
+        int nbEmpilement = TDS.getInstance().getTableLocaleCourante().getNbVariable() * 4 + 8;
+        for (int i = 0 ; i < nbEmpilement ; i++) {
+            Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+        }
         // Restauration du pointeur de la pile
         sb.append("addi $sp,$sp,"+nbEmpilement+"\n");
         // Restauration de la base locale
-        // TODO (8+4*nbParam quand il y aura les param)
         // Attention: ceci n'est pas un dépilement
         sb.append("lw $t8, 0($sp)\n");
         sb.append("addi $sp,$sp, 4\n");
@@ -46,8 +49,14 @@ public class Retourne extends Instruction {
         // On stocke la valeur de retour
         sb.append("addi $sp, $sp, 4\n");
         sb.append("move $s7, $t8\n");
-        sb.append("sw $v0, ($sp)\n");
-        sb.append("addi $sp, $sp, -4\n");
+        int par = TDS.getInstance().getTableLocaleCourante().getNbParams() - 1;
+        if (par < 0) {
+            par = 0;
+        }
+        sb.append("sw $v0, " + (par * 4 + 4) + "($sp)\n");
+        if (TDS.getInstance().getTableLocaleCourante().getNbParams() > 0) {
+            sb.append("addi $sp, $sp, -4\n");
+        }
         sb.append("jr $ra\n");
         return sb.toString();
     }

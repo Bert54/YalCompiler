@@ -27,7 +27,7 @@ public class TDS {
     private TDS() {
         this.table = new HashMap<>();
         this.compteurBloc = 0;
-        this.racine = new TableLocale(compteurBloc, null);
+        this.racine = new TableLocale(compteurBloc, null, 0);
         this.tableLocaleCourante = this.racine;
     }
 
@@ -52,7 +52,8 @@ public class TDS {
      */
     public void entreeBloc(){
         compteurBloc++;
-        TableLocale tableLocale = new TableLocale(compteurBloc, this.tableLocaleCourante);
+        Valeurs.getInstance().ajouterCompteurPile(compteurBloc);
+        TableLocale tableLocale = new TableLocale(compteurBloc, this.tableLocaleCourante, 0);
         tableLocaleCourante.ajouterFille(tableLocale);
         tableLocaleCourante = tableLocale;
     }
@@ -95,7 +96,7 @@ public class TDS {
             if (en instanceof EntreeFonction) {
                 typeEn = 1;
             }
-            if (typeE == typeEn && en.getNom().equals(e.getNom())) {
+            if (typeE == typeEn && en.getNom().equals(e.getNom()) && en.getNbParams() == e.getNbParams()) {
                 throw new DoubleDeclarationException("Fonction déjà déclarée : " + e.getNom());
             }
         }

@@ -1,6 +1,8 @@
 package yal.arbre.instructions;
 
 import yal.arbre.ArbreAbstrait;
+import yal.arbre.expressions.ExpressionBinaire;
+import yal.arbre.expressions.Idf;
 import yal.exceptions.RetournerManquantException;
 import yal.tds.TDS;
 import yal.tds.Valeurs;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 public class DeclarerFonction extends Instruction {
 
     private String nom;
-    private ArrayList<Declarer> params;
+    private ArrayList<Idf> params;
     private ArbreAbstrait corps;
     private int numBloc;
 
@@ -33,7 +35,7 @@ public class DeclarerFonction extends Instruction {
      * @param parametres liste des parametres
      * @param corps corps de la fonction
      */
-    public DeclarerFonction(int n, String nom, ArrayList<Declarer> parametres, ArbreAbstrait corps) {
+    public DeclarerFonction(int n, String nom, ArrayList<Idf> parametres, ArbreAbstrait corps) {
         super(n);
         this.nom = nom;
         this.params = parametres;
@@ -45,7 +47,7 @@ public class DeclarerFonction extends Instruction {
         Symbole s = TDS.getInstance().identifier(new EntreeFonction(this.nom, this.getNoLigne(), this.params.size()));
         this.numBloc = s.getNumBloc();
         TDS.getInstance().entreeBlocVerifier(this.numBloc);
-        for (Declarer d: this.params) {
+        for (Idf d: this.params) {
             d.verifier();
         }
         this.corps.verifier();
@@ -60,6 +62,7 @@ public class DeclarerFonction extends Instruction {
         StringBuilder string = new StringBuilder();
         string.append("#Déclaration fonction\n");
         string.append("j fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +"\n");  // Permet de sauter la fonction
+        TDS.getInstance().entreeBlocVerifier(this.numBloc);
         string.append(this.nom + this.params.size() + ": ");    // Etiquette
         // Adresse de retour
         string.append("sw $ra, ($sp)\n");
@@ -73,7 +76,13 @@ public class DeclarerFonction extends Instruction {
         string.append("addi $sp, $sp, -4\n");
         // Initialisation de la base locale
         string.append("move $s7, $sp\n");
+        for (int i = 0 ; i < this.params.size() ; i++) {
+            string.append("lw $v0, " + (12 + (this.params.size() * 4)) + "($sp)\n");
+            string.append("sw $v0,"  + this.params.get(i).getDeplacement() + "($s7)\n");
+            string.append("addi $sp, $sp, -4\n");
+        }
         string.append(this.corps.toMIPS());
+        TDS.getInstance().sortieBloc();
         string.append("fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +":\n");
         Valeurs.getInstance().incrementerNbFontionPasse();
         return string.toString();

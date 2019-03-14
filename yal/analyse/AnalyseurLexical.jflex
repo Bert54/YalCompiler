@@ -87,9 +87,11 @@ espace = {finDeLigne}  | [ \t\f]
 
 "fonction"             { return symbol(CodesLexicaux.FONCTION); }
 
-"retourne"            { return symbol(CodesLexicaux.RETOURNER); }
+"retourne"             { return symbol(CodesLexicaux.RETOURNER); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
+
+","                    { return symbol(CodesLexicaux.VIRGULE); }
 
 "("                    { return symbol(CodesLexicaux.PAROUVRANTE); }
 

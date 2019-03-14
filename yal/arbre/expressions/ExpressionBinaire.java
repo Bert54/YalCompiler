@@ -50,7 +50,7 @@ public class ExpressionBinaire extends Expression {
                 string.append("mflo $v0\n");
                 break;
             case "/":
-                string.append("div $v0, $t8\n");
+                string.append("div $t8, $v0\n");
                 string.append("mflo $v0\n");
                 break;
         }

@@ -17,16 +17,18 @@ public class TableLocale implements Iterable<TableLocale> {
         private TableLocale pere;
         private ArrayList<TableLocale> filles;
         private int nbRetour;
+        private int nbParams;
 
         /**
          * Constructeur de Table locale
          */
-        public TableLocale(int numBloc, TableLocale pere) {
+        public TableLocale(int numBloc, TableLocale pere, int nbParams) {
             this.table = new HashMap<>();
             this.filles = new ArrayList<>();
             this.numBloc = numBloc;
             this.pere = pere;
             this.nbRetour = 0;
+            this.nbParams = nbParams;
         }
 
         /**
@@ -115,7 +117,7 @@ public class TableLocale implements Iterable<TableLocale> {
      * @return le nombre de variable locale
      */
     public int getNbVariable(){
-        return table.size()-1;
+        return table.size();
     }
 
     /**
@@ -131,6 +133,14 @@ public class TableLocale implements Iterable<TableLocale> {
      */
     public void incrementerNbRetour() {
         this.nbRetour++;
+    }
+
+    public int getNbParams() {
+        return this.nbParams;
+    }
+
+    public void setNbParams(int nb) {
+        this.nbParams = nb;
     }
 
     /**
