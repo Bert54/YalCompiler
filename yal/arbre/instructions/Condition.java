@@ -3,6 +3,7 @@ package yal.arbre.instructions;
 import yal.arbre.ArbreAbstrait;
 import yal.arbre.BlocDInstructions;
 import yal.arbre.expressions.ExpressionLogique;
+import yal.tds.TDS;
 import yal.tds.Valeurs;
 
 public class Condition extends Instruction {
@@ -36,11 +37,13 @@ public class Condition extends Instruction {
 
     @Override
     public void verifier() {
+        TDS.getInstance().getTableLocaleCourante().setInCondition();
         exp.verifier();
         alors.verifier();
         if(sinon != null) {
             sinon.verifier();
         }
+        TDS.getInstance().getTableLocaleCourante().unsetInCondition();
     }
 
     @Override
@@ -57,7 +60,7 @@ public class Condition extends Instruction {
         if(sinon != null) {
             string.append(this.sinon.toMIPS());
         }
-        string.append("finCond"+Valeurs.getInstance().getCompteurCondition()+":");
+        string.append("finCond"+Valeurs.getInstance().getCompteurCondition()+":\n");
         Valeurs.getInstance().incrementerCompteurCondition();
 
         return string.toString();

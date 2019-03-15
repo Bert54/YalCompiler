@@ -52,7 +52,7 @@ public class DeclarerFonction extends Instruction {
         }
         this.corps.verifier();
         if (TDS.getInstance().getTableLocaleCourante().getNbRetour() == 0) {
-            throw new RetournerManquantException(this.getNoLigne(), "Pas de retour dans la fonction '" + this.nom + "'");
+            throw new RetournerManquantException(this.getNoLigne(), "Pas de retour dans le corps principal de la fonction '" + this.nom + "'");
         }
         TDS.getInstance().sortieBlocVerifier();
     }

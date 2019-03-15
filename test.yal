@@ -1,33 +1,47 @@
 programme test
 debut
 
-    fonction un()
+    //fonction un()
+    //debut
+    //    entier b;
+    //    b = 20 * 3 - 100;
+    //    retourne b + 1;
+    //fin
+
+    //fonction trois(entier zgueg)
+    //debut
+    //    entier baton;
+    //    baton = 2;
+    //    retourne -(baton / zgueg);
+    //fin
+
+    //fonction deux(entier bite ; entier penis)
+    //debut
+    //    entier cock;
+    //    cock = 5;
+    //    retourne bite + penis + cock - trois(5);
+    //fin
+
+    //entier bite;
+    //bite = 20;
+    //bite = bite + un();
+    //ecrire bite;
+    //bite = bite + deux(3, 5) + deux(6, 3);
+    //ecrire bite;
+
+    fonction password1(entier a ; entier b ; entier c ; entier d)
     debut
-        entier b;
-        b = 20 * 3 - 100;
-        retourne b + 1;
+        retourne 0;
     fin
 
-    fonction trois(entier zgueg)
+    fonction bool(entier depth)
     debut
-        entier baton;
-        baton = 2;
-        retourne -(baton / zgueg);
+        si depth > 0 alors
+            retourne 3 + bool(depth - 1) ;
+        finsi
+        retourne 0;
     fin
-
-    fonction deux(entier bite ; entier penis)
-    debut
-        entier cock;
-        cock = 5;
-        retourne bite + penis + cock - trois(5);
-    fin
-
-    entier bite;
-    bite = 20;
-    bite = bite + un();
-    ecrire bite;
-    bite = bite + deux(3, 5) + deux(6, 3);
-    ecrire bite;
+    ecrire bool(3);
 
     ecrire 1<3;
 

@@ -18,6 +18,7 @@ public class TableLocale implements Iterable<TableLocale> {
         private ArrayList<TableLocale> filles;
         private int nbRetour;
         private int nbParams;
+        private int inCondition;
 
         /**
          * Constructeur de Table locale
@@ -29,6 +30,7 @@ public class TableLocale implements Iterable<TableLocale> {
             this.pere = pere;
             this.nbRetour = 0;
             this.nbParams = nbParams;
+            this.inCondition = 0;
         }
 
         /**
@@ -149,6 +151,18 @@ public class TableLocale implements Iterable<TableLocale> {
      */
     public void setNbParams(int nb) {
         this.nbParams = nb;
+    }
+
+    public void setInCondition() {
+        this.inCondition++;
+    }
+
+    public void unsetInCondition() {
+        this.inCondition--;
+    }
+
+    public int getInCondition() {
+        return this.inCondition;
     }
 
     /**

@@ -24,7 +24,9 @@ public class Retourne extends Instruction {
         if (TDS.getInstance().getTableLocaleCourante().getNumBloc() == 0) {
             throw new RetournerIllegalException(this.getNoLigne(), "Instruction de retour trouvée dans la fonction principale");
         }
-        TDS.getInstance().getTableLocaleCourante().incrementerNbRetour();
+        if (TDS.getInstance().getTableLocaleCourante().getInCondition() == 0) {
+            TDS.getInstance().getTableLocaleCourante().incrementerNbRetour();
+        }
         this.exp.verifier();
     }
 
