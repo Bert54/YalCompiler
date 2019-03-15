@@ -60,7 +60,7 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, VIRGULE, FONCTION, ECRIRE, LIRE, ENTIER, EGALE, RETOURNER, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
-terminal String    IDF, CSTENTIERE, OPER, OPERT, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU, EXPNEG ;
+terminal String    IDF, CSTENTIERE, OPER, OPERT, OPERTN, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU;
 
 /* Non terminals used in the grammar section.  */
 
@@ -79,8 +79,7 @@ precedence left OPERMULTET;
 precedence left OPELOGIQUET;
 precedence left OPELOGIQUE;
 precedence left OPER;
-precedence left OPERT;
-precedence left EXPNEG;
+precedence left OPERT, OPERTN;
 precedence left PAROUVRANTE, PARFERMANTE;
 precedence left NON;
 
@@ -176,10 +175,10 @@ AFFECT  ::=     IDF:i EGALE EXP:e
 EXP    ::=      EXP:g OPER:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
-                EXP:g OPER:o EXPNEG EXPF:d
+                EXP:g OPER:o OPERTN EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
        |
-                EXPNEG EXP:e
+                OPERTN EXP:e
                 {: RESULT = new ExpressionBinaireNegative(eleft + 1, e); :}
        |
                 EXP:g OPER:o PAROUVRANTE EXP:d PARFERMANTE
@@ -188,10 +187,19 @@ EXP    ::=      EXP:g OPER:o EXPF:d
                 EXP:g OPERT:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
-                EXP:g OPERT:o EXPNEG EXPF:d
+                EXP:g OPERTN:o EXPF:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
+       |
+                EXP:g OPERT:o OPERTN EXPF:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
+       |
+                EXP:g OPERTN:o OPERTN EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
        |
                 EXP:g OPERT:o PAROUVRANTE EXP:d PARFERMANTE
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
+       |
+                EXP:g OPERTN:o PAROUVRANTE EXP:d PARFERMANTE
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
                 PAROUVRANTE EXP:e PARFERMANTE

@@ -110,6 +110,15 @@ div $t8, $v0
 mflo $v0
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 addi $sp,$sp,16

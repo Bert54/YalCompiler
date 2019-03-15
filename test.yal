@@ -12,7 +12,7 @@ debut
     debut
         entier baton;
         baton = 2;
-        retourne baton / zgueg;
+        retourne -(baton / zgueg);
     fin
 
     fonction deux(entier bite ; entier penis)

@@ -38,7 +38,6 @@ commentDoubleSl = \/\/.*\n?
 csteE = [0-9]+
 guillemet = [\"]
 operateur = [\*\/]
-operateurT = [\+\-]
 operateurComp =  (<|>)
 operateurCompT = (\=\=|\!\=)
 
@@ -64,12 +63,13 @@ espace = {finDeLigne}  | [ \t\f]
 "entier"               { return symbol(CodesLexicaux.ENTIER); }
 
 {operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
-{operateurT}           { return symbol(CodesLexicaux.OPERT, yytext()); }
 
-"-"                    { return symbol(CodesLexicaux.EXPNEG, yytext()); }
+"+"                    { return symbol(CodesLexicaux.OPERT, yytext()); }
+
+"-"                    { return symbol(CodesLexicaux.OPERTN, yytext()); }
 
 {operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
-{operateurCompT}        { return symbol(CodesLexicaux.OPELOGIQUET, yytext()); }
+{operateurCompT}       { return symbol(CodesLexicaux.OPELOGIQUET, yytext()); }
 
 
 "et"                   { return symbol(CodesLexicaux.OPERMULTET, yytext()); }
