@@ -29,4 +29,6 @@ debut
     bite = bite + deux(3, 5) + deux(6, 3);
     ecrire bite;
 
+    ecrire 1<3;
+
 fin

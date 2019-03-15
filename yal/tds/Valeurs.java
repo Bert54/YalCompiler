@@ -49,9 +49,9 @@ public class Valeurs {
         this.nbFonctionPasse = 0;
     }
 
+
     public void ajouterCompteurPile(int numBloc) {
         this.taillePiles.put(numBloc, 0);
-    }
     }
 
     /**
