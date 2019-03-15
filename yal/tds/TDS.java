@@ -97,7 +97,7 @@ public class TDS {
                 typeEn = 1;
             }
             if (typeE == typeEn && en.getNom().equals(e.getNom()) && en.getNbParams() == e.getNbParams()) {
-                throw new DoubleDeclarationException("Fonction déjà déclarée : " + e.getNom());
+                throw new DoubleDeclarationException("Fonction déjà déclarée : " + e.getNom() + " (" + e.getNbParams() + " paramètre(s))");
             }
         }
         this.table.put(e, s);
@@ -125,7 +125,7 @@ public class TDS {
                 return this.table.get(en);
             }
         }
-        throw new FonctionNonDeclareeException(e.getLigne(), "Fonction non déclarée : " + e.getNom());
+        throw new FonctionNonDeclareeException(e.getLigne(), "Fonction non déclarée : " + e.getNom() + " (" + e.getNbParams() + " paramètre(s))");
     }
 
 }

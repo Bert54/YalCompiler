@@ -1,30 +1,40 @@
 programme test
 debut
 
-    fonction password1(entier a ; entier b ; entier c ; entier d)
+    fonction deux()
     debut
-        retourne 0;
+        retourne 2;
     fin
 
-    fonction bool(entier depth)
+    fonction foisdeux(entier n)
     debut
-        si depth > 0 alors
-            retourne 3 + bool(depth - 1);
+        retourne n * 2;
+    fin
+
+    fonction melimelo(entier a ; entier b ; entier c ; entier d ; entier e)
+    debut
+        entier temp;
+        temp = 10;
+        si (a + -b > 0) alors
+            temp = temp + foisdeux(d);
         finsi
-        retourne 0;
+        si (temp / deux() > d - (e + deux())) alors
+        sinon
+            a = -(a - b - c);
+        finsi
+        c = c / foisdeux(foisdeux(foisdeux(deux())));
+        retourne a + b + c + d + e;
     fin
 
-    entier a;
-    a = -9;
+    fonction tripleaddition(entier u ; entier d ; entier t)
+    debut
+        retourne u + d + t;
+    fin
 
-    ecrire bool(3);
-
-    a = (a+10) * 12 * (-1);
-    ecrire 1 < 3;
-
-    si (a == 10) alors
-    sinon
-        ecrire 1 + a == 1 + a;
-    finsi
+    entier bite;
+    entier penis;
+    penis = -20;
+    bite = tripleaddition(5, melimelo(4, bite, -1, 10, 2 + foisdeux(bite) / (-1)), penis);
+    ecrire bite;
 
 fin

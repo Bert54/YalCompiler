@@ -10,7 +10,7 @@ move $s7,$sp
 
 #Déclaration fonction
 j fonctionskip0
-password14: sw $ra, ($sp)
+deux0: sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s7, ($sp)
 addi $sp, $sp, -4
@@ -18,37 +18,24 @@ li $v0, 1
 sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s7, $sp
-lw $v0, 28($sp)
-sw $v0,0($s7)
-addi $sp, $sp, -4
-lw $v0, 28($sp)
-sw $v0,-4($s7)
-addi $sp, $sp, -4
-lw $v0, 28($sp)
-sw $v0,-8($s7)
-addi $sp, $sp, -4
-lw $v0, 28($sp)
-sw $v0,-12($s7)
-addi $sp, $sp, -4
 #Retour de la fonction 
-li $v0, 0
+li $v0, 2
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
-addi $sp,$sp,24
+addi $sp,$sp,8
 lw $t8, 0($sp)
 addi $sp,$sp, 4
 lw $ra,($sp)
 addi $sp, $sp, 4
 move $s7, $t8
-sw $v0, 16($sp)
-addi $sp, $sp, -4
+sw $v0, 4($sp)
 jr $ra
 fonctionskip0:
 #Déclaration fonction
 j fonctionskip1
-bool1: sw $ra, ($sp)
+foisdeux1: sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s7, ($sp)
 addi $sp, $sp, -4
@@ -59,8 +46,89 @@ move $s7, $sp
 lw $v0, 16($sp)
 sw $v0,0($s7)
 addi $sp, $sp, -4
-#Condition
+#Retour de la fonction 
 lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp,12
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+addi $sp, $sp, 4
+move $s7, $t8
+sw $v0, 4($sp)
+addi $sp, $sp, -4
+jr $ra
+fonctionskip1:
+#Déclaration fonction
+j fonctionskip2
+melimelo5: sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+lw $v0, 32($sp)
+sw $v0,0($s7)
+addi $sp, $sp, -4
+lw $v0, 32($sp)
+sw $v0,-4($s7)
+addi $sp, $sp, -4
+lw $v0, 32($sp)
+sw $v0,-8($s7)
+addi $sp, $sp, -4
+lw $v0, 32($sp)
+sw $v0,-12($s7)
+addi $sp, $sp, -4
+lw $v0, 32($sp)
+sw $v0,-16($s7)
+addi $sp, $sp, -4
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -20($s7)
+#Affectation
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -20($s7)
+#Condition
+lw $v0, -16($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -12($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 li $v0, 0
@@ -82,15 +150,56 @@ addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 beqz $v0, sinon1
-#Retour de la fonction 
-li $v0, 3
+#Affectation
+lw $v0, -20($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+addi $sp, $sp, -4
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal foisdeux1
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -20($s7)
+b finCond1
+sinon1: 
+finCond1:
+#Condition
+lw $v0, -20($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+jal deux0
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+div $t8, $v0
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -4($s7)
+sw $v0, 0($sp)
 addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 1
+addi $sp, $sp, -4
+jal deux0
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
@@ -100,50 +209,46 @@ lw $v0, 0($sp)
 sub $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-jal bool1
-addi $sp, $sp, 4
 addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp,$sp, 4
-lw $v0, 0($sp)
-addi $sp,$sp,12
-lw $t8, 0($sp)
-addi $sp,$sp, 4
-lw $ra,($sp)
-addi $sp, $sp, 4
-move $s7, $t8
-sw $v0, 4($sp)
-addi $sp, $sp, -4
-jr $ra
-b finCond1
-sinon1: 
-finCond1:
-#Retour de la fonction 
+ble $v0, $t8, condcompafaux2
+condcompavrai2: 
+li $v0, 1
+b fincondcompa2
+condcompafaux2: 
 li $v0, 0
+fincondcompa2: 
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-addi $sp,$sp, 4
-lw $v0, 0($sp)
-addi $sp,$sp,12
-lw $t8, 0($sp)
-addi $sp,$sp, 4
-lw $ra,($sp)
 addi $sp, $sp, 4
-move $s7, $t8
-sw $v0, 4($sp)
-addi $sp, $sp, -4
-jr $ra
-fonctionskip1:
-#Déclaration
-addi $sp, $sp, -4 
-sw $zero, 0($s7)
+lw $v0, 0($sp)
+beqz $v0, sinon2
+b finCond2
+sinon2: 
 #Affectation
-li $v0, 9
+lw $v0, -16($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -12($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -8($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
@@ -157,14 +262,244 @@ sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sw $v0, 0($s7)
-#Ecriture
-addi $sp, $sp, -4
-li $v0, 3
+sw $v0, -16($s7)
+finCond2:
+#Affectation
+lw $v0, -8($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-jal bool1
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+jal deux0
+jal foisdeux1
 addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+div $t8, $v0
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -8($s7)
+#Retour de la fonction 
+lw $v0, -16($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -12($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -8($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp,32
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+addi $sp, $sp, 4
+move $s7, $t8
+sw $v0, 20($sp)
+addi $sp, $sp, -4
+jr $ra
+fonctionskip2:
+#Déclaration fonction
+j fonctionskip3
+tripleaddition3: sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 4
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+lw $v0, 24($sp)
+sw $v0,0($s7)
+addi $sp, $sp, -4
+lw $v0, 24($sp)
+sw $v0,-4($s7)
+addi $sp, $sp, -4
+lw $v0, 24($sp)
+sw $v0,-8($s7)
+addi $sp, $sp, -4
+#Retour de la fonction 
+lw $v0, -8($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp,20
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+addi $sp, $sp, 4
+move $s7, $t8
+sw $v0, 12($sp)
+addi $sp, $sp, -4
+jr $ra
+fonctionskip3:
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, 0($s7)
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -4($s7)
+#Affectation
+li $v0, 20
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
+#Affectation
+addi $sp, $sp, -4
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal foisdeux1
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+div $t8, $v0
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 4
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal melimelo5
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal tripleaddition3
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+#Ecriture
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 move $a0, $v0
@@ -176,174 +511,6 @@ li $v0, 4
 la $a0, ln
 syscall
 
-#Affectation
-lw $v0, 0($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 10
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 12
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, 2
-mult $v0, $t8
-mflo $t8
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sw $v0, 0($s7)
-#Ecriture
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 3
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bge $v0, $t8, condcompafaux2
-condcompavrai2: 
-li $v0, 1
-b fincondcompa2
-condcompafaux2: 
-li $v0, 0
-fincondcompa2: 
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, boolean1
-la $a0, vrai
-b finBool1
-boolean1: 
-la $a0, faux
-finBool1:
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Condition
-lw $v0, 0($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 10
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bne $v0, $t8, condcompafaux3
-condcompavrai3: 
-li $v0, 1
-b fincondcompa3
-condcompafaux3: 
-li $v0, 0
-fincondcompa3: 
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beqz $v0, sinon2
-b finCond2
-sinon2: 
-#Ecriture
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-lw $v0, 0($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-lw $v0, 0($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bne $v0, $t8, condcompafaux4
-condcompavrai4: 
-li $v0, 1
-b fincondcompa4
-condcompafaux4: 
-li $v0, 0
-fincondcompa4: 
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, boolean2
-la $a0, vrai
-b finBool2
-boolean2: 
-la $a0, faux
-finBool2:
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-finCond2:
 
 end :
 
