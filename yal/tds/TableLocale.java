@@ -6,6 +6,7 @@ import yal.tds.entree.Entree;
 import yal.tds.entree.EntreeVariable;
 import yal.tds.symbole.Symbole;
 
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -67,7 +68,7 @@ public class TableLocale implements Iterable<TableLocale> {
          * @throws VariableNonDeclareeException Exception déclenchée lors de la manipulation
          * d'une entrée inexistante
          */
-        public Symbole identifier(Entree e) throws VariableNonDeclareeException {
+        public Symbole identifier(Entree e){
             /**
              * Pour instanceof, même chose qu'au-dessus
              */
@@ -83,8 +84,11 @@ public class TableLocale implements Iterable<TableLocale> {
                 if (typeE == typeEn && en.getNom().equals(e.getNom())) {
                     return this.table.get(en);
                 }
+                if (typeE == typeEn && en.getNom().equals(e.getNom())) {
+                    return this.table.get(en);
+                }
             }
-            throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée : " + e.getNom());
+            return null;
         }
 
     /**
