@@ -17,18 +17,7 @@ public class Condition extends Instruction {
      *
      * @param n numero de ligne
      */
-    public Condition(int n, ExpressionLogique eL, ArbreAbstrait alors) {
-        super(n);
-        this.exp = eL;
-        this.alors = alors;
-    }
-
-    /**
-     * Constructeur d'une condistionnelle avec sinon
-     *
-     * @param n numero de ligne
-     */
-    public Condition(int n, ExpressionLogique eL, ArbreAbstrait alors,ArbreAbstrait sinon) {
+    public Condition(int n, ExpressionLogique eL, ArbreAbstrait alors, ArbreAbstrait sinon) {
         super(n);
         this.exp = eL;
         this.alors = alors;
@@ -39,7 +28,9 @@ public class Condition extends Instruction {
     public void verifier() {
         TDS.getInstance().getTableLocaleCourante().setInCondition();
         exp.verifier();
-        alors.verifier();
+        if (alors != null) {
+            alors.verifier();
+        }
         if(sinon != null) {
             sinon.verifier();
         }
@@ -54,7 +45,9 @@ public class Condition extends Instruction {
         string.append("addi $sp, $sp, 4\n");
         string.append("lw $v0, 0($sp)\n");
         string.append("beqz $v0, sinon" + Valeurs.getInstance().getCompteurCondition() + "\n");
-        string.append(alors.toMIPS());
+        if (alors != null) {
+            string.append(alors.toMIPS());
+        }
         string.append("b finCond"+Valeurs.getInstance().getCompteurCondition()+"\n");
         string.append("sinon" + Valeurs.getInstance().getCompteurCondition() + ": \n");
         if(sinon != null) {

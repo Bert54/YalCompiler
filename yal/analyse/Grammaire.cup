@@ -165,10 +165,13 @@ BOUCLE  ::=     TANTQUE EXPLOG:el REPETER LINST:li FINTANTQUE
                 ;
 
 CONDITION ::=   SI EXPLOG:e ALORS LINST:lia FINSI
-                {: RESULT = new Condition(eleft+1,e,lia); :}
+                {: RESULT = new Condition(eleft+1, e, lia, null); :}
         |
                 SI EXPLOG:e ALORS LINST:lia SINON LINST:lib FINSI
-                {: RESULT = new Condition(eleft+1,e,lia,lib); :}
+                {: RESULT = new Condition(eleft+1,e, lia, lib); :}
+        |
+                SI EXPLOG:e ALORS SINON LINST:lib FINSI
+                {: RESULT = new Condition(eleft+1, e, null, lib); :}
                 ;
 
 AFFECT  ::=     IDF:i EGALE EXP:e

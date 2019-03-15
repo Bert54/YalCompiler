@@ -1,5 +1,7 @@
 .data
 ln : 	.asciiz "\n"
+vrai : 	.asciiz "vrai"
+faux : 	.asciiz "faux"
 
 .text
 main :
@@ -137,6 +139,25 @@ sw $v0, 4($sp)
 addi $sp, $sp, -4
 jr $ra
 fonctionskip1:
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, 0($s7)
+#Affectation
+li $v0, 9
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
 #Ecriture
 addi $sp, $sp, -4
 li $v0, 3
@@ -155,6 +176,174 @@ li $v0, 4
 la $a0, ln
 syscall
 
+#Affectation
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 12
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+#Ecriture
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+bge $v0, $t8, condcompafaux2
+condcompavrai2: 
+li $v0, 1
+b fincondcompa2
+condcompafaux2: 
+li $v0, 0
+fincondcompa2: 
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $t8, $v0
+li $v0, 4
+beqz $t8, boolean1
+la $a0, vrai
+b finBool1
+boolean1: 
+la $a0, faux
+finBool1:
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Condition
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+bne $v0, $t8, condcompafaux3
+condcompavrai3: 
+li $v0, 1
+b fincondcompa3
+condcompafaux3: 
+li $v0, 0
+fincondcompa3: 
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+beqz $v0, sinon2
+b finCond2
+sinon2: 
+#Ecriture
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+bne $v0, $t8, condcompafaux4
+condcompavrai4: 
+li $v0, 1
+b fincondcompa4
+condcompafaux4: 
+li $v0, 0
+fincondcompa4: 
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $t8, $v0
+li $v0, 4
+beqz $t8, boolean2
+la $a0, vrai
+b finBool2
+boolean2: 
+la $a0, faux
+finBool2:
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+finCond2:
 
 end :
 
