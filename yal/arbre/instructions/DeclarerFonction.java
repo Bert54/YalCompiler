@@ -61,9 +61,11 @@ public class DeclarerFonction extends Instruction {
     public String toMIPS() {
         StringBuilder string = new StringBuilder();
         string.append("#Déclaration fonction\n");
-        string.append("j fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +"\n");  // Permet de sauter la fonction
+        // Permet de sauter la fonction lors de l'exécution principal du programme
+        string.append("j fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +"\n");
+        // Entrée dans le bloc de la fonction
         TDS.getInstance().entreeBlocVerifier(this.numBloc);
-        string.append(this.nom + this.params.size() + ": ");    // Etiquette
+        string.append(this.nom + this.params.size() + ": ");    // Nom/Etiquette de la fonction en MIPS
         // Adresse de retour
         string.append("sw $ra, ($sp)\n");
         string.append("addi $sp, $sp, -4\n");
@@ -76,13 +78,15 @@ public class DeclarerFonction extends Instruction {
         string.append("addi $sp, $sp, -4\n");
         // Initialisation de la base locale
         string.append("move $s7, $sp\n");
+        // Récupération des paramètres pour les utiliser en tant que variables locaux
         for (int i = 0 ; i < this.params.size() ; i++) {
             string.append("lw $v0, " + (12 + (this.params.size() * 4)) + "($sp)\n");
             string.append("sw $v0,"  + this.params.get(i).getDeplacement() + "($s7)\n");
             string.append("addi $sp, $sp, -4\n");
         }
-        string.append(this.corps.toMIPS());
-        TDS.getInstance().sortieBloc();
+        string.append(this.corps.toMIPS()); // Génération du code MIPS du corps de la fonction
+        TDS.getInstance().sortieBloc(); // Sortie du bloc de la fonction vers le bloc englobant
+        // Etiquette permettant de sauter la fonction lors de l'exécution principal du programme
         string.append("fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +":\n");
         Valeurs.getInstance().incrementerNbFontionPasse();
         return string.toString();

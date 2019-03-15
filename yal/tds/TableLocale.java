@@ -135,10 +135,18 @@ public class TableLocale implements Iterable<TableLocale> {
         this.nbRetour++;
     }
 
+    /**
+     * Récupère le nombre de paramètres de ce bloc
+     * @return le nombre de paramètres
+     */
     public int getNbParams() {
         return this.nbParams;
     }
 
+    /**
+     * Set le nombre de paramètres dans ce bloc
+     * @param nb nombre de paramètres
+     */
     public void setNbParams(int nb) {
         this.nbParams = nb;
     }

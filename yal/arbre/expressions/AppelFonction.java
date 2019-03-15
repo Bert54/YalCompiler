@@ -42,12 +42,12 @@ public class AppelFonction extends ExpressionBinaire {
     public String toMIPS() {
         StringBuilder string = new StringBuilder();
         // Une étiquette de fonction est représentée par : nomFonction+nbparamètres
-        string.append("addi $sp, $sp, -4\n");
-        for (ExpressionBinaire exp: this.parametres) {
+        string.append("addi $sp, $sp, -4\n"); // Réservation de la place pour le retour de la fonction
+        for (ExpressionBinaire exp: this.parametres) { // Empilement des paramètres
             string.append(exp.toMIPS());
         }
-        string.append("jal " + this.nom + this.parametres.size() + "\n");
-        for (int i = 0 ; i < this.parametres.size() ; i++) {
+        string.append("jal " + this.nom + this.parametres.size() + "\n"); // Appel de la fonction en MIPS
+        for (int i = 0 ; i < this.parametres.size() ; i++) { // Dépilement des paramètres
             string.append("addi $sp, $sp, 4\n");
         }
         return string.toString();

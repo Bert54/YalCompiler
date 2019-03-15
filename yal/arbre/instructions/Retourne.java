@@ -31,10 +31,11 @@ public class Retourne extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder("#Retour de la fonction \n");
-        sb.append(this.exp.toMIPS());
+        sb.append(this.exp.toMIPS()); // Génération du code MIPS de l'expression à retourner
         sb.append("addi $sp,$sp, 4\n");
         sb.append("lw $v0, 0($sp)\n");
         int nbEmpilement = TDS.getInstance().getTableLocaleCourante().getNbVariable() * 4 + 8;
+        // Dépilement des variables locaux
         for (int i = 0 ; i < nbEmpilement ; i++) {
             Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
         }
@@ -53,10 +54,12 @@ public class Retourne extends Instruction {
         if (par < 0) {
             par = 0;
         }
+        // On empile la valeur de retour dans l'espacé réservé lors de l'appel de fonction
         sb.append("sw $v0, " + (par * 4 + 4) + "($sp)\n");
         if (TDS.getInstance().getTableLocaleCourante().getNbParams() > 0) {
             sb.append("addi $sp, $sp, -4\n");
         }
+        // Retour à l'endroit où on a appelé la fonction
         sb.append("jr $ra\n");
         return sb.toString();
     }
