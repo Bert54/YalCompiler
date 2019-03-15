@@ -65,7 +65,7 @@ public class DeclarerFonction extends Instruction {
         string.append("j fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +"\n");
         // Entrée dans le bloc de la fonction
         TDS.getInstance().entreeBlocVerifier(this.numBloc);
-        string.append(this.nom + this.params.size() + ": ");    // Nom/Etiquette de la fonction en MIPS
+        string.append(this.nom + this.params.size() + ":\n");    // Nom/Etiquette de la fonction en MIPS
         // Adresse de retour
         string.append("sw $ra, ($sp)\n");
         string.append("addi $sp, $sp, -4\n");
