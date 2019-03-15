@@ -99,6 +99,9 @@ LINST   ::=     LINST:li  INST:i
 
 INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 {: RESULT = new Ecrire(e, eleft + 1) ; :}
+       |
+                ECRIRE EXPLOG:e POINTVIRGULE
+                {: RESULT = new Ecrire(e, eleft + 1) ; :}
         |
                 DECLARATION:d POINTVIRGULE
                 {: RESULT = d; :}
@@ -179,7 +182,7 @@ EXPLOGF ::=     EXP:g OPELOGIQUE:o EXP:d
                 {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
        |
                 EXP:g OPELOGIQUET:o EXP:d
-                       {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
+                {: RESULT = new ExpressionLogique(gleft+1, g, o, d); :}
                 ;
 
 EXPF   ::=      CSTENTIERE:c

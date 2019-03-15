@@ -35,7 +35,7 @@ public class TDS {
         /**
          * Utilisation de instanceof car utiliser la méthode "containsKey" avec un objet
          * en tant que clé va comparer les adresses. Or on ne stock pas les Entree.
-         * Ainsi, une Entree instanciée avec les même paramaètre ne sera quand même pas
+         * Ainsi, une Entree instanciée avec les même paramètre ne sera quand même pas
          * reconnue par "containsKey"...
          */
         int typeE = 0;

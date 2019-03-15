@@ -12,6 +12,10 @@ debut
     sinon
         ecrire 24;
     finsi
+    ecrire 1 < 2;
+    ecrire 1+3 == 4;
+    ecrire 4 == 4;
+    ecrire 7 == 4;
 
 
 fin

@@ -49,7 +49,7 @@ public class ExpressionLogique extends Expression {
             string.append("or $v0, $v0, $t8\n");
         }
         else {
-            // Sinon, on a deux expressions binaire. ON les compare donc normalement et on enregistre un booléen sous forme d'entier
+            // Sinon, on a deux expressions binaire. On les compare donc normalement et on enregistre un booléen sous forme d'entier
             switch (this.oper) {
                 case "<":
                     string.append("bge $v0, $t8, condcompafaux" + Valeurs.getInstance().getCompteurComparaisonLogique() + "\n");

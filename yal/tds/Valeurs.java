@@ -22,6 +22,8 @@ public class Valeurs {
 
     private int compteurExpresionLogiqueNot;
 
+    private int compteurBooleen;
+
     /**
      * Constructeur
      */
@@ -31,6 +33,7 @@ public class Valeurs {
         this.compteurComparaisonLogique = 1;
         this.compteurCondition = 1;
         this.compteurExpresionLogiqueNot = 1;
+        this.compteurBooleen = 1;
     }
 
     /**
@@ -108,10 +111,26 @@ public class Valeurs {
     }
 
     /**
+     * Récupère le compteur de conditions
+     * @return compteur de conditions
+     */
+    public int getCompteurExpresionLogiqueNot() {
+        return this.compteurExpresionLogiqueNot;
+    }
+
+    /**
      * Recupère le compteur d'inversion d'expression logique
      * @return compteur d'inversion d'expression logique
      */
-    public int getCompteurExpresionLogiqueNot() {
-        return compteurExpresionLogiqueNot;
+    public int getCompteurBooleen() {
+        return compteurBooleen;
     }
+
+    /**
+     * Incrémente le compteur d'inversion d'expression logique
+     */
+    public void incrementerCompteurBoleen() {
+        this.compteurBooleen++;
+    }
+
 }

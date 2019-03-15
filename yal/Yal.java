@@ -27,6 +27,8 @@ public class Yal {
             String nomSortie = nomFichier.replaceAll("[.]yal", ".mips") ;
             PrintWriter flot = new PrintWriter(new BufferedWriter(new FileWriter(nomSortie))) ;
             flot.println(".data\nln : 	.asciiz \"\\n\"");  // Constante pour le saut de ligne
+            flot.println("vrai : 	.asciiz \"vrai\"");
+            flot.println("faux : 	.asciiz \"faux\"");
             flot.println("\n.text\nmain :\n"); // Début du programme MIPS
             flot.println("move $s7,$sp\n"); // Mémorise la tête de pile
             flot.println(arbre.toMIPS()); // Transformation de l'arbre abstrait en code MIPS

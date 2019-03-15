@@ -45,7 +45,6 @@ public class Condition extends Instruction {
 
     @Override
     public String toMIPS() {
-        boolean diff = false;
         StringBuilder string = new StringBuilder("#Condition\n");
         // Créer un compteur à l'aide de Valeur pour les étiquettes
         string.append(this.exp.toMIPS());

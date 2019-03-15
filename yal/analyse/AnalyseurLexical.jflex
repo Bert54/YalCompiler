@@ -43,7 +43,7 @@ operateurComp =  (<|>)
 operateurCompT = (\=\=|\!\=)
 
 finDeLigne = \r|\n
-espace = {finDeLigne}  | [ \t\f]
+espace = {finDeLigne} | [ \t\f]
 
 %%
 
@@ -70,7 +70,7 @@ espace = {finDeLigne}  | [ \t\f]
 {operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
 {operateurT}           { return symbol(CodesLexicaux.OPERT, yytext()); }
 
-"-"                    { return symbol(CodesLexicaux.EXPNEG); }
+"-"                    { return symbol(CodesLexicaux.EXPNEG), yytext(); }
 
 "et"                   { return symbol(CodesLexicaux.OPERMULTET, yytext()); }
 "ou"                   { return symbol(CodesLexicaux.OPERMULTOU, yytext()); }
