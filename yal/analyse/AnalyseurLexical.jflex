@@ -35,7 +35,7 @@ import yal.exceptions.AnalyseLexicaleException;
 
 idf = [A-Za-z_][A-Za-z_0-9]*
 commentDoubleSl = \/\/.*\n?
-csteE = \-?[0-9]+
+csteE = [0-9]+
 guillemet = [\"]
 operateur = [\*\/]
 operateurT = [\+\-]
@@ -63,14 +63,19 @@ espace = {finDeLigne} | [ \t\f]
 
 "entier"               { return symbol(CodesLexicaux.ENTIER); }
 
+{operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
+
+"+"                    { return symbol(CodesLexicaux.OPERT, yytext()); }
+
+"-"                    { return symbol(CodesLexicaux.OPERTN, yytext()); }
+
 {operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }
-{operateurCompT}        { return symbol(CodesLexicaux.OPELOGIQUET, yytext()); }
+{operateurCompT}       { return symbol(CodesLexicaux.OPELOGIQUET, yytext()); }
 
 
 {operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
 {operateurT}           { return symbol(CodesLexicaux.OPERT, yytext()); }
 
-"-"                    { return symbol(CodesLexicaux.EXPNEG), yytext(); }
 
 "et"                   { return symbol(CodesLexicaux.OPERMULTET, yytext()); }
 "ou"                   { return symbol(CodesLexicaux.OPERMULTOU, yytext()); }
@@ -85,13 +90,19 @@ espace = {finDeLigne} | [ \t\f]
 
 "lire"                 { return symbol(CodesLexicaux.LIRE); }
 
+"fonction"             { return symbol(CodesLexicaux.FONCTION); }
+
+"retourne"             { return symbol(CodesLexicaux.RETOURNER); }
+
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
-{csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
+","                    { return symbol(CodesLexicaux.VIRGULE); }
 
 "("                    { return symbol(CodesLexicaux.PAROUVRANTE); }
 
 ")"                    { return symbol(CodesLexicaux.PARFERMANTE); }
+
+{csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
 

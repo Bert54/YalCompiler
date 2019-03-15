@@ -1,21 +1,32 @@
 programme test
 debut
-    entier a;
-    entier b;
-    b = 24;
-    si 3 != 5 alors
-        si 4 > 3 ou 5 < 1 alors
-            ecrire 2;
-        sinon
-            ecrire 5;
-        finsi
-    sinon
-        ecrire 24;
-    finsi
-    ecrire 1 < 2;
-    ecrire 1+3 == 4;
-    ecrire 4 == 4;
-    ecrire 7 == 4;
 
+    fonction un()
+    debut
+        entier b;
+        b = 20 * 3 - 100;
+        retourne b + 1;
+    fin
+
+    fonction trois(entier zgueg)
+    debut
+        entier baton;
+        baton = 2;
+        retourne -(baton / zgueg);
+    fin
+
+    fonction deux(entier bite ; entier penis)
+    debut
+        entier cock;
+        cock = 5;
+        retourne bite + penis + cock - trois(5);
+    fin
+
+    entier bite;
+    bite = 20;
+    bite = bite + un();
+    ecrire bite;
+    bite = bite + deux(3, 5) + deux(6, 3);
+    ecrire bite;
 
 fin

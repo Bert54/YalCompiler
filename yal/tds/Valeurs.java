@@ -4,6 +4,9 @@
 
 package yal.tds;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Valeurs {
 
     private static Valeurs instance = new Valeurs();
@@ -11,6 +14,8 @@ public class Valeurs {
     public static Valeurs getInstance() {
         return instance;
     }
+
+    private HashMap<Integer, Integer> taillePiles;
 
     private int taillePile; // Taille actuelle de la pile
 
@@ -24,38 +29,57 @@ public class Valeurs {
 
     private int compteurBooleen;
 
+    private int nbRetourner;
+
+    private int nbFonctionPasse;
+
     /**
      * Constructeur
      */
     private Valeurs() {
         this.taillePile = 0;
+        this.taillePiles = new HashMap<>();
+        this.ajouterCompteurPile(0);
         this.compteurBoucle = 1;
         this.compteurComparaisonLogique = 1;
         this.compteurCondition = 1;
         this.compteurExpresionLogiqueNot = 1;
         this.compteurBooleen = 1;
+        this.nbRetourner = 0;
+        this.nbFonctionPasse = 0;
+    }
+
+    public void ajouterCompteurPile(int numBloc) {
+        this.taillePiles.put(numBloc, 0);
+    }
     }
 
     /**
      * Getter sur la taille de la pile
      * @return la taille de la pile
      */
-    public int getTaillePile() {
-        return this.taillePile;
+    public int getTaillePile(int numBloc) {
+        return this.taillePiles.get(numBloc);
     }
 
     /**
      * Incremente la taille de la pile
      */
-    public void empiler() {
-        this.taillePile -= 4;
+    public void empiler(int numBloc) {
+        int taille = this.taillePiles.get(numBloc);
+        taille -= 4;
+        this.taillePiles.remove(numBloc);
+        this.taillePiles.put(numBloc, taille);
     }
 
     /**
      * Decremente la taille de la pile
      */
-    public void depiler() {
-        this.taillePile += 4;
+    public void depiler(int numBloc) {
+        int taille = this.taillePiles.get(numBloc);
+        taille += 4;
+        this.taillePiles.remove(numBloc);
+        this.taillePiles.put(numBloc, taille);
     }
 
     /**
@@ -131,6 +155,21 @@ public class Valeurs {
      */
     public void incrementerCompteurBoleen() {
         this.compteurBooleen++;
+    }
+
+    /**
+     * Incrémente le compteur du passeur de fonctions
+     */
+    public void incrementerNbFontionPasse() {
+        this.nbFonctionPasse++;
+    }
+
+    /**
+     * Récupère le compeur du passeur de fonctions
+     * @return compteur du passeur de fonctions
+     */
+    public int getNbFonctionPasse() {
+        return this.nbFonctionPasse;
     }
 
 }

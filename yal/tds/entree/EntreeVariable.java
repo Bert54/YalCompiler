@@ -11,4 +11,9 @@ public class EntreeVariable extends Entree {
         super(n, l);
     }
 
+    @Override
+    public int getNbParams() {
+        return 0;
+    }
+
 }

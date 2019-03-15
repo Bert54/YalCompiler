@@ -6,7 +6,7 @@ public class ExpressionBinaireNegative extends ExpressionBinaire {
 
     /**
      * Constructeur d'une expression binaire avec signe négatif
-     * @param n Numéro de ligne
+     * @param n Numero de ligne
      * @param e L'expression binaire négative
      */
     public ExpressionBinaireNegative(int n, ExpressionBinaire e) {
@@ -24,7 +24,7 @@ public class ExpressionBinaireNegative extends ExpressionBinaire {
         StringBuilder string = new StringBuilder("");
         // On évalue l'expression avant toute chose
         string.append(this.exp.toMIPS());
-        // "Négativisation" de l'expression
+        // Négation de l'expression
         string.append("addi $sp, $sp, 4\n");
         string.append("lw $v0, 0($sp)\n");
         string.append("li $t8, 2\n");

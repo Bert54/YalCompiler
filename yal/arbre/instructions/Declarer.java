@@ -1,7 +1,7 @@
 package yal.arbre.instructions;
 
 import yal.tds.TDS;
-import yal.tds.Valeurs;
+import yal.tds.TableLocale;
 import yal.tds.entree.EntreeVariable;
 import yal.tds.symbole.Symbole;
 
@@ -22,7 +22,7 @@ public class Declarer extends Instruction {
 
     @Override
     public void verifier() {
-        Symbole s = TDS.getInstance().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
+        Symbole s = TDS.getInstance().getTableLocaleCourante().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
         this.dep = s.getDeplacement();
     }
 

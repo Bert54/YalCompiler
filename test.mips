@@ -6,31 +6,234 @@ main :
 
 move $s7,$sp
 
-#Condition
-li $v0, 3
+#Déclaration fonction
+j fonctionskip0
+un0: sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, 0($s7)
+#Affectation
+li $v0, 20
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 5
+li $v0, 3
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-ble $v0, $t8, condcompafaux1
-condcompavrai1: 
-li $v0, 1
-b fincondcompa1
-condcompafaux1: 
-li $v0, 0
-fincondcompa1: 
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 100
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-beqz $v0, sinon1
+sw $v0, 0($s7)
+#Retour de la fonction 
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp,12
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+addi $sp, $sp, 4
+move $s7, $t8
+sw $v0, 4($sp)
+jr $ra
+fonctionskip0:
+#Déclaration fonction
+j fonctionskip1
+trois1: sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+lw $v0, 16($sp)
+sw $v0,0($s7)
+addi $sp, $sp, -4
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -4($s7)
+#Affectation
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
+#Retour de la fonction 
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+div $t8, $v0
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, 2
+mult $v0, $t8
+mflo $t8
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp,16
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+addi $sp, $sp, 4
+move $s7, $t8
+sw $v0, 4($sp)
+addi $sp, $sp, -4
+jr $ra
+fonctionskip1:
+#Déclaration fonction
+j fonctionskip2
+deux2: sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+lw $v0, 20($sp)
+sw $v0,0($s7)
+addi $sp, $sp, -4
+lw $v0, 20($sp)
+sw $v0,-4($s7)
+addi $sp, $sp, -4
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -8($s7)
+#Affectation
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -8($s7)
+#Retour de la fonction 
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -8($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal trois1
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp,20
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+addi $sp, $sp, 4
+move $s7, $t8
+sw $v0, 8($sp)
+addi $sp, $sp, -4
+jr $ra
+fonctionskip2:
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, 0($s7)
+#Affectation
+li $v0, 20
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+#Affectation
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+jal un0
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
 #Ecriture
-li $v0, 1
+lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
@@ -44,9 +247,49 @@ li $v0, 4
 la $a0, ln
 syscall
 
-b finCond1
-sinon1: #Ecriture
-li $v0, 0
+#Affectation
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal deux2
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 6
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal deux2
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+#Ecriture
+lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
@@ -60,7 +303,7 @@ li $v0, 4
 la $a0, ln
 syscall
 
-finCond1:
+
 end :
 
 li $v0, 10

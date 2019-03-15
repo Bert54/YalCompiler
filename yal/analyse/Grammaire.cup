@@ -59,30 +59,36 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, EXPNEG, ECRIRE, LIRE, ENTIER, EGALE, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
-terminal String    IDF, CSTENTIERE, OPER, OPERT, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, VIRGULE, FONCTION, ECRIRE, LIRE, ENTIER, EGALE, RETOURNER, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, SI, ALORS, SINON, FINSI, NON;
+terminal String    IDF, CSTENTIERE, OPER, OPERT, OPERTN, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU;
 
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST ;
-non terminal ExpressionBinaire EXP, EXPF;
+non terminal String FONCTIONT;
+non terminal ArbreAbstrait PROG, LINST, LINSTF, INST;
+non terminal ExpressionBinaire EXP, EXPF, APPELFONCTION;
 non terminal ExpressionLogique EXPLOG, EXPLOGF;
-non terminal Instruction DECL_VAR, DECLARATION, AFFECT, BOUCLE, CONDITION ;
+non terminal Instruction DECL_VAR, DECL_FONCTION, DECLARATION, AFFECT, BOUCLE, CONDITION, RETOURNE;
+non terminal ArrayList<Idf> PARAMETRES, PARAMETRESDECL;
+non terminal ArrayList<ExpressionBinaire> PAR_EFF;
+
+//
 
 precedence left OPERMULTOU;
 precedence left OPERMULTET;
 precedence left OPELOGIQUET;
 precedence left OPELOGIQUE;
 precedence left OPER;
-precedence left OPERT;
+precedence left OPERT, OPERTN;
 precedence left PAROUVRANTE, PARFERMANTE;
 precedence left NON;
+
 
 /* ----------------------------Grammar Section-------------------- */
  
 start with PROG ;
 
-PROG    ::=     PROGRAMME  IDF  DEBUT  LINST:li  FIN
+PROG    ::=     PROGRAMME  IDF  DEBUT  LINST:li FIN
                 {: RESULT = li ; :}
                 ;
 
@@ -95,6 +101,37 @@ LINST   ::=     LINST:li  INST:i
                    BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
                    b.ajouter(i) ;
                    RESULT = b ; :}
+        |
+                LINST:li  DECLARATION:d
+                {: ((BlocDInstructions)li).ajouter(d) ;
+                RESULT = li ; :}
+        |
+                DECLARATION:d
+                {:
+                    BlocDInstructions b = new BlocDInstructions(dleft + 1) ;
+                    b.ajouter(d) ;
+                    RESULT = b ; :}
+                ;
+
+LINSTF  ::=     LINSTF:li  INST:i
+                {: ((BlocDInstructions)li).ajouter(i) ;
+                RESULT = li ; :}
+        |
+                INST:i
+                {:
+                BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
+                b.ajouter(i) ;
+                RESULT = b ; :}
+        |
+                LINSTF:li  DECL_VAR:d
+                {: ((BlocDInstructions)li).ajouter(d) ;
+                RESULT = li ; :}
+        |
+                DECL_VAR:d
+                {:
+                    BlocDInstructions b = new BlocDInstructions(dleft + 1);
+                    b.ajouter(d);
+                    RESULT = b; :}
                 ;
 
 INST    ::=     ECRIRE EXP:e POINTVIRGULE
@@ -102,9 +139,6 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
        |
                 ECRIRE EXPLOG:e POINTVIRGULE
                 {: RESULT = new Ecrire(e, eleft + 1) ; :}
-        |
-                DECLARATION:d POINTVIRGULE
-                {: RESULT = d; :}
         |
                 LIRE IDF:i POINTVIRGULE
                 {: RESULT = new Lire(ileft + 1, new Idf(ileft + 1, i)) ; :}
@@ -117,6 +151,13 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |
                 CONDITION:c
                 {: RESULT = c; :}
+        |
+                RETOURNE:r POINTVIRGULE
+                {: RESULT = r; :}
+                ;
+
+RETOURNE ::=    RETOURNER EXP:e
+                {: RESULT = new Retourne(eleft+1, e); :}
                 ;
 
 BOUCLE  ::=     TANTQUE EXPLOG:el REPETER LINST:li FINTANTQUE
@@ -137,7 +178,10 @@ AFFECT  ::=     IDF:i EGALE EXP:e
 EXP    ::=      EXP:g OPER:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
-                EXPNEG PAROUVRANTE EXP:e PARFERMANTE
+                EXP:g OPER:o OPERTN EXPF:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
+       |
+                OPERTN EXP:e
                 {: RESULT = new ExpressionBinaireNegative(eleft + 1, e); :}
        |
                 EXP:g OPER:o PAROUVRANTE EXP:d PARFERMANTE
@@ -146,7 +190,19 @@ EXP    ::=      EXP:g OPER:o EXPF:d
                 EXP:g OPERT:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
+                EXP:g OPERTN:o EXPF:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
+       |
+                EXP:g OPERT:o OPERTN EXPF:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
+       |
+                EXP:g OPERTN:o OPERTN EXPF:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
+       |
                 EXP:g OPERT:o PAROUVRANTE EXP:d PARFERMANTE
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
+       |
+                EXP:g OPERTN:o PAROUVRANTE EXP:d PARFERMANTE
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
                 PAROUVRANTE EXP:e PARFERMANTE
@@ -188,17 +244,78 @@ EXPLOGF ::=     EXP:g OPELOGIQUE:o EXP:d
 EXPF   ::=      CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
        |
+                APPELFONCTION:a
+                {: RESULT = a; :}
+       |
                 IDF:i
                 {: RESULT = new Idf(ileft + 1, i) ; :}
                 ;
 
-DECLARATION ::= DECL_VAR:d
-                {: RESULT = d ; :}
+APPELFONCTION ::= IDF:i PAROUVRANTE PARFERMANTE
+                {: RESULT = new AppelFonction(ileft + 1, i, new ArrayList<>()); :}
+       |
+                  IDF:i PAROUVRANTE PAR_EFF:pe PARFERMANTE
+                {: RESULT = new AppelFonction(ileft + 1, i, pe); :}
                 ;
 
-DECL_VAR ::=    ENTIER IDF:i
-                {: TDS.getInstance().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile()));
-                   Valeurs.getInstance().empiler();
+PAR_EFF   ::= EXP:e VIRGULE PAR_EFF:pe
+                {: pe.add(e);
+                   RESULT = pe;
+                :}
+       |
+                EXP:e
+                {: ArrayList<ExpressionBinaire> al = new ArrayList<>();
+                   al.add(e);
+                   RESULT = al;
+                :}
+                ;
+
+DECLARATION ::= DECL_VAR:d
+                {: RESULT = d ; :}
+       |
+                DECL_FONCTION:d
+                {:  Instruction in = d;
+                    TDS.getInstance().sortieBloc();
+                    RESULT = d; :}
+                ;
+
+DECL_FONCTION ::= FONCTIONT IDF:i PARAMETRES:p DEBUT LINSTF:li FIN
+                {:  TDS.getInstance().ajouter(new EntreeFonction(i, ileft+1, p.size()), new SymboleFonction(TDS.getInstance().getTableLocaleCourante().getNumBloc()));
+                    TDS.getInstance().getTableLocaleCourante().setNbParams(p.size());
+                    RESULT = new DeclarerFonction(ileft+1, i, p, li);
+                :}
+                ;
+
+FONCTIONT     ::= FONCTION
+                {: TDS.getInstance().entreeBloc();:}
+                ;
+
+PARAMETRES    ::= PAROUVRANTE PARFERMANTE
+                {: RESULT = new ArrayList<>(); :}
+       |
+                  PAROUVRANTE PARAMETRESDECL:pr PARFERMANTE
+                {: RESULT = pr; :}
+                ;
+
+PARAMETRESDECL ::= ENTIER IDF:i POINTVIRGULE PARAMETRESDECL:pr
+                {:  TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc())));
+                    Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+                    pr.add(new Idf(ileft+1, i));
+                    RESULT = pr;
+                :}
+       |
+                ENTIER IDF:i
+                {: ArrayList<Idf> al = new ArrayList<>();
+                   TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc())));
+                   Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+                   al.add(new Idf(ileft+1, i));
+                   RESULT = al;
+                :}
+                ;
+
+DECL_VAR ::=    ENTIER IDF:i POINTVIRGULE
+                {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc())));
+                   Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
                    RESULT = new Declarer(ileft+1, i);
                 :}
                 ;

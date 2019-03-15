@@ -1,9 +1,9 @@
 package yal.tds;
 
 import yal.exceptions.DoubleDeclarationException;
-import yal.exceptions.VariableNonDeclareeException;
+import yal.exceptions.FonctionNonDeclareeException;
 import yal.tds.entree.Entree;
-import yal.tds.entree.EntreeVariable;
+import yal.tds.entree.EntreeFonction;
 import yal.tds.symbole.Symbole;
 
 import java.util.HashMap;
@@ -17,68 +17,115 @@ public class TDS {
     }
 
     private HashMap<Entree, Symbole> table;
+    private int compteurBloc;
+    private TableLocale tableLocaleCourante;
+    private final TableLocale racine;
 
     /**
      * Constructeur
      */
     private TDS() {
         this.table = new HashMap<>();
+        this.compteurBloc = 0;
+        this.racine = new TableLocale(compteurBloc, null, 0);
+        this.tableLocaleCourante = this.racine;
     }
 
     /**
-     * Ajoute une entrée dans la TDS
-     * @param e L'entrée correspondant au symbole
-     * @param s Le symbole résultant de l'entrée
-     * @throws DoubleDeclarationException Exception déclenchée lors d'une double déclaration
+     * Sortie d'un bloc lors de l'analyse syntaxique
      */
-    public void ajouter(Entree e, Symbole s) throws DoubleDeclarationException {
-        /**
-         * Utilisation de instanceof car utiliser la méthode "containsKey" avec un objet
-         * en tant que clé va comparer les adresses. Or on ne stock pas les Entree.
-         * Ainsi, une Entree instanciée avec les même paramètre ne sera quand même pas
-         * reconnue par "containsKey"...
-         */
+    public void sortieBloc() {
+        this.tableLocaleCourante = this.tableLocaleCourante.getTableLocalPere();
+    }
+
+    /**
+     * Récupère la table courante actuellement active
+     * @return la table courante actuellement active
+     */
+    public TableLocale getTableLocaleCourante() {
+        return this.tableLocaleCourante;
+    }
+
+
+    /**
+     * Entrée dans un bloc lors de l'analyse syntaxique
+     */
+    public void entreeBloc(){
+        compteurBloc++;
+        Valeurs.getInstance().ajouterCompteurPile(compteurBloc);
+        TableLocale tableLocale = new TableLocale(compteurBloc, this.tableLocaleCourante, 0);
+        tableLocaleCourante.ajouterFille(tableLocale);
+        tableLocaleCourante = tableLocale;
+    }
+
+    /**
+     * Entrée dans un bloc lors de l'analyse sémantique
+     * @param numBloc le numéro du bloc dans lequel entrer
+     */
+    public void entreeBlocVerifier(int numBloc) {
+        TableLocale table = null;
+        for (TableLocale tl: this.tableLocaleCourante) {
+            if (tl.getNumBloc() == numBloc) {
+                table = tl;
+            }
+        }
+        this.tableLocaleCourante = table;
+    }
+
+    /**
+     * Méthode de sortie d'un bloc lors de l'analyse sémantique. Ici, on rècupre donc juste la table locale englobante
+     */
+    public void sortieBlocVerifier() {
+        this.tableLocaleCourante = this.tableLocaleCourante.getTableLocalPere();
+    }
+
+    /**
+     * Méthode d'ajout d'une nouvelle entrée de bloc avec son symbole correspondant
+     * @param e la nouvelle entrée
+     * @param s le nouveau symbole associé à l'entrée
+     * @throws DoubleDeclarationException Exception déclenché lors de l'ajout d'une fonction déjà présente avec le même nombre de paramètres
+     */
+    public void ajouter(Entree e, Symbole s) {
         int typeE = 0;
         int typeEn = 0;
-        if (e instanceof EntreeVariable) {
-            typeE = 0;
+        // Utilisation de instanceof : voir la classe TableLocale.
+        if (e instanceof EntreeFonction) {
+            typeE = 1;
         }
         for (Entree en : this.table.keySet()) {
-            if (en instanceof EntreeVariable) {
-                typeEn = 0;
+            if (en instanceof EntreeFonction) {
+                typeEn = 1;
             }
-            if (typeE == typeEn && en.getNom().equals(e.getNom())) {
-                throw new DoubleDeclarationException(e.getLigne(), "Variable déjà déclarée");
+            if (typeE == typeEn && en.getNom().equals(e.getNom()) && en.getNbParams() == e.getNbParams()) {
+                throw new DoubleDeclarationException("Fonction déjà déclarée : " + e.getNom());
             }
         }
         this.table.put(e, s);
     }
 
+
     /**
-     * Récupère un sylbole dans la TDS associée à une entrée
-     * @param e L'entrée du symbole à récupérer
-     * @return Le symbole associé à l'entrée
-     * @throws VariableNonDeclareeException Exception déclenchée lors de la manipulation
-     * d'une entrée inexistante
+     * Méthode d'identification d'un bloc
+     * @param e l'entrée à identifier
+     * @return le symbole correspondant à l'entrée
+     * @throws FonctionNonDeclareeException Exception déclenchée lors de l'identification d'un appel de fonction non déclarée
      */
-    public Symbole identifier(Entree e) throws VariableNonDeclareeException {
-        /**
-         * Pour instanceof, même chose qu'au-dessus
-         */
+    public Symbole identifier(Entree e) {
         int typeE = 0;
         int typeEn = 0;
-        if (e instanceof EntreeVariable) {
-            typeE = 0;
+        if (e instanceof EntreeFonction) {
+            typeE = 1;
         }
+        // Utilisation de instanceof : voir la classe TableLocale.
         for (Entree en : this.table.keySet()) {
-            if (en instanceof EntreeVariable) {
-                typeEn = 0;
+            if (en instanceof EntreeFonction) {
+                typeEn = 1;
             }
-            if (typeE == typeEn && en.getNom().equals(e.getNom())) {
+            if (typeE == typeEn && en.getNom().equals(e.getNom()) && en.getNbParams() == e.getNbParams()) {
                 return this.table.get(en);
             }
         }
-        throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
+        throw new FonctionNonDeclareeException(e.getLigne(), "Fonction non déclarée : " + e.getNom());
     }
 
 }
