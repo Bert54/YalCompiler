@@ -1,40 +1,51 @@
-programme test
-debut
+programme entierNaturel debut
 
-    fonction deux()
-    debut
-        retourne 2;
+    fonction successeur(entier a) debut
+        retourne a+1;
     fin
 
-    fonction foisdeux(entier n)
-    debut
-        retourne n * 2;
+    fonction predecesseur(entier a) debut
+        retourne a-1;
     fin
 
-    fonction melimelo(entier a ; entier b ; entier c ; entier d ; entier e)
-    debut
-        entier temp;
-        temp = 10;
-        si (a + -b > 0) alors
-            temp = temp + foisdeux(d);
-        finsi
-        si (temp / deux() > d - (e + deux())) alors
+
+    fonction addition(entier a; entier b) debut
+        si b > 0 alors
+            retourne addition(successeur(a), predecesseur(b));
         sinon
-            a = -(a - b - c);
+            retourne a;
         finsi
-        c = c / foisdeux(foisdeux(foisdeux(deux())));
-        retourne a + b + c + d + e;
     fin
 
-    fonction tripleaddition(entier u ; entier d ; entier t)
-    debut
-        retourne u + d + t;
+    fonction soustraction(entier a; entier b) debut
+        si b > 0 alors
+            retourne soustraction(predecesseur(a), predecesseur(b));
+        sinon
+            retourne a;
+        finsi
     fin
 
-    entier bite;
-    entier penis;
-    penis = -20;
-    bite = tripleaddition(5, melimelo(4, bite, -1, 10, 2 + foisdeux(bite) / (-1)), penis);
-    ecrire bite;
+    fonction multiplication(entier a; entier b) debut
+        si a == 0 ou b == 0 alors
+            retourne 0;
+        sinon
+            si b == 1 alors
+                retourne a;
+            sinon
+                retourne addition(a , multiplication(a, predecesseur(b)));
+            finsi
+        finsi
+    fin
 
+    entier a;
+    entier b;
+    a = 5;
+    b = 3;
+    ecrire a;                       // affiche 5
+    ecrire b;                       // affiche 3
+    ecrire predecesseur(a);         // affiche 4
+    ecrire successeur(a);           // affiche 6
+    ecrire addition(a, b);          // affiche 8
+    ecrire soustraction(a, b);      // affiche 2
+    ecrire multiplication(a, b);    // affiche 15
 fin

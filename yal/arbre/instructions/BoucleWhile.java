@@ -30,15 +30,16 @@ public class BoucleWhile extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("#Boucle tantque\n");
-        string.append("tantque" + Valeurs.getInstance().getCompteurBoucle() + ": \n");  // étiquette tantque
+        int cnt = Valeurs.getInstance().getCompteurBoucle();
+        Valeurs.getInstance().incrementerCompteurBoucle();
+        string.append("tantque" + cnt + ": \n");  // étiquette tantque
         string.append(this.expL.toMIPS());
         string.append("addi $sp, $sp, 4\n");
         string.append("lw $v0, 0($sp)\n");
-        string.append("beqz $v0, fintantque" + Valeurs.getInstance().getCompteurBoucle() + "\n");   // on se dirige
+        string.append("beqz $v0, fintantque" + cnt + "\n");   // on se dirige
         string.append(this.bloc.toMIPS());                              // vers fintantque si condition non remplie
-        string.append("b tantque" + Valeurs.getInstance().getCompteurBoucle() + "\n");  // on retourne au tantque
-        string.append("fintantque" + Valeurs.getInstance().getCompteurBoucle() + ": \n");   // étiquette fintantque
-        Valeurs.getInstance().incrementerCompteurBoucle();
+        string.append("b tantque" + cnt + "\n");  // on retourne au tantque
+        string.append("fintantque" + cnt + ": \n");   // étiquette fintantque
         return string.toString();
     }
 }

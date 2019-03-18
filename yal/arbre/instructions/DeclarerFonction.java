@@ -60,9 +60,11 @@ public class DeclarerFonction extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder();
+        int cnt = Valeurs.getInstance().getNbFonctionPasse();
+        Valeurs.getInstance().incrementerNbFontionPasse();
         string.append("#Déclaration fonction\n");
         // Permet de sauter la fonction lors de l'exécution principal du programme
-        string.append("j fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +"\n");
+        string.append("j fonctionskip"+ cnt +"\n");
         // Entrée dans le bloc de la fonction
         TDS.getInstance().entreeBlocVerifier(this.numBloc);
         string.append(this.nom + this.params.size() + ":\n");    // Nom/Etiquette de la fonction en MIPS
@@ -87,8 +89,7 @@ public class DeclarerFonction extends Instruction {
         string.append(this.corps.toMIPS()); // Génération du code MIPS du corps de la fonction
         TDS.getInstance().sortieBloc(); // Sortie du bloc de la fonction vers le bloc englobant
         // Etiquette permettant de sauter la fonction lors de l'exécution principal du programme
-        string.append("fonctionskip"+ Valeurs.getInstance().getNbFonctionPasse() +":\n");
-        Valeurs.getInstance().incrementerNbFontionPasse();
+        string.append("fonctionskip"+ cnt +":\n");
         return string.toString();
     }
 
