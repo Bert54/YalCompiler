@@ -102,6 +102,10 @@ espace = {finDeLigne} | [ \t\f]
 
 ")"                    { return symbol(CodesLexicaux.PARFERMANTE); }
 
+"["                    { return symbol(CodesLexicaux.CROCHOUVRANT); }
+
+"]"                    { return symbol(CodesLexicaux.CROCHFERMANT); }
+
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }

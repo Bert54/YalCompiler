@@ -8,37 +8,39 @@ package yal.analyse;
 /** CUP generated class containing symbol constants. */
 public class CodesLexicaux {
   /* terminals */
-  public static final int IDF = 23;
+  public static final int IDF = 25;
   public static final int PARFERMANTE = 17;
-  public static final int CSTENTIERE = 24;
+  public static final int CSTENTIERE = 26;
   public static final int LIRE = 9;
-  public static final int OPERMULTET = 30;
+  public static final int OPERMULTET = 32;
   public static final int ECRIRE = 8;
+  public static final int CROCHFERMANT = 19;
   public static final int FONCTION = 7;
-  public static final int ALORS = 19;
+  public static final int ALORS = 21;
   public static final int TANTQUE = 13;
   public static final int VIRGULE = 6;
   public static final int REPETER = 14;
-  public static final int OPELOGIQUE = 28;
-  public static final int NON = 22;
+  public static final int OPELOGIQUE = 30;
+  public static final int NON = 24;
   public static final int POINTVIRGULE = 5;
   public static final int FINTANTQUE = 15;
-  public static final int OPERTN = 27;
-  public static final int SINON = 20;
+  public static final int OPERTN = 29;
+  public static final int SINON = 22;
   public static final int EGALE = 11;
-  public static final int OPERMULTOU = 31;
+  public static final int OPERMULTOU = 33;
   public static final int ENTIER = 10;
   public static final int EOF = 0;
-  public static final int OPELOGIQUET = 29;
+  public static final int OPELOGIQUET = 31;
   public static final int RETOURNER = 12;
   public static final int PAROUVRANTE = 16;
-  public static final int SI = 18;
+  public static final int SI = 20;
   public static final int error = 1;
-  public static final int OPER = 25;
+  public static final int OPER = 27;
+  public static final int CROCHOUVRANT = 18;
   public static final int DEBUT = 3;
-  public static final int FINSI = 21;
+  public static final int FINSI = 23;
   public static final int FIN = 4;
-  public static final int OPERT = 26;
+  public static final int OPERT = 28;
   public static final int PROGRAMME = 2;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -59,6 +61,8 @@ public class CodesLexicaux {
   "FINTANTQUE",
   "PAROUVRANTE",
   "PARFERMANTE",
+  "CROCHOUVRANT",
+  "CROCHFERMANT",
   "SI",
   "ALORS",
   "SINON",
