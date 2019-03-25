@@ -326,7 +326,7 @@ DECL_VAR ::=    ENTIER IDF:i POINTVIRGULE
                 :}
                 |
                 ENTIER IDF:i CROCHOUVRANT EXP:e CROCHFERMANT POINTVIRGULE
-                {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeTableau(i, ileft+1), new SymboleTableau(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), 4));
+                {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeTableau(i, ileft+1), new SymboleTableau(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), 4, e));
                    Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
                    RESULT = new DeclarerTableau(ileft+1, i, e);
                 :}

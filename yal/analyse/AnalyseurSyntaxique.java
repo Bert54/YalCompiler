@@ -1345,7 +1345,7 @@ class CUP$AnalyseurSyntaxique$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)).right;
 		ExpressionBinaire e = (ExpressionBinaire)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)).value;
-		 TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeTableau(i, ileft+1), new SymboleTableau(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), 4));
+		 TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeTableau(i, ileft+1), new SymboleTableau(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), 4, e));
                    Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
                    RESULT = new DeclarerTableau(ileft+1, i, e);
                 

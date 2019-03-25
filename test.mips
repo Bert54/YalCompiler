@@ -8,18 +8,17 @@ main :
 
 move $s7,$sp
 
-#Ecriture
+#Déclaration
+addi $sp, $sp, -4 
+sw $zero, -4($s7)
+#Affectation
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
+sw $v0, -4($s7)
+#Affectation
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
 
 end :
 

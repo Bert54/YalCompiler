@@ -1,5 +1,7 @@
 package yal.tds.symbole;
 
+import yal.arbre.expressions.ExpressionBinaire;
+
 public class SymboleVariable extends Symbole {
 
     private int dep;
@@ -23,6 +25,16 @@ public class SymboleVariable extends Symbole {
     @Override
     public int getNumBloc() {
         return 0;
+    }
+
+    @Override
+    public int getEnjambe() {
+        return 0;
+    }
+
+    @Override
+    public ExpressionBinaire getExpression() {
+        return null;
     }
 
 }

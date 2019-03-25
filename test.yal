@@ -1,0 +1,11 @@
+programme entierNaturel debut
+
+    entier a[5];
+
+    entier b;
+    b = a[2];
+
+    entier azert[1];
+    b = azert[0];
+
+fin

@@ -14,6 +14,8 @@ public class ExpressionBinaireNegative extends ExpressionBinaire {
         this.exp = e;
     }
 
+    public ExpressionBinaire getExp() { return this.exp; }
+
     @Override
     public void verifier() {
         this.exp.verifier();
