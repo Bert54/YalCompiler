@@ -8,8 +8,10 @@ public class AffectationTab extends Instruction {
     private IdfTab idft;
     private ExpressionBinaire exp;
 
-    protected AffectationTab(int n) {
+    public AffectationTab(int n, IdfTab tab, ExpressionBinaire e) {
         super(n);
+        this.idft = tab;
+        this.exp = e;
     }
 
     @Override

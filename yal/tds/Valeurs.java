@@ -4,6 +4,10 @@
 
 package yal.tds;
 
+import org.omg.CORBA.INTERNAL;
+import yal.arbre.expressions.ConstanteEntiere;
+import yal.arbre.expressions.ExpressionBinaire;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -72,14 +76,24 @@ public class Valeurs {
         this.taillePiles.put(numBloc, taille);
     }
 
+    public void empilerTableau(int numBloc, ExpressionBinaire tab) {
+        int taille = this.taillePiles.get(numBloc);
+        if (tab instanceof ConstanteEntiere) {
+            taille -= Integer.parseInt(tab.toString()) * 4;
+        }
+        else {
+            taille -= 4000;
+        }
+        this.taillePiles.remove(numBloc);
+        this.taillePiles.put(numBloc, taille);
+    }
+
     /**
      * Decremente la taille de la pile
      */
     public void depiler(int numBloc) {
-        int taille = this.taillePiles.get(numBloc);
-        taille += 4;
         this.taillePiles.remove(numBloc);
-        this.taillePiles.put(numBloc, taille);
+        this.taillePiles.put(numBloc, 0);
     }
 
     /**

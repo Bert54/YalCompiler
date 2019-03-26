@@ -51,7 +51,7 @@ public class ExpressionBinaire extends Expression {
                 break;
             case "/":
                 string.append("div $t8, $v0\n");
-                string.append("mflo $v0\n");
+                string.append("mfhi $v0\n");
                 break;
         }
         string.append("sw $v0, 0($sp)\n");

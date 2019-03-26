@@ -70,8 +70,7 @@ public class TableLocale implements Iterable<TableLocale> {
          * Récupère un sylbole dans la table locale associée à une entrée
          * @param e L'entrée du symbole à récupérer
          * @return Le symbole associé à l'entrée
-         * @throws VariableNonDeclareeException Exception déclenchée lors de la manipulation
-         * d'une entrée inexistante
+         * @throws VariableNonDeclareeException Exception déclenchée lors de la manipulation d'une entrée inexistante
          */
         public Symbole identifier(Entree e) throws VariableNonDeclareeException {
             /**

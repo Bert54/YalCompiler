@@ -176,6 +176,10 @@ CONDITION ::=   SI EXPLOG:e ALORS LINST:lia FINSI
 
 AFFECT  ::=     IDF:i EGALE EXP:e
                 {: RESULT = new Affectation(eleft+1, new Idf(ileft + 1, i), e); :}
+
+       |
+                IDF:i CROCHOUVRANT EXP:ind CROCHFERMANT EGALE EXP:e
+                    {: RESULT = new AffectationTab(eleft + 1, new IdfTab(ileft + 1, i, ind), e); :}
                 ;
 
 EXP    ::=      EXP:g OPER:o EXPF:d
@@ -327,7 +331,7 @@ DECL_VAR ::=    ENTIER IDF:i POINTVIRGULE
                 |
                 ENTIER IDF:i CROCHOUVRANT EXP:e CROCHFERMANT POINTVIRGULE
                 {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeTableau(i, ileft+1), new SymboleTableau(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), 4, e));
-                   Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+                   Valeurs.getInstance().empilerTableau(TDS.getInstance().getTableLocaleCourante().getNumBloc(), e);
                    RESULT = new DeclarerTableau(ileft+1, i, e);
                 :}
                 ;

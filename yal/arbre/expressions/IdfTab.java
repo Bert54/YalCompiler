@@ -8,8 +8,8 @@ import yal.tds.symbole.Symbole;
 public class IdfTab extends ExpressionBinaire {
 
     private String nom;
-    private int origine;
-    private int enjambe;
+    private static int origine;
+    private static int enjambe;
     private ExpressionBinaire position;
 
     public IdfTab(int n, String nom, ExpressionBinaire exp) {

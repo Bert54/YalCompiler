@@ -3,7 +3,6 @@ package yal.arbre.instructions;
 import yal.arbre.expressions.ConstanteEntiere;
 import yal.arbre.expressions.ExpressionBinaire;
 import yal.arbre.expressions.ExpressionBinaireNegative;
-import yal.exceptions.IdentificateurTableauHorsLimitesException;
 import yal.exceptions.TableauDimensionsIncorrectsException;
 import yal.tds.TDS;
 import yal.tds.entree.EntreeVariable;
@@ -43,8 +42,6 @@ public class DeclarerTableau extends Instruction {
         string.append("mult $v0, $t8\n");
         string.append("mflo $v0\n");
         string.append("add $sp, $sp, $v0\n");
-        //string.append("li $t8, " + this.origine + "\n");
-        //string.append("add $a1, $v0, $t8\n");
         return string.toString();
     }
 }

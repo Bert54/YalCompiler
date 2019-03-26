@@ -28,6 +28,10 @@ public class Idf extends ExpressionBinaire {
         return this.dep;
     }
 
+    public String getNom() {
+        return this.nom;
+    }
+
     @Override
     public void verifier() {
         Symbole s = TDS.getInstance().getTableLocaleCourante().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
