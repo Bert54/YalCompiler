@@ -15,6 +15,12 @@ public class DeclarerTableau extends Instruction {
     private ExpressionBinaire taille;
     private int enjambe;
 
+    /**
+     * COnstructeur d'une déclaration de tableau
+     * @param n numéro de ligne
+     * @param nom identificateur du tableau
+     * @param exp expression correspondant à la taille du tableau
+     */
     public DeclarerTableau(int n, String nom, ExpressionBinaire exp) {
         super(n);
         this.nom = nom;
@@ -23,6 +29,7 @@ public class DeclarerTableau extends Instruction {
 
     @Override
     public void verifier() {
+        // Si on vérifie un tableau statique, on vérifie que sa taille est strictement positive
         Symbole s = TDS.getInstance().getTableLocaleCourante().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
         if ((this.taille instanceof ExpressionBinaireNegative && ((ExpressionBinaireNegative) this.taille).getExp() instanceof ConstanteEntiere) || (this.taille instanceof ConstanteEntiere && Integer.parseInt(this.taille.toString()) == 0)) {
             throw new TableauDimensionsIncorrectsException(this.getNoLigne(), "Dimensions du tableau nulles ou négatives");
@@ -34,10 +41,10 @@ public class DeclarerTableau extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder();
-        string.append(this.taille.toMIPS());
-        string.append("addi $sp, $sp, 4\n");
+        string.append(this.taille.toMIPS()); // EValuation de l'expression correspondant à la taille du tableau
+        string.append("addi $sp, $sp, 4\n"); // Recupération de la taille calculée et allocation de la place nécessaire
         string.append("lw $v0, 0($sp)\n");
-        int enjNeg = this.enjambe - this.enjambe * 2;
+        int enjNeg = this.enjambe - this.enjambe * 2; // enjambe positif, on doit la rendre négative car on doit descendre dans la pile
         string.append("li $t8, " + enjNeg + "\n");
         string.append("mult $v0, $t8\n");
         string.append("mflo $v0\n");

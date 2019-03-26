@@ -118,14 +118,6 @@ public class TableLocale implements Iterable<TableLocale> {
     }
 
     /**
-     *
-     * @return le nombre de variable locale
-     */
-    public int getNbVariable(){
-        return table.size();
-    }
-
-    /**
      * Retourne le nombre d'instruction retourner trouvés dans ce bloc
      * @return le nombre d'instruction retourner trouvés dans ce bloc
      */

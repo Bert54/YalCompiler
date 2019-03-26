@@ -1,5 +1,7 @@
 package yal.arbre.expressions;
 
+import yal.exceptions.DivisionParZeroException;
+
 public class ExpressionBinaire extends Expression {
 
     /**
@@ -50,6 +52,14 @@ public class ExpressionBinaire extends Expression {
                 string.append("mflo $v0\n");
                 break;
             case "/":
+                // Si l'expression droite est juste une constante, alors on sait si l'utilisateur tente de
+                // diviser par 0. Si c'est le cas, alors on produit une exception
+                if (this.expd instanceof ConstanteEntiere) {
+                    int cons = Integer.parseInt(expd.toString());
+                    if (cons == 0) {
+                        throw new DivisionParZeroException(this.getNoLigne(), "Tentative de division par zéro");
+                    }
+                }
                 string.append("div $t8, $v0\n");
                 string.append("mfhi $v0\n");
                 break;

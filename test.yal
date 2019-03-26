@@ -49,5 +49,6 @@ programme entierNaturel debut
     ecrire fonc1();
     ecrire fonc2();
     ecrire fonc3(c[10]);
+    ecrire 10 * (5 / 0 + 2) + fonc3(d);
 
 fin

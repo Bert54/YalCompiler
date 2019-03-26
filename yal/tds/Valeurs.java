@@ -4,11 +4,9 @@
 
 package yal.tds;
 
-import org.omg.CORBA.INTERNAL;
 import yal.arbre.expressions.ConstanteEntiere;
 import yal.arbre.expressions.ExpressionBinaire;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Valeurs {
@@ -54,6 +52,10 @@ public class Valeurs {
     }
 
 
+    /**
+     * Ajoute un nouveau compteur de pile pour une nouvelle table locale
+     * @param numBloc numéro de bloc de la nouvelle table locale
+     */
     public void ajouterCompteurPile(int numBloc) {
         this.taillePiles.put(numBloc, 0);
     }
@@ -67,7 +69,7 @@ public class Valeurs {
     }
 
     /**
-     * Incremente la taille de la pile
+     * Incremente la taille de la pile de la table locale courante (variable)
      */
     public void empiler(int numBloc) {
         int taille = this.taillePiles.get(numBloc);
@@ -76,13 +78,16 @@ public class Valeurs {
         this.taillePiles.put(numBloc, taille);
     }
 
+    /**
+     * Incremente la taille de la pile de la table locale courante (tableau)
+     */
     public void empilerTableau(int numBloc, ExpressionBinaire tab) {
         int taille = this.taillePiles.get(numBloc);
         if (tab instanceof ConstanteEntiere) {
-            taille -= Integer.parseInt(tab.toString()) * 4;
+            taille -= Integer.parseInt(tab.toString()) * 4; // Tableau statique : on connait sa taille
         }
         else {
-            taille -= 4000;
+            taille -= 40000; // On se sait pas comment faire ici dans le cas du tableau dynamique
         }
         this.taillePiles.remove(numBloc);
         this.taillePiles.put(numBloc, taille);
