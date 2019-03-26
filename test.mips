@@ -8,17 +8,15 @@ main :
 
 move $s7,$sp
 
-#Déclaration
-addi $sp, $sp, -4 
-sw $zero, -4($s7)
-#Affectation
+li $v0, 15
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sw $v0, -4($s7)
-#Affectation
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sw $v0, -4($s7)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+addi $sp, $sp, $v0
 
 end :
 
