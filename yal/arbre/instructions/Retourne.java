@@ -59,7 +59,7 @@ public class Retourne extends Instruction {
         // Dépilement des variables locaux
         int nbEmpilement = Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc());
         nbEmpilement = Math.abs(nbEmpilement) + 8;
-        //Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+        /*//Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
         // Restauration du pointeur de la pile
         sb.append("addi $sp,$sp,"+nbEmpilement+"\n");
         // Restauration de la base locale
@@ -70,13 +70,17 @@ public class Retourne extends Instruction {
         sb.append("lw $ra,($sp)\n");
         // On stocke la valeur de retour
         sb.append("addi $sp, $sp, 4\n");
-        sb.append("move $s7, $t8\n");
+        sb.append("move $s7, $t8\n");*/
+        sb.append("move $sp, $s7\n");
+        sb.append("lw $ra, 12($s7)\n");
+        sb.append("lw $s7, 8($s7)\n");
+        sb.append("addi $sp, $sp, 12\n");
         int par = TDS.getInstance().getTableLocaleCourante().getNbParams() - 1;
         if (par < 0) {
             par = 0;
         }
         // On empile la valeur de retour dans l'espacé réservé lors de l'appel de fonction
-        sb.append("sw $v0, " + (par * 4 + 4) + "($sp)\n");
+        sb.append("sw $v0, " + (par * 4 + 8) + "($sp)\n");
         if (TDS.getInstance().getTableLocaleCourante().getNbParams() > 0) {
             sb.append("addi $sp, $sp, -4\n");
         }

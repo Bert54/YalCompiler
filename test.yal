@@ -25,6 +25,9 @@ programme entierNaturel debut
     fonction fonc3(entier premier)
     debut
         entier[1000] a;
+
+        entier[premier * premier] grosTab;
+        ecrire grosTab.longueur;
         a[999] = premier - 10;
         a[333] = a[999] - 20;
         retourne a[333];
@@ -41,7 +44,7 @@ programme entierNaturel debut
     //entier[40] c;
     c[10] = 333;
     ecrire c[10];
-
+    ecrire c.longueur;
     entier d;
     d = c[10] + 2;
     ecrire d > a[9];

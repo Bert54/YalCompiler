@@ -88,7 +88,7 @@ public class IdfTab extends ExpressionBinaire {
         string.append("mflo $v0\n");
         if (estDynamique) { // Tableau dynamique
             string.append("lw $a1, " + origine + "($s7)\n");
-            string.append("move $t8, $a1\n");
+            string.append("move $t8, $a1\n"); // Chargement de l'adresse d'implémentation du tableau dynamique
             string.append("add $a1, $v0, $t8\n");
             string.append("lw $v0, 0($a1)\n"); // Position de l'indice du tableau retrouvée dans la pile : on charge sa valeur et on la sauvegarde en tête de pile
             string.append("sw $v0, 0($sp)\n");
