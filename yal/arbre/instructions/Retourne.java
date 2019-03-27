@@ -59,7 +59,7 @@ public class Retourne extends Instruction {
         // Dépilement des variables locaux
         int nbEmpilement = Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc());
         nbEmpilement = Math.abs(nbEmpilement) + 8;
-        Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+        //Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
         // Restauration du pointeur de la pile
         sb.append("addi $sp,$sp,"+nbEmpilement+"\n");
         // Restauration de la base locale

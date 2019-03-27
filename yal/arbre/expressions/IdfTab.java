@@ -8,9 +8,10 @@ import yal.tds.symbole.Symbole;
 public class IdfTab extends ExpressionBinaire {
 
     private String nom;
-    private static int origine;
-    private static int enjambe;
+    private int origine;
+    private int enjambe;
     private ExpressionBinaire position;
+    private boolean estDynamique;
 
     /**
      * COnstructeur d'un identificateur de tableau
@@ -29,7 +30,7 @@ public class IdfTab extends ExpressionBinaire {
      * @return l'origine virtuelle du tableau
      */
     public int getOrigine() {
-        return this.origine;
+        return origine;
     }
 
     /**
@@ -37,7 +38,7 @@ public class IdfTab extends ExpressionBinaire {
      * @return l'enjambé du tableau
      */
     public int getEnjambe() {
-        return this.enjambe;
+        return enjambe;
     }
 
     /**
@@ -46,6 +47,10 @@ public class IdfTab extends ExpressionBinaire {
      */
     public ExpressionBinaire getPosition() {
         return this.position;
+    }
+
+    public boolean estDynamique() {
+        return estDynamique;
     }
 
     @Override
@@ -66,8 +71,9 @@ public class IdfTab extends ExpressionBinaire {
                 throw new IdentificateurTableauHorsLimitesException(this.getNoLigne(), "Indice de tableau statique en dehors des limites");
             }
         }
-        this.enjambe = s.getEnjambe();
-        this.origine = s.getDeplacement();
+        estDynamique = !(s.getExpression() instanceof ConstanteEntiere);
+        enjambe = s.getEnjambe();
+        origine = s.getDeplacement();
     }
 
     @Override
@@ -80,11 +86,21 @@ public class IdfTab extends ExpressionBinaire {
         string.append("li $t8, " + enjNeg + "\n");
         string.append("mult $v0, $t8\n");
         string.append("mflo $v0\n");
-        string.append("li $t8, " + this.origine + "\n");
-        string.append("add $a1, $v0, $t8\n");
-        string.append("lw $v0, 0($a1)\n"); // Position de l'indice du tableau retrouvée dans la pile : on charge sa valeur et on la sauvegarde en tête de pile
-        string.append("sw $v0, 0($sp)\n");
-        string.append("addi $sp, $sp, -4\n");
+        if (estDynamique) { // Tableau dynamique
+            string.append("lw $a1, " + origine + "($s7)\n");
+            string.append("move $t8, $a1\n");
+            string.append("add $a1, $v0, $t8\n");
+            string.append("lw $v0, 0($a1)\n"); // Position de l'indice du tableau retrouvée dans la pile : on charge sa valeur et on la sauvegarde en tête de pile
+            string.append("sw $v0, 0($sp)\n");
+            string.append("addi $sp, $sp, -4\n");
+        }
+        else { // Tableau statique
+            string.append("li $t8, " + origine + "\n");
+            string.append("add $a1, $v0, $t8\n");
+            string.append("lw $v0, 0($a1)\n"); // Position de l'indice du tableau retrouvée dans la pile : on charge sa valeur et on la sauvegarde en tête de pile
+            string.append("sw $v0, 0($sp)\n");
+            string.append("addi $sp, $sp, -4\n");
+        }
         return string.toString();
     }
 

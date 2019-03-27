@@ -8,6 +8,8 @@ main :
 
 move $s7,$sp
 
+addi $sp, $sp, 0
+
 #Déclaration fonction
 j fonctionskip0
 fonc10:
@@ -19,17 +21,23 @@ li $v0, 1
 sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s7, $sp
+addi $sp, $sp, -124
+#Ecriture
 li $v0, 30
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-li $t8, -4
-mult $v0, $t8
-mflo $v0
-add $sp, $sp, $v0
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
 #Déclaration
-addi $sp, $sp, -4 
 sw $zero, -120($s7)
 li $v0, 20
 sw $v0, 0($sp)
@@ -42,7 +50,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 addi $sp, $sp, 4
 lw $v0, 0($sp)
@@ -55,7 +63,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
@@ -79,7 +87,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 addi $sp, $sp, 4
 lw $v0, 0($sp)
@@ -93,7 +101,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
@@ -137,33 +145,7 @@ li $v0, 2
 sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s7, $sp
-li $v0, 500
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, -4
-mult $v0, $t8
-mflo $v0
-add $sp, $sp, $v0
-li $v0, 200
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, -4
-mult $v0, $t8
-mflo $v0
-add $sp, $sp, $v0
-li $v0, 750
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, -4
-mult $v0, $t8
-mflo $v0
-add $sp, $sp, $v0
+addi $sp, $sp, -5800
 li $v0, 10
 sw $v0, 0($sp)
 addi $sp, $sp, -4
@@ -175,7 +157,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 addi $sp, $sp, 4
 lw $v0, 0($sp)
@@ -191,7 +173,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, -2000
 add $a1, $v0, $t8
 addi $sp, $sp, 4
 lw $v0, 0($sp)
@@ -204,7 +186,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
@@ -217,7 +199,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, -2000
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
@@ -238,7 +220,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, -2800
 add $a1, $v0, $t8
 addi $sp, $sp, 4
 lw $v0, 0($sp)
@@ -252,7 +234,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, -2800
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
@@ -281,16 +263,7 @@ addi $sp, $sp, -4
 move $s7, $sp
 lw $v0, 16($sp)
 sw $v0,0($s7)
-addi $sp, $sp, -4
-li $v0, 1000
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, -4
-mult $v0, $t8
-mflo $v0
-add $sp, $sp, $v0
+addi $sp, $sp, -4008
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
@@ -312,7 +285,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, -4
 add $a1, $v0, $t8
 addi $sp, $sp, 4
 lw $v0, 0($sp)
@@ -325,7 +298,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, -4
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
@@ -348,7 +321,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, -4
 add $a1, $v0, $t8
 addi $sp, $sp, 4
 lw $v0, 0($sp)
@@ -362,14 +335,14 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, -4
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
-addi $sp,$sp,4012
+addi $sp,$sp,4016
 lw $t8, 0($sp)
 addi $sp,$sp, 4
 lw $ra,($sp)
@@ -379,17 +352,7 @@ sw $v0, 4($sp)
 addi $sp, $sp, -4
 jr $ra
 fonctionskip2:
-li $v0, 15
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, -4
-mult $v0, $t8
-mflo $v0
-add $sp, $sp, $v0
 #Déclaration
-addi $sp, $sp, -4 
 sw $zero, -60($s7)
 li $v0, 5
 sw $v0, 0($sp)
@@ -402,7 +365,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 addi $sp, $sp, 4
 lw $v0, 0($sp)
@@ -416,7 +379,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
@@ -439,36 +402,6 @@ li $v0, 4
 la $a0, ln
 syscall
 
-li $v0, 9
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, -4
-mult $v0, $t8
-mflo $v0
-li $t8, -64
-add $a1, $v0, $t8
-lw $v0, 0($a1)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 3
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-li $t8, -4
-mult $v0, $t8
-mflo $v0
-add $sp, $sp, $v0
 li $v0, 333
 sw $v0, 0($sp)
 addi $sp, $sp, -4
@@ -511,8 +444,7 @@ la $a0, ln
 syscall
 
 #Déclaration
-addi $sp, $sp, -4 
-sw $zero, -40064($s7)
+sw $zero, -224($s7)
 #Affectation
 li $v0, 10
 sw $v0, 0($sp)
@@ -539,9 +471,9 @@ sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sw $v0, -40064($s7)
+sw $v0, -224($s7)
 #Ecriture
-lw $v0, -40064($s7)
+lw $v0, -224($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 li $v0, 9
@@ -552,7 +484,7 @@ lw $v0, 0($sp)
 li $t8, -4
 mult $v0, $t8
 mflo $v0
-li $t8, -64
+li $t8, 0
 add $a1, $v0, $t8
 lw $v0, 0($a1)
 sw $v0, 0($sp)
@@ -736,7 +668,7 @@ mflo $v0
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, -4
-lw $v0, -40064($s7)
+lw $v0, -224($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 jal fonc31

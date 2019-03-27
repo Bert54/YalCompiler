@@ -62,6 +62,7 @@ public class DeclarerFonction extends Instruction {
         StringBuilder string = new StringBuilder();
         int cnt = Valeurs.getInstance().getNbFonctionPasse();
         Valeurs.getInstance().incrementerNbFontionPasse();
+        Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
         string.append("#Déclaration fonction\n");
         // Permet de sauter la fonction lors de l'exécution principal du programme
         string.append("j fonctionskip"+ cnt +"\n");
@@ -84,9 +85,11 @@ public class DeclarerFonction extends Instruction {
         for (int i = 0 ; i < this.params.size() ; i++) {
             string.append("lw $v0, " + (12 + (this.params.size() * 4)) + "($sp)\n");
             string.append("sw $v0,"  + this.params.get(i).getDeplacement() + "($s7)\n");
-            string.append("addi $sp, $sp, -4\n");
+            Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
         }
-        string.append(this.corps.toMIPS()); // Génération du code MIPS du corps de la fonction
+        String a = this.corps.toMIPS(); // Génération du code MIPS du corps de la fonction
+        string.append("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
+        string.append(a);
         TDS.getInstance().sortieBloc(); // Sortie du bloc de la fonction vers le bloc englobant
         // Etiquette permettant de sauter la fonction lors de l'exécution principal du programme
         string.append("fonctionskip"+ cnt +":\n");

@@ -84,10 +84,10 @@ public class Valeurs {
     public void empilerTableau(int numBloc, ExpressionBinaire tab) {
         int taille = this.taillePiles.get(numBloc);
         if (tab instanceof ConstanteEntiere) {
-            taille -= Integer.parseInt(tab.toString()) * 4; // Tableau statique : on connait sa taille
+            taille -= Integer.parseInt(tab.toString()) * 4; // Tableau statique : on connait sa taille, on incrémente donc la pile en conséquence
         }
         else {
-            taille -= 40000; // On se sait pas comment faire ici dans le cas du tableau dynamique
+            taille -= 4; // Tableau dynamique : sa taille sera déterminé lors de son exécution, on incrémente donc la pile que pour l'espace qui contiendra son adresse d'implémentation
         }
         this.taillePiles.remove(numBloc);
         this.taillePiles.put(numBloc, taille);

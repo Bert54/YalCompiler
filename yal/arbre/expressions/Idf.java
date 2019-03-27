@@ -1,7 +1,6 @@
 package yal.arbre.expressions;
 
 import yal.tds.TDS;
-import yal.tds.TableLocale;
 import yal.tds.entree.EntreeVariable;
 import yal.tds.symbole.Symbole;
 
@@ -18,6 +17,7 @@ public class Idf extends ExpressionBinaire {
     public Idf(int n, String nom) {
         super(n);
         this.nom = nom;
+        this.dep = 52525235;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Idf extends ExpressionBinaire {
 
     @Override
     public String toMIPS() {
-        StringBuilder string = new StringBuilder("");
+        StringBuilder string = new StringBuilder();
         string.append("lw $v0, " + this.dep + "($s7)\n");
         string.append("sw $v0, 0($sp)\n");
         string.append("addi $sp, $sp, -4\n");
