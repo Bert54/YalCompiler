@@ -71,6 +71,7 @@ public class IdfTab extends ExpressionBinaire {
                 throw new IdentificateurTableauHorsLimitesException(this.getNoLigne(), "Indice de tableau statique en dehors des limites");
             }
         }
+        // On regarde si cet identitificateur de tableau est un identificateur de tableau dynamique. Cela servira pour la génération du code MIPS
         estDynamique = !(s.getExpression() instanceof ConstanteEntiere);
         enjambe = s.getEnjambe();
         origine = s.getDeplacement();

@@ -37,12 +37,12 @@ public class AffectationTab extends Instruction {
         string.append("li $t8, " + enjNeg + "\n");
         string.append("mult $v0, $t8\n");
         string.append("mflo $v0\n");
-        if (this.idft.estDynamique()) {
-            string.append("lw $a1, " + this.idft.getOrigine() + "($s7)\n");
+        if (this.idft.estDynamique()) { // Chargement d'une valeur d'un tableau dynamique
+            string.append("lw $a1, " + this.idft.getOrigine() + "($s7)\n"); // Chargement de l'adresse d'implémentation du tableau dynamique
             string.append("move $t8, $a1\n");
             string.append("add $a1, $v0, $t8\n");
         }
-        else {
+        else { // Chargement d'une valeur d'un tableau statique
             string.append("li $t8, " + this.idft.getOrigine() + "\n");
             string.append("add $a1, $v0, $t8\n");
         }

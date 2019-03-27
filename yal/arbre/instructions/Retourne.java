@@ -57,7 +57,7 @@ public class Retourne extends Instruction {
         sb.append("addi $sp,$sp, 4\n");
         sb.append("lw $v0, 0($sp)\n");
         // Dépilement des variables locaux
-        int nbEmpilement = Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+        int nbEmpilement = Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()); // Ne sert plus avec la nouvelle méthode.
         nbEmpilement = Math.abs(nbEmpilement) + 8;
         /*//Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
         // Restauration du pointeur de la pile
@@ -71,6 +71,8 @@ public class Retourne extends Instruction {
         // On stocke la valeur de retour
         sb.append("addi $sp, $sp, 4\n");
         sb.append("move $s7, $t8\n");*/
+
+        // Nouvelle méthode : restauration de la base locale du bloc englobant et valeur de retour à partir de la base locale courante
         sb.append("move $sp, $s7\n");
         sb.append("lw $ra, 12($s7)\n");
         sb.append("lw $s7, 8($s7)\n");
