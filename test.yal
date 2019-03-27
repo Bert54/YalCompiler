@@ -37,8 +37,8 @@ programme entierNaturel debut
     b = a[9];
     ecrire b;
 
-    //entier[a[9]*3] c;
-    entier[40] c;
+    entier[a[9]*3] c;
+    //entier[40] c;
     c[10] = 333;
     ecrire c[10];
 

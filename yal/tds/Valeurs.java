@@ -97,8 +97,10 @@ public class Valeurs {
      * Decremente la taille de la pile
      */
     public void depiler(int numBloc) {
-        this.taillePiles.remove(numBloc);
-        this.taillePiles.put(numBloc, 0);
+        if (numBloc != 0) {
+            this.taillePiles.remove(numBloc);
+            this.taillePiles.put(numBloc, 0);
+        }
     }
 
     /**

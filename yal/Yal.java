@@ -8,6 +8,7 @@ import yal.analyse.AnalyseurLexical;
 import yal.analyse.AnalyseurSyntaxique;
 import yal.arbre.ArbreAbstrait;
 import yal.exceptions.AnalyseException;
+import yal.tds.TDS;
 import yal.tds.Valeurs;
 
 public class Yal {
@@ -33,7 +34,7 @@ public class Yal {
             flot.println("\n.text\nmain :\n"); // Début du programme MIPS
             flot.println("move $s7,$sp\n"); // Mémorise la tête de pile
             String a = arbre.toMIPS();
-            flot.println("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(0) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
+            flot.println("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
             flot.println(a); // Transformation de l'arbre abstrait en code MIPS
             flot.println("end :\n\n" + // Fin du programme MIPS
                     "li $v0, 10\n" +
