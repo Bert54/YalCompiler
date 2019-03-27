@@ -59,7 +59,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, VIRGULE, FONCTION, ECRIRE, LIRE, ENTIER, EGALE, RETOURNER, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, CROCHOUVRANT, CROCHFERMANT, SI, ALORS, SINON, FINSI, NON;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, VIRGULE, FONCTION, ECRIRE, LIRE, ENTIER, EGALE, RETOURNER, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, CROCHOUVRANT, CROCHFERMANT, SI, ALORS, SINON, FINSI, NON, LONGUEURTAB;
 terminal String    IDF, CSTENTIERE, OPER, OPERT, OPERTN, OPELOGIQUE, OPELOGIQUET, OPERMULTET, OPERMULTOU;
 
 /* Non terminals used in the grammar section.  */
@@ -259,6 +259,12 @@ EXPF   ::=      CSTENTIERE:c
        |
                 IDF:i CROCHOUVRANT EXP:e CROCHFERMANT
                 {: RESULT = new IdfTab(ileft + 1, i, e); :}
+       |
+                IDF:i LONGUEURTAB
+                {:  EntreeTableau et = new EntreeTableau(i, ileft+1);
+                    Symbole s = TDS.getInstance().getTableLocaleCourante().identifier(et);
+                    RESULT = s.getExpression();
+                :}
                 ;
 
 APPELFONCTION ::= IDF:i PAROUVRANTE PARFERMANTE
@@ -329,7 +335,7 @@ DECL_VAR ::=    ENTIER IDF:i POINTVIRGULE
                    RESULT = new Declarer(ileft+1, i);
                 :}
                 |
-                ENTIER IDF:i CROCHOUVRANT EXP:e CROCHFERMANT POINTVIRGULE
+                ENTIER CROCHOUVRANT EXP:e CROCHFERMANT IDF:i POINTVIRGULE
                 {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeTableau(i, ileft+1), new SymboleTableau(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), 4, e));
                    Valeurs.getInstance().empilerTableau(TDS.getInstance().getTableLocaleCourante().getNumBloc(), e);
                    RESULT = new DeclarerTableau(ileft+1, i, e);

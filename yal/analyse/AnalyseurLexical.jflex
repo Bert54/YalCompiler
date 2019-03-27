@@ -106,6 +106,8 @@ espace = {finDeLigne} | [ \t\f]
 
 "]"                    { return symbol(CodesLexicaux.CROCHFERMANT); }
 
+".longueur"            { return symbol(CodesLexicaux.LONGUEURTAB); }
+
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }

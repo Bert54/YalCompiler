@@ -2,10 +2,11 @@ programme entierNaturel debut
 
     fonction fonc1()
     debut
-        entier a[30];
+        entier[50] a;
+        ecrire a.longueur;
         entier c;
         a[15] = 20;
-        //ecrire a[15];
+        //ecrire[15] a;
         a[13] = a[15] / 2;
         //ecrire a[13];
         c = a[13] + 1;
@@ -15,31 +16,31 @@ programme entierNaturel debut
 
     fonction fonc2()
     debut
-        entier a[500];
-        entier b[200];
-        entier c[750];
-        a[374] = 10;
+        entier[500] fonc3;
+        entier[200] b;
+        entier[750] c;
+        fonc3[0] = 10;
         b[122] = 20;
-        c[749] = a[374] * b[122];
+        c[749] = fonc3[0] * b[122];
         retourne c[749];
     fin
 
-    fonction fonc3(entier premier)
+    fonction fonc3(entier premier; entier deux)
     debut
-        entier a[1000];
+        entier[1000] a;
         a[999] = premier - 10;
         a[333] = a[999] - 20;
         retourne a[333];
     fin
 
-    entier a[15];
+    entier[15] a;
     entier b;
 
     a[9] = 5;
     b = a[9];
     ecrire b;
 
-    entier c[a[9]*3];
+    entier[a[9]*3] c;
     c[10] = 333;
     ecrire c[10];
 
@@ -48,9 +49,9 @@ programme entierNaturel debut
     ecrire d > a[9];
     ecrire fonc1();
     ecrire fonc2();
-    ecrire fonc3(c[10]);
-    ecrire fonc3(c[10]);
-    ecrire fonc3(c[10]);
-    ecrire 10 * (5 / 0 + 2) + fonc3(d);
+    ecrire fonc3(c[10], 2);
+    ecrire fonc3(c[10], 1);
+    ecrire fonc3(c[10], 1);
+    ecrire 10 * (5 / 1 + 2) + fonc3(d, 1);
 
 fin
