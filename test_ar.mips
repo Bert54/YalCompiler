@@ -1,0 +1,819 @@
+.data
+ln : 	.asciiz "\n"
+vrai : 	.asciiz "vrai"
+faux : 	.asciiz "faux"
+
+.text
+main :
+
+move $s7,$sp
+
+addi $sp, $sp, -72
+
+#Déclaration fonction
+j fonctionskip0
+fonc10:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+addi $sp, $sp, -124
+#Ecriture
+li $v0, 30
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Déclaration - inititialisation à zéro
+sw $zero, -120($s7)
+li $v0, 20
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 15
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+li $v0, 15
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+div $t8, $v0
+mfhi $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 13
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+#Affectation
+li $v0, 13
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -120($s7)
+#Retour de la fonction 
+lw $v0, -120($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+move $sp, $s7
+lw $ra, 12($s7)
+lw $s7, 8($s7)
+addi $sp, $sp, 12
+sw $v0, 8($sp)
+jr $ra
+fonctionskip0:
+#Déclaration fonction
+j fonctionskip1
+fonc20:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+addi $sp, $sp, -5800
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 374
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+li $v0, 20
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 122
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, -2000
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+li $v0, 374
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 122
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, -2000
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 749
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, -2800
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+#Retour de la fonction 
+li $v0, 749
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, -2800
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+move $sp, $s7
+lw $ra, 12($s7)
+lw $s7, 8($s7)
+addi $sp, $sp, 12
+sw $v0, 8($sp)
+jr $ra
+fonctionskip1:
+#Déclaration fonction
+j fonctionskip2
+fonc31:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+lw $v0, 16($sp)
+sw $v0,0($s7)
+addi $sp, $sp, -4
+addi $sp, $sp, -4012
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+sw $sp, -4004($s7)
+add $sp, $sp, $v0
+#Ecriture
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 999
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, -4
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+li $v0, 999
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, -4
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 20
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 333
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, -4
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+#Retour de la fonction 
+li $v0, 333
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, -4
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+move $sp, $s7
+lw $ra, 12($s7)
+lw $s7, 8($s7)
+addi $sp, $sp, 12
+sw $v0, 8($sp)
+addi $sp, $sp, -4
+jr $ra
+fonctionskip2:
+#Déclaration - inititialisation à zéro
+sw $zero, -60($s7)
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 9
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+#Affectation
+li $v0, 9
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -60($s7)
+#Ecriture
+lw $v0, -60($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+li $v0, 9
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+sw $sp, -64($s7)
+add $sp, $sp, $v0
+li $v0, 333
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+lw $a1, -64($s7)
+move $t8, $a1
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+#Ecriture
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+lw $a1, -64($s7)
+move $t8, $a1
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+li $v0, 9
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Déclaration - inititialisation à zéro
+sw $zero, -68($s7)
+#Affectation
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+lw $a1, -64($s7)
+move $t8, $a1
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -68($s7)
+#Ecriture
+lw $v0, -68($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 9
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+ble $v0, $t8, condcompafaux1
+condcompavrai1: 
+li $v0, 1
+b fincondcompa1
+condcompafaux1: 
+li $v0, 0
+fincondcompa1: 
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $t8, $v0
+li $v0, 4
+beqz $t8, boolean1
+la $a0, vrai
+b finBool1
+boolean1: 
+la $a0, faux
+finBool1:
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+addi $sp, $sp, -4
+jal fonc10
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+addi $sp, $sp, -4
+jal fonc20
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+addi $sp, $sp, -4
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+lw $a1, -64($s7)
+move $t8, $a1
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal fonc31
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+addi $sp, $sp, -4
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+lw $a1, -64($s7)
+move $t8, $a1
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal fonc31
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+addi $sp, $sp, -4
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+lw $a1, -64($s7)
+move $t8, $a1
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal fonc31
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+li $v0, 10
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 5
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+div $t8, $v0
+mfhi $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+lw $v0, -68($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal fonc31
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+
+end :
+
+li $v0, 10
+syscall 

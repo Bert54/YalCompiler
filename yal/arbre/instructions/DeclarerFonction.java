@@ -86,6 +86,7 @@ public class DeclarerFonction extends Instruction {
             string.append("lw $v0, " + (12 + (this.params.size() * 4)) + "($sp)\n");
             string.append("sw $v0,"  + this.params.get(i).getDeplacement() + "($s7)\n");
             Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+            string.append("addi $sp, $sp, -4\n");
         }
         String a = this.corps.toMIPS(); // Génération du code MIPS du corps de la fonction
         string.append("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables

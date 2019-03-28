@@ -1,58 +1,114 @@
 programme entierNaturel debut
 
-    fonction fonc1()
+    fonction combSort()
     debut
-        entier[30] a;
-        ecrire a.longueur;
-        entier c;
-        a[15] = 20;
-        a[13] = a[15] / 2;
-        c = a[13] + 1;
-        retourne c;
+        entier[20] array;
+        array[0] = 8;
+        array[1] = 1;
+        array[2] = 38;
+        array[3] = 4;
+        array[4] = 0;
+        array[5] = -6;
+        array[6] = 22;
+        array[7] = 19;
+        array[8] = 10;
+        array[9] = -4;
+        array[10] = 7;
+        array[11] = -6;
+        array[12] = 40;
+        array[13] = 25;
+        array[14] = 6;
+        array[15] = -1;
+        array[16] = 8;
+        array[17] = 2;
+        array[18] = -14;
+        array[19] = 3;
+        ecrire array[0];
+        ecrire array[1];
+        ecrire array[2];
+        ecrire array[3];
+        ecrire array[4];
+        ecrire array[5];
+        ecrire array[6];
+        ecrire array[7];
+        ecrire array[8];
+        ecrire array[9];
+        ecrire array[10];
+        ecrire array[11];
+        ecrire array[12];
+        ecrire array[13];
+        ecrire array[14];
+        ecrire array[15];
+        ecrire array[16];
+        ecrire array[17];
+        ecrire array[18];
+        ecrire array[19];
+
+        entier again;
+        entier start;
+        entier end;
+        entier j;
+        entier tmp;
+
+        again = 1;
+        start = 0;
+        end = array.longueur - 1;
+        tantque again == 1 repeter
+            again = 0;
+            j = start;
+            tantque j < end repeter
+                si array[j] > array[j+1] alors
+                    tmp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = tmp;
+                    again = 1;
+                finsi
+            j = j + 1;
+            fintantque
+            end = end - 1;
+            j = end;
+            tantque j > start-1 repeter
+                si array[j] > array[j+1] alors
+                     tmp = array[j];
+                     array[j] = array[j + 1];
+                     array[j + 1] = tmp;
+                     again = 1;
+                finsi
+                j = j - 1;
+            fintantque
+        fintantque
+        ecrire 0;
+        ecrire 0;
+        ecrire 0;
+        ecrire 0;
+        ecrire 0;
+        ecrire 0;
+        ecrire 0;
+        ecrire array[0];
+        ecrire array[1];
+        ecrire array[2];
+        ecrire array[3];
+        ecrire array[4];
+        ecrire array[5];
+        ecrire array[6];
+        ecrire array[7];
+        ecrire array[8];
+        ecrire array[9];
+        ecrire array[10];
+        ecrire array[11];
+        ecrire array[12];
+        ecrire array[13];
+        ecrire array[14];
+        ecrire array[15];
+        ecrire array[16];
+        ecrire array[17];
+        ecrire array[18];
+        ecrire array[19];
+
+        retourne 2395706;
     fin
 
-    fonction fonc2()
-    debut
-        entier[500] a;
-        entier[200] b;
-        entier[750] c;
-        a[374] = 10;
-        b[122] = 20;
-        c[749] = a[374] * b[122];
-        retourne c[749];
-    fin
-
-    fonction fonc3(entier premier)
-    debut
-        entier[1000] a;
-
-        entier[premier * premier] grosTab;
-        ecrire grosTab.longueur;
-        a[999] = premier - 10;
-        a[333] = a[999] - 20;
-        retourne a[333];
-    fin
-
-    entier[15] a;
-    entier b;
-
-    a[9] = 5;
-    b = a[9];
-    ecrire b;
-
-    entier[a[9]*3] c;
-    //entier[40] c;
-    c[10] = 333;
-    ecrire c[10];
-    ecrire c.longueur;
-    entier d;
-    d = c[10] + 2;
-    ecrire d > a[9];
-    ecrire fonc1();
-    ecrire fonc2();
-    ecrire fonc3(c[10]);
-    ecrire fonc3(c[10]);
-    ecrire fonc3(c[10]);
-    ecrire 10 * (5 / (0 + 2)) + fonc3(d);
+    entier proxy;
+    proxy = combSort();
 
 fin

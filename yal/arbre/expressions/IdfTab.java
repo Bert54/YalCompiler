@@ -97,6 +97,7 @@ public class IdfTab extends ExpressionBinaire {
         }
         else { // Tableau statique
             string.append("li $t8, " + origine + "\n");
+            string.append("add $t8, $t8, $s7\n");
             string.append("add $a1, $v0, $t8\n");
             string.append("lw $v0, 0($a1)\n"); // Position de l'indice du tableau retrouvée dans la pile : on charge sa valeur et on la sauvegarde en tête de pile
             string.append("sw $v0, 0($sp)\n");

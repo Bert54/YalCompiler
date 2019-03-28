@@ -44,6 +44,7 @@ public class AffectationTab extends Instruction {
         }
         else { // Chargement d'une valeur d'un tableau statique
             string.append("li $t8, " + this.idft.getOrigine() + "\n");
+            string.append("add $t8, $t8, $s7\n");
             string.append("add $a1, $v0, $t8\n");
         }
         string.append("addi $sp, $sp, 4\n"); // Récupération de la valeur à affecter et sauvegarde
