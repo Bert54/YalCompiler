@@ -82,7 +82,7 @@ public class Retourne extends Instruction {
             par = 0;
         }
         // On empile la valeur de retour dans l'espacé réservé lors de l'appel de fonction
-        sb.append("sw $v0, " + (par * 4 + 8) + "($sp)\n");
+        sb.append("sw $v0, " + (par * 4 + 4) + "($sp)\n");
         if (TDS.getInstance().getTableLocaleCourante().getNbParams() > 0) {
             sb.append("addi $sp, $sp, -4\n");
         }
