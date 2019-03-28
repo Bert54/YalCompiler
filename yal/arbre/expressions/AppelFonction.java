@@ -50,7 +50,6 @@ public class AppelFonction extends ExpressionBinaire {
         for (int i = 0 ; i < this.parametres.size() ; i++) { // Dépilement des paramètres
             string.append("addi $sp, $sp, 4\n");
         }
-        //string.append("addi $sp, $sp, 4\n");
         return string.toString();
     }
 }

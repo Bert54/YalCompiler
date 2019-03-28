@@ -1,5 +1,6 @@
 package yal.arbre.instructions;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import yal.arbre.expressions.ExpressionBinaire;
 import yal.arbre.expressions.Idf;
 import yal.arbre.expressions.IdfTab;
@@ -77,15 +78,12 @@ public class Retourne extends Instruction {
         sb.append("lw $ra, 12($s7)\n");
         sb.append("lw $s7, 8($s7)\n");
         sb.append("addi $sp, $sp, 12\n");
-        int par = TDS.getInstance().getTableLocaleCourante().getNbParams() - 1;
-        if (par < 0) {
-            par = 0;
-        }
+        int par = TDS.getInstance().getTableLocaleCourante().getNbParams();
         // On empile la valeur de retour dans l'espacé réservé lors de l'appel de fonction
         sb.append("sw $v0, " + (par * 4 + 4) + "($sp)\n");
-        if (TDS.getInstance().getTableLocaleCourante().getNbParams() > 0) {
+        /*if (TDS.getInstance().getTableLocaleCourante().getNbParams() > 0) {
             sb.append("addi $sp, $sp, -4\n");
-        }
+        }*/
         // Retour à l'endroit où on a appelé la fonction
         sb.append("jr $ra\n");
         return sb.toString();
