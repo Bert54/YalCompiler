@@ -89,6 +89,10 @@ public class TableLocale implements Iterable<TableLocale> {
                     return this.table.get(en);
                 }
             }
+            Symbole s = pere.identifier(e);
+            if(s != null){
+                return s;
+            }
             throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée : " + e.getNom());
         }
 

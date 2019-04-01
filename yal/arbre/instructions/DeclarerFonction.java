@@ -89,9 +89,8 @@ public class DeclarerFonction extends Instruction {
             string.append("addi $sp, $sp, -4\n");
         }
         String a = this.corps.toMIPS(); // Génération du code MIPS du corps de la fonction
-        string.append("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
+        string.append("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(numBloc) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
         string.append(a);
-        TDS.getInstance().sortieBloc(); // Sortie du bloc de la fonction vers le bloc englobant
         // Etiquette permettant de sauter la fonction lors de l'exécution principal du programme
         string.append("fonctionskip"+ cnt +":\n");
         return string.toString();

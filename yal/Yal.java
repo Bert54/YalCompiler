@@ -32,10 +32,14 @@ public class Yal {
             flot.println("vrai : 	.asciiz \"vrai\"");
             flot.println("faux : 	.asciiz \"faux\"");
             flot.println("\n.text\nmain :\n"); // Début du programme MIPS
-            flot.println("move $s7,$sp\n"); // Mémorise la tête de pile
-            String a = arbre.toMIPS();
-            flot.println("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
-            flot.println(a); // Transformation de l'arbre abstrait en code MIPS
+            // J'empile le numéro de bloc du main
+            flot.println("li $v0,0");
+            flot.println("sw $v0,($sp)");
+            flot.println("addi $sp,$sp,-4");
+            // Mémorise la tête de pile
+            flot.println("move $s7,$sp\n");
+            //flot.println("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
+            flot.println(arbre.toMIPS()); // Transformation de l'arbre abstrait en code MIPS
             flot.println("end :\n\n" + // Fin du programme MIPS
                     "li $v0, 10\n" +
                     "syscall ");

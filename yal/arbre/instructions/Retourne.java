@@ -1,19 +1,17 @@
 package yal.arbre.instructions;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import yal.arbre.expressions.ExpressionBinaire;
 import yal.arbre.expressions.Idf;
-import yal.arbre.expressions.IdfTab;
 import yal.exceptions.RetournerIllegalException;
 import yal.tds.TDS;
-import yal.tds.Valeurs;
 import yal.tds.entree.EntreeVariable;
 import yal.tds.symbole.Symbole;
 import yal.tds.symbole.SymboleTableau;
 
 public class Retourne extends Instruction {
 
-    ExpressionBinaire exp;
+    private ExpressionBinaire exp;
+    private int param;
 
     /**
      * Constructeur d'un retour de fonction
@@ -23,6 +21,7 @@ public class Retourne extends Instruction {
     public Retourne(int n, ExpressionBinaire exp) {
         super(n);
         this.exp = exp;
+        this.param = 0;
     }
 
     @Override
@@ -49,6 +48,7 @@ public class Retourne extends Instruction {
                 break;
         }
         this.exp.verifier();
+        this.param = TDS.getInstance().getTableLocaleCourante().getNbParams();
     }
 
     @Override
@@ -57,33 +57,13 @@ public class Retourne extends Instruction {
         sb.append(this.exp.toMIPS()); // Génération du code MIPS de l'expression à retourner
         sb.append("addi $sp,$sp, 4\n");
         sb.append("lw $v0, 0($sp)\n");
-        // Dépilement des variables locaux
-        int nbEmpilement = Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()); // Ne sert plus avec la nouvelle méthode.
-        nbEmpilement = Math.abs(nbEmpilement) + 8;
-        /*//Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
-        // Restauration du pointeur de la pile
-        sb.append("addi $sp,$sp,"+nbEmpilement+"\n");
-        // Restauration de la base locale
-        // Attention: ceci n'est pas un dépilement
-        sb.append("lw $t8, 0($sp)\n");
-        sb.append("addi $sp,$sp, 4\n");
-        // Restaurer le compteur ordinal
-        sb.append("lw $ra,($sp)\n");
-        // On stocke la valeur de retour
-        sb.append("addi $sp, $sp, 4\n");
-        sb.append("move $s7, $t8\n");*/
-
-        // Nouvelle méthode : restauration de la base locale du bloc englobant et valeur de retour à partir de la base locale courante
+        // Restauration de la base locale du bloc englobant et valeur de retour à partir de la base locale courante
         sb.append("move $sp, $s7\n");
         sb.append("lw $ra, 12($s7)\n");
         sb.append("lw $s7, 8($s7)\n");
         sb.append("addi $sp, $sp, 12\n");
-        int par = TDS.getInstance().getTableLocaleCourante().getNbParams();
-        // On empile la valeur de retour dans l'espacé réservé lors de l'appel de fonction
-        sb.append("sw $v0, " + (par * 4 + 4) + "($sp)\n");
-        /*if (TDS.getInstance().getTableLocaleCourante().getNbParams() > 0) {
-            sb.append("addi $sp, $sp, -4\n");
-        }*/
+        // On empile la valeur de retour dans l'espace réservé lors de l'appel de fonction
+        sb.append("sw $v0, " + (param * 4 + 4) + "($sp)\n");
         // Retour à l'endroit où on a appelé la fonction
         sb.append("jr $ra\n");
         return sb.toString();
