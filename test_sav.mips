@@ -17,9 +17,6 @@ sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s7, ($sp)
 addi $sp, $sp, -4
-li $v0, 1
-sw $v0, ($sp)
-addi $sp, $sp, -4
 move $s7, $sp
 lw $v0, 16($sp)
 sw $v0,0($s7)
@@ -42,8 +39,8 @@ addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 8($sp)
 jr $ra
@@ -54,9 +51,6 @@ predecesseur1:
 sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s7, ($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s7, $sp
 lw $v0, 16($sp)
@@ -80,8 +74,8 @@ addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 8($sp)
 jr $ra
@@ -92,9 +86,6 @@ addition2:
 sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s7, ($sp)
-addi $sp, $sp, -4
-li $v0, 3
-sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s7, $sp
 lw $v0, 20($sp)
@@ -133,22 +124,31 @@ addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 jal predecesseur1
 addi $sp, $sp, 4
 addi $sp, $sp, -4
 lw $v0, -4($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 jal successeur1
 addi $sp, $sp, 4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 jal addition2
 addi $sp, $sp, 4
 addi $sp, $sp, 4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 12($sp)
 jr $ra
@@ -161,8 +161,8 @@ addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 12($sp)
 jr $ra
@@ -174,9 +174,6 @@ soustraction2:
 sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s7, ($sp)
-addi $sp, $sp, -4
-li $v0, 4
-sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s7, $sp
 lw $v0, 20($sp)
@@ -215,22 +212,31 @@ addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 jal predecesseur1
 addi $sp, $sp, 4
 addi $sp, $sp, -4
 lw $v0, -4($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 jal predecesseur1
 addi $sp, $sp, 4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 jal soustraction2
 addi $sp, $sp, 4
 addi $sp, $sp, 4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 12($sp)
 jr $ra
@@ -243,8 +249,8 @@ addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 12($sp)
 jr $ra
@@ -256,9 +262,6 @@ multiplication2:
 sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s7, ($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s7, $sp
 lw $v0, 20($sp)
@@ -324,8 +327,8 @@ addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 12($sp)
 jr $ra
@@ -361,8 +364,8 @@ addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 12($sp)
 jr $ra
@@ -375,9 +378,15 @@ addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 jal predecesseur1
 addi $sp, $sp, 4
 lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 4($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 jal multiplication2
@@ -386,14 +395,17 @@ addi $sp, $sp, 4
 lw $v0, -4($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
 jal addition2
 addi $sp, $sp, 4
 addi $sp, $sp, 4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
 move $sp, $s7
-lw $ra, 12($s7)
-lw $s7, 8($s7)
+lw $ra, 8($s7)
+lw $s7, 4($s7)
 addi $sp, $sp, 12
 sw $v0, 12($sp)
 jr $ra
@@ -453,6 +465,8 @@ addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+sw $s7, 0($sp)
+addi $sp, $sp, -4
 jal predecesseur1
 addi $sp, $sp, 4
 addi $sp, $sp, 4
@@ -470,6 +484,8 @@ syscall
 addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
+addi $sp, $sp, -4
+sw $s7, 0($sp)
 addi $sp, $sp, -4
 jal successeur1
 addi $sp, $sp, 4
@@ -491,6 +507,8 @@ sw $v0, 0($sp)
 addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
+addi $sp, $sp, -4
+sw $s7, 0($sp)
 addi $sp, $sp, -4
 jal addition2
 addi $sp, $sp, 4
@@ -514,6 +532,8 @@ addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
+sw $s7, 0($sp)
+addi $sp, $sp, -4
 jal soustraction2
 addi $sp, $sp, 4
 addi $sp, $sp, 4
@@ -535,6 +555,8 @@ sw $v0, 0($sp)
 addi $sp, $sp, -4
 lw $v0, 0($s7)
 sw $v0, 0($sp)
+addi $sp, $sp, -4
+sw $s7, 0($sp)
 addi $sp, $sp, -4
 jal multiplication2
 addi $sp, $sp, 4

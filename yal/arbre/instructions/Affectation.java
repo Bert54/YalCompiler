@@ -2,6 +2,8 @@ package yal.arbre.instructions;
 
 import yal.arbre.expressions.ExpressionBinaire;
 import yal.arbre.expressions.Idf;
+import yal.tds.TDS;
+import yal.tds.TableLocale;
 
 public class Affectation extends Instruction {
 
@@ -32,7 +34,23 @@ public class Affectation extends Instruction {
         string.append(this.exp.toMIPS());
         string.append("addi $sp, $sp, 4\n");
         string.append("lw $v0, 0($sp)\n");    // on charge la variable
-        string.append("sw $v0, " + this.idf.getDeplacement() + "($s7)\n");
+        if (this.idf.getBlocRef() > -1) {
+            TableLocale pere = TDS.getInstance().getTableLocaleCourante();
+            int superBloc = pere.getNumBloc();
+            string.append("move $a2, $sp\n");
+            string.append("move $a3, $s7\n");
+            while (superBloc != this.idf.getBlocRef()) {
+                string.append("lw $s7, 12($s7)\n");
+                pere = pere.getTableLocalPere();
+                superBloc = pere.getNumBloc();
+            }
+            string.append("sw $v0, " + this.idf.getDeplacement() + "($s7)\n");
+            string.append("move $sp, $a2\n");
+            string.append("move $s7, $a3\n");
+        }
+        else {
+            string.append("sw $v0, " + this.idf.getDeplacement() + "($s7)\n");
+        }
         return string.toString();
     }
 }

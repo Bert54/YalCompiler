@@ -59,11 +59,17 @@ public class Retourne extends Instruction {
         sb.append("lw $v0, 0($sp)\n");
         // Restauration de la base locale du bloc englobant et valeur de retour à partir de la base locale courante
         sb.append("move $sp, $s7\n");
-        sb.append("lw $ra, 12($s7)\n");
-        sb.append("lw $s7, 8($s7)\n");
+        sb.append("lw $ra, 8($s7)\n");
+        sb.append("lw $s7, 4($s7)\n");
         sb.append("addi $sp, $sp, 12\n");
         // On empile la valeur de retour dans l'espace réservé lors de l'appel de fonction
-        sb.append("sw $v0, " + (param * 4 + 4) + "($sp)\n");
+        //sb.append("sw $v0, " + (param * 4 + 4) + "($sp)\n");
+        int par = TDS.getInstance().getTableLocaleCourante().getNbParams();
+        // On empile la valeur de retour dans l'espacé réservé lors de l'appel de fonction
+        sb.append("sw $v0, " + (par * 4 + 4) + "($sp)\n");
+        /*if (TDS.getInstance().getTableLocaleCourante().getNbParams() > 0) {
+            sb.append("addi $sp, $sp, -4\n");
+        }*/
         // Retour à l'endroit où on a appelé la fonction
         sb.append("jr $ra\n");
         return sb.toString();

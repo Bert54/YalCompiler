@@ -35,6 +35,7 @@ public class Valeurs {
 
     private int nbFonctionPasse;
 
+
     /**
      * Constructeur
      */

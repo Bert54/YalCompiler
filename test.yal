@@ -1,100 +1,44 @@
-programme entierNaturel debut
+programme ayaya
+debut
 
-    // tri à peigne
-    fonction combSort()
+    entier b;
+
+    fonction fonc1()
     debut
-
-        entier[20] array;
-        entier i;
-
-        array[0] = 8;
-        array[1] = 1;
-        array[2] = 38;
-        array[3] = 4;
-        array[4] = 0;
-        array[5] = -6;
-        array[6] = 22;
-        array[7] = 19;
-        array[8] = 10;
-        array[9] = -4;
-        array[10] = 7;
-        array[11] = -6;
-        array[12] = 40;
-        array[13] = 25;
-        array[14] = 6;
-        array[15] = -1;
-        array[16] = 8;
-        array[17] = 2;
-        array[18] = -14;
-        array[19] = 3;
-
-        i = 0;
-        tantque i < array.longueur repeter
-            ecrire array[i];
-            i = i + 1;
-        fintantque
-
-        entier again;
-        entier start;
-        entier end;
-        entier j;
-        entier tmp;
-
-        again = 1;
-        start = 0;
-        end = array.longueur - 1;
-        tantque again == 1 repeter
-            again = 0;
-            j = start;
-            tantque j < end repeter
-                si array[j] > array[j+1] alors
-                    tmp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = tmp;
-                    again = 1;
-                finsi
-            j = j + 1;
-            fintantque
-            end = end - 1;
-            j = end;
-            tantque j > start-1 repeter
-                si array[j] > array[j+1] alors
-                     tmp = array[j];
-                     array[j] = array[j + 1];
-                     array[j + 1] = tmp;
-                     again = 1;
-                finsi
-                j = j - 1;
-            fintantque
-        fintantque
-        // séparation des affichages avec des 0
-        ecrire 0;
-        ecrire 0;
-        ecrire 0;
-        ecrire 0;
-        ecrire 0;
-        ecrire 0;
-        ecrire 0;
-        i = 0;
-                tantque i < array.longueur repeter
-                    ecrire array[i];
-                    i = i + 1;
-                fintantque
-
-        retourne 2395706;
+        entier b;
+        b = b + 5;
+        retourne b;
     fin
 
-    entier proxy;
-    proxy = combSort();
-    // séparation des affichages avec des 0
-    // on print le retour de la fonction afin de s'assurer qu'elle retourne bien la valeur qu'on lui a définit
-    ecrire 0;
-    ecrire 0;
-    ecrire 0;
-    ecrire 0;
-    ecrire 0;
-    ecrire 0;
-    ecrire 0;
-    ecrire proxy;
+    fonction fonc2()
+    debut
+        b = b + 5;
+        retourne b;
+    fin
+
+    fonction proxy1()
+    debut
+        retourne fonc2();
+    fin
+
+    fonction proxy2()
+    debut
+        retourne proxy1();
+    fin
+
+    fonction proxy3()
+    debut
+        retourne proxy2() * 2;
+    fin
+
+    fonction proxy4()
+    debut
+        retourne proxy3() * proxy3();
+    fin
+
+    b = 5;
+
+    ecrire fonc1();
+    ecrire proxy4();
 
 fin

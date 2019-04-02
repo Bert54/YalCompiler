@@ -1,6 +1,7 @@
 package yal.arbre.expressions;
 
 import yal.tds.TDS;
+import yal.tds.Valeurs;
 import yal.tds.entree.EntreeFonction;
 
 import java.util.ArrayList;
@@ -46,6 +47,16 @@ public class AppelFonction extends ExpressionBinaire {
         for (ExpressionBinaire exp: this.parametres) { // Empilement des paramètres
             string.append(exp.toMIPS());
         }
+        boolean principal = TDS.getInstance().getTableLocaleCourante().getNumBloc() == 0;
+        // Empiler le numéro de région
+        if (!principal) {
+            string.append("lw $v0, 4($s7)\n");
+            string.append("sw $v0, 0($sp)\n");
+        }
+        else {
+            string.append("sw $s7, 0($sp)\n");
+        }
+        string.append("addi $sp, $sp, -4\n");
         string.append("jal " + this.nom + this.parametres.size() + "\n"); // Appel de la fonction en MIPS
         for (int i = 0 ; i < this.parametres.size() ; i++) { // Dépilement des paramètres
             string.append("addi $sp, $sp, 4\n");

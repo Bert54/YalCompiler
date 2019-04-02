@@ -70,9 +70,8 @@ public class TableLocale implements Iterable<TableLocale> {
          * Récupère un sylbole dans la table locale associée à une entrée
          * @param e L'entrée du symbole à récupérer
          * @return Le symbole associé à l'entrée
-         * @throws VariableNonDeclareeException Exception déclenchée lors de la manipulation d'une entrée inexistante
          */
-        public Symbole identifier(Entree e) throws VariableNonDeclareeException {
+        public Symbole identifier(Entree e){
             /**
              * Pour instanceof, même chose qu'au-dessus
              */
@@ -89,11 +88,7 @@ public class TableLocale implements Iterable<TableLocale> {
                     return this.table.get(en);
                 }
             }
-            Symbole s = pere.identifier(e);
-            if(s != null){
-                return s;
-            }
-            throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée : " + e.getNom());
+            return null;
         }
 
     /**

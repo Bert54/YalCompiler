@@ -1,0 +1,43 @@
+programme entierNaturel debut
+
+    entier[4] ar;
+    entier b;
+    entier c;
+
+    fonction un()
+    debut
+        ar[2] = ar[2] * 2;
+        retourne ar[2] + 1;
+    fin
+
+    fonction deux(entier a)
+    debut
+        entier i;
+        i = ar.longueur - 1;
+        tantque i > 1 repeter
+            ar[i] = c;
+            c = c * a;
+            i = i - 1;
+        fintantque
+        retourne c;
+    fin
+
+    fonction inter()
+    debut
+        retourne un();
+    fin
+
+    fonction proxyplusun(entier a)
+    debut
+        retourne deux(a) + 1;
+    fin
+
+    ar[2] = 9;
+    c = 2;
+    b = inter();
+    ecrire b;
+    ecrire ar[2];
+    ecrire proxyplusun(2);
+    ecrire c;
+
+fin

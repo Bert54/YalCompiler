@@ -10,6 +10,7 @@ import yal.arbre.*;
 import yal.arbre.expressions.*;
 import yal.arbre.instructions.*;
 import yal.exceptions.AnalyseSyntaxiqueException;
+import yal.exceptions.VariableNonDeclareeException;
 import yal.tds.*;
 import yal.tds.entree.*;
 import yal.tds.symbole.*;
@@ -1186,6 +1187,14 @@ class CUP$AnalyseurSyntaxique$actions {
 		String i = (String)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)).value;
 		  EntreeTableau et = new EntreeTableau(i, ileft+1);
                     Symbole s = TDS.getInstance().getTableLocaleCourante().identifier(et);
+                    TableLocale pere = TDS.getInstance().getTableLocaleCourante().getTableLocalPere();
+                    while(pere != null && s == null){
+                        s = pere.identifier(et);
+                        pere = pere.getTableLocalPere();
+                    }
+                    if(s == null) {
+                        throw new VariableNonDeclareeException(et.getLigne(), "Variable non déclarée : " + et.getNom());
+                    }
                     RESULT = s.getExpression();
                 
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("EXPF",6, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);

@@ -1,7 +1,6 @@
 package yal.arbre.instructions;
 
 import yal.arbre.ArbreAbstrait;
-import yal.arbre.expressions.ExpressionBinaire;
 import yal.arbre.expressions.Idf;
 import yal.exceptions.RetournerManquantException;
 import yal.tds.TDS;
@@ -75,10 +74,6 @@ public class DeclarerFonction extends Instruction {
         // Sauvegarde de la base locale
         string.append("sw $s7, ($sp)\n");
         string.append("addi $sp, $sp, -4\n");
-        // Empiler le numéro de région
-        string.append("li $v0, " + this.numBloc + "\n");
-        string.append("sw $v0, ($sp)\n");
-        string.append("addi $sp, $sp, -4\n");
         // Initialisation de la base locale
         string.append("move $s7, $sp\n");
         // Récupération des paramètres pour les utiliser en tant que variables locaux
@@ -89,9 +84,11 @@ public class DeclarerFonction extends Instruction {
             string.append("addi $sp, $sp, -4\n");
         }
         String a = this.corps.toMIPS(); // Génération du code MIPS du corps de la fonction
-        string.append("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(numBloc) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
+        //string.append("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(numBloc) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
+        string.append("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
         string.append(a);
         // Etiquette permettant de sauter la fonction lors de l'exécution principal du programme
+        TDS.getInstance().sortieBloc(); // Sortie du bloc de la fonction vers le bloc englobant
         string.append("fonctionskip"+ cnt +":\n");
         return string.toString();
     }

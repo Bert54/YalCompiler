@@ -1,0 +1,438 @@
+.data
+ln : 	.asciiz "\n"
+vrai : 	.asciiz "vrai"
+faux : 	.asciiz "faux"
+
+.text
+main :
+
+move $s7,$sp
+
+addi $sp, $sp, -24
+
+#Déclaration - initialisation à zéro
+sw $zero, -16($s7)
+#Déclaration - initialisation à zéro
+sw $zero, -20($s7)
+#Déclaration fonction
+j fonctionskip0
+un0:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+addi $sp, $sp, 0
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+move $a2, $sp
+move $a3, $s7
+lw $s7, 12($s7)
+li $t8, 0
+add $t8, $t8, $s7
+add $a1, $v0, $t8
+move $sp, $a2
+move $s7, $a3
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+addi $sp, $sp, 4
+lw $v1, 0($sp)
+move $a2, $sp
+move $a3, $s7
+lw $s7, 12($s7)
+li $t8, 0
+add $t8, $t8, $s7
+add $a1, $v0, $t8
+sw $v1, 0($a1)
+move $sp, $a2
+move $s7, $a3
+#Retour de la fonction 
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+move $a2, $sp
+move $a3, $s7
+lw $s7, 12($s7)
+li $t8, 0
+add $t8, $t8, $s7
+add $a1, $v0, $t8
+move $sp, $a2
+move $s7, $a3
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+move $sp, $s7
+lw $ra, 8($s7)
+lw $s7, 4($s7)
+addi $sp, $sp, 12
+sw $v0, 4($sp)
+jr $ra
+fonctionskip0:
+#Déclaration fonction
+j fonctionskip1
+deux1:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+lw $v0, 16($sp)
+sw $v0,0($s7)
+addi $sp, $sp, -4
+addi $sp, $sp, -12
+#Déclaration - initialisation à zéro
+sw $zero, -4($s7)
+#Affectation
+li $v0, 4
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
+#Boucle tantque
+tantque1: 
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+ble $v0, $t8, condcompafaux1
+condcompavrai1: 
+li $v0, 1
+b fincondcompa1
+condcompafaux1: 
+li $v0, 0
+fincondcompa1: 
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+beqz $v0, fintantque1
+move $a2, $sp
+move $a3, $s7
+lw $s7, 12($s7)
+lw $v0, -20($s7)
+move $sp, $a2
+move $s7, $a3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+addi $sp, $sp, 4
+lw $v1, 0($sp)
+move $a2, $sp
+move $a3, $s7
+lw $s7, 12($s7)
+li $t8, 0
+add $t8, $t8, $s7
+add $a1, $v0, $t8
+sw $v1, 0($a1)
+move $sp, $a2
+move $s7, $a3
+#Affectation
+move $a2, $sp
+move $a3, $s7
+lw $s7, 12($s7)
+lw $v0, -20($s7)
+move $sp, $a2
+move $s7, $a3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a2, $sp
+move $a3, $s7
+lw $s7, 12($s7)
+sw $v0, -20($s7)
+move $sp, $a2
+move $s7, $a3
+#Affectation
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sub $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
+b tantque1
+fintantque1: 
+#Retour de la fonction 
+move $a2, $sp
+move $a3, $s7
+lw $s7, 12($s7)
+lw $v0, -20($s7)
+move $sp, $a2
+move $s7, $a3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+move $sp, $s7
+lw $ra, 8($s7)
+lw $s7, 4($s7)
+addi $sp, $sp, 12
+sw $v0, 8($sp)
+jr $ra
+fonctionskip1:
+#Déclaration fonction
+j fonctionskip2
+inter0:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+addi $sp, $sp, 0
+#Retour de la fonction 
+addi $sp, $sp, -4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal un0
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+move $sp, $s7
+lw $ra, 8($s7)
+lw $s7, 4($s7)
+addi $sp, $sp, 12
+sw $v0, 4($sp)
+jr $ra
+fonctionskip2:
+#Déclaration fonction
+j fonctionskip3
+proxyplusun1:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s7, ($sp)
+addi $sp, $sp, -4
+move $s7, $sp
+lw $v0, 16($sp)
+sw $v0,0($s7)
+addi $sp, $sp, -4
+addi $sp, $sp, -8
+#Retour de la fonction 
+addi $sp, $sp, -4
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal deux1
+addi $sp, $sp, 4
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+move $sp, $s7
+lw $ra, 8($s7)
+lw $s7, 4($s7)
+addi $sp, $sp, 12
+sw $v0, 8($sp)
+jr $ra
+fonctionskip3:
+li $v0, 9
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $t8, $t8, $s7
+add $a1, $v0, $t8
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($a1)
+#Affectation
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -20($s7)
+#Affectation
+addi $sp, $sp, -4
+sw $s7, 0($sp)
+addi $sp, $sp, -4
+jal inter0
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -16($s7)
+#Ecriture
+lw $v0, -16($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+li $t8, -4
+mult $v0, $t8
+mflo $v0
+li $t8, 0
+add $t8, $t8, $s7
+add $a1, $v0, $t8
+lw $v0, 0($a1)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+sw $s7, 0($sp)
+addi $sp, $sp, -4
+jal proxyplusun1
+addi $sp, $sp, 4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Ecriture
+lw $v0, -20($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+
+end :
+
+li $v0, 10
+syscall 
