@@ -39,7 +39,8 @@ public class Yal {
             flot.println("addi $sp,$sp,-4");
             // Mémorise la tête de pile
             flot.println("move $s7,$sp\n");
-//            flot.println("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
+            // La déclaration des variables se fait dans Declarer
+            //flot.println("addi $sp, $sp, " + Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()) + "\n"); // Incrémententation du compteur afin de réserver la place pour les variables
             flot.println(arbre.toMIPS()); // Transformation de l'arbre abstrait en code MIPS
             flot.println("end :\n\n" + // Fin du programme MIPS
                     "li $v0, 10\n" +

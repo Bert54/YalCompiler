@@ -4,6 +4,7 @@ import yal.exceptions.DoubleDeclarationException;
 import yal.exceptions.FonctionNonDeclareeException;
 import yal.tds.entree.Entree;
 import yal.tds.entree.EntreeFonction;
+import yal.tds.entree.EntreeVariable;
 import yal.tds.symbole.Symbole;
 
 import java.util.HashMap;
@@ -30,6 +31,10 @@ public class TDS {
         this.racine = new TableLocale(compteurBloc, null, 0);
         this.racine.setPere(racine);
         this.tableLocaleCourante = this.racine;
+    }
+
+    public void test(EntreeVariable et){
+
     }
 
     /**

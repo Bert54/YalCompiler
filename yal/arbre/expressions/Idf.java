@@ -49,7 +49,6 @@ public class Idf extends ExpressionBinaire {
         string.append("addi $sp, $sp, -4\n");
         return string.toString();
     }*/
-        System.out.println("Idf nom "+getNom()+" deplacemement "+getDeplacement());
         StringBuilder string = new StringBuilder("");
         if (this.numBloc != symbole.getNumBloc()) {
             int cnt = Valeurs.getInstance().getCompteurBoucle();

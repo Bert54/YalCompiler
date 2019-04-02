@@ -44,7 +44,6 @@ public class Affectation extends Instruction {
         return string.toString();*/
         StringBuilder string = new StringBuilder("#Affectation\n");
         if(! (numBloc == symbole.getNumBloc())) {
-            System.out.println("affectation nom "+ idf.getNom()+" ici");
             int cnt = Valeurs.getInstance().getCompteurBoucle();
             Valeurs.getInstance().incrementerCompteurBoucle();
             // On stocke la base locale courante
@@ -68,7 +67,6 @@ public class Affectation extends Instruction {
             string.append("lw $v0, 0($sp)\n");    // on charge la variable
             string.append("sw $v0, " + this.idf.getDeplacement() + "($t9)\n");
         } else {
-            System.out.println("affectation nom "+ idf.getNom()+" la");
             string.append(this.exp.toMIPS());
             string.append("addi $sp, $sp, 4\n");
             string.append("lw $v0, 0($sp)\n");    // on charge la variable

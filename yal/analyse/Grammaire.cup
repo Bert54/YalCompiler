@@ -4,7 +4,7 @@ import java.util.*;
 import yal.arbre.* ;
 import yal.arbre.expressions.* ;
 import yal.arbre.instructions.* ;
-import yal.exceptions.AnalyseSyntaxiqueException;
+import yal.exceptions.*;
 import yal.tds.*;
 import yal.tds.entree.*;
 import yal.tds.symbole.*;
@@ -186,7 +186,6 @@ EXP    ::=      EXP:g OPER:o EXPF:d
                 EXPF:g OPER:o EXP:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
-
                 EXP:g OPER:o OPERTN EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
        |
@@ -198,11 +197,9 @@ EXP    ::=      EXP:g OPER:o EXPF:d
        |
                 EXP:g OPERT:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
-
        |
                 EXPF:g OPERT:o EXP:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
-
        |
                 EXP:g OPERTN:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
@@ -269,7 +266,16 @@ EXPF   ::=      CSTENTIERE:c
        |
                 IDF:i LONGUEURTAB
                 {:  EntreeTableau et = new EntreeTableau(i, ileft+1);
+                    TDS.getInstance().test(et);
                     Symbole s = TDS.getInstance().getTableLocaleCourante().identifier(et);
+                    TableLocale pere = TDS.getInstance().getTableLocaleCourante().getTableLocalPere();
+                    while(pere != null && s == null){
+                        s = pere.identifier(et);
+                        pere = pere.getTableLocalPere();
+                    }
+                    if(s == null) {
+                        throw new VariableNonDeclareeException(et.getLigne(), "Variable non déclarée : " + et.getNom());
+                    }
                     RESULT = s.getExpression();
                 :}
                 ;

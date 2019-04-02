@@ -6,7 +6,7 @@ programme entierNaturel debut
         a = 4;
         ecrire a;
         ecrire b;
-        retourne a + b * 3;
+        retourne a + b * 3; // 19 si ça marche, sinon 27
     fin
     ecrire a();
     ecrire 1 + (2 * 3);
