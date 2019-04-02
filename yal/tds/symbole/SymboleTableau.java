@@ -6,6 +6,7 @@ public class SymboleTableau extends SymboleVariable {
 
     private int enjambe;
     private ExpressionBinaire exp;
+    private int numBloc;
 
 
     /**
@@ -13,29 +14,27 @@ public class SymboleTableau extends SymboleVariable {
      * @param d Origine du tableau
      * @param enj enjambé
      * @param e taille du tableau
+     * @param num numero de bloc
      */
-    public SymboleTableau(int d, int enj, ExpressionBinaire e) {
-        super(d);
+    public SymboleTableau(int d, int enj, ExpressionBinaire e, int num) {
+        super(d, num);
         this.enjambe = enj;
         this.exp = e;
+        this.numBloc = num;
     }
 
-    /**
-     * retourne l'enjambé du tableau
-     * @return l'enjambé du tableau
-     */
     @Override
     public int getEnjambe() {
         return this.enjambe;
     }
 
-    /**
-     * retourne l'expression correspondant à la taille du tableau
-     * @return l'expression correspondant à la taille du tableau
-     */
     @Override
     public ExpressionBinaire getExpression() {
         return this.exp;
     }
 
+    @Override
+    public int getNumBloc() {
+        return this.numBloc;
+    }
 }

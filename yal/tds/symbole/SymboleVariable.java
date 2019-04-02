@@ -5,26 +5,26 @@ import yal.arbre.expressions.ExpressionBinaire;
 public class SymboleVariable extends Symbole {
 
     private int dep;
+    private int numBloc;
 
     /**
      * Constructeur d'un symbole de variable
      * @param d Déplacement de la variable
+     * @param num numero de bloc de la variable
      */
-    public SymboleVariable(int d) {
+    public SymboleVariable(int d, int num) {
         this.dep = d;
+        numBloc = num;
     }
 
-    /**
-     * Retourne la valeur de déplacement de cette variable
-     * @return La valeur d déplacement
-     */
+    @Override
     public int getDeplacement() {
         return this.dep;
     }
 
     @Override
     public int getNumBloc() {
-        return 0;
+        return this.numBloc;
     }
 
     @Override

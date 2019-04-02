@@ -29,6 +29,7 @@ public class Declarer extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder string = new StringBuilder("#Déclaration - initialisation à zéro\n");
+        string.append("add $sp, $sp, -4\n");
         string.append("sw $zero, " + dep + "($s7)" + "\n"); // on place le registre 0 dans la variable
         return string.toString();
     }

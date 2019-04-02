@@ -104,6 +104,21 @@ public class TableLocale implements Iterable<TableLocale> {
         filles.add(fille);
     }
 
+    /**
+     * Récupère les tables locales filles
+     * @return les tables locales filles
+     */
+    public ArrayList<TableLocale> getFilles() {
+        return filles;
+    }
+
+    /**
+     * Definis la table locale comme pere
+     * @param pere pere de la table
+     */
+    public void setPere(TableLocale pere) {
+        this.pere = pere;
+    }
 
     /**
      * Récupère la table locale du bloc englobant

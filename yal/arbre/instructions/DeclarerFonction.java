@@ -62,12 +62,12 @@ public class DeclarerFonction extends Instruction {
         StringBuilder string = new StringBuilder();
         int cnt = Valeurs.getInstance().getNbFonctionPasse();
         Valeurs.getInstance().incrementerNbFontionPasse();
-        Valeurs.getInstance().depiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+        Valeurs.getInstance().depiler(numBloc);
         string.append("#Déclaration fonction\n");
         // Permet de sauter la fonction lors de l'exécution principal du programme
         string.append("j fonctionskip"+ cnt +"\n");
         // Entrée dans le bloc de la fonction
-        TDS.getInstance().entreeBlocVerifier(this.numBloc);
+        //TDS.getInstance().entreeBlocVerifier(this.numBloc);
         string.append(this.nom + this.params.size() + ":\n");    // Nom/Etiquette de la fonction en MIPS
         // Adresse de retour
         string.append("sw $ra, ($sp)\n");
@@ -85,7 +85,7 @@ public class DeclarerFonction extends Instruction {
         for (int i = 0 ; i < this.params.size() ; i++) {
             string.append("lw $v0, " + (12 + (this.params.size() * 4)) + "($sp)\n");
             string.append("sw $v0,"  + this.params.get(i).getDeplacement() + "($s7)\n");
-            Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
+            Valeurs.getInstance().empiler(numBloc);
             string.append("addi $sp, $sp, -4\n");
         }
         String a = this.corps.toMIPS(); // Génération du code MIPS du corps de la fonction

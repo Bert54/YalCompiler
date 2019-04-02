@@ -63,10 +63,6 @@ espace = {finDeLigne} | [ \t\f]
 
 "entier"               { return symbol(CodesLexicaux.ENTIER); }
 
-{operateur}            { return symbol(CodesLexicaux.OPER, yytext()); }
-
-"+"                    { return symbol(CodesLexicaux.OPERT, yytext()); }
-
 "-"                    { return symbol(CodesLexicaux.OPERTN, yytext()); }
 
 {operateurComp}        { return symbol(CodesLexicaux.OPELOGIQUE, yytext()); }

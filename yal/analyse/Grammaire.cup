@@ -72,14 +72,12 @@ non terminal Instruction DECL_VAR, DECL_FONCTION, DECLARATION, AFFECT, BOUCLE, C
 non terminal ArrayList<Idf> PARAMETRES, PARAMETRESDECL;
 non terminal ArrayList<ExpressionBinaire> PAR_EFF;
 
-//
-
 precedence left OPERMULTOU;
 precedence left OPERMULTET;
 precedence left OPELOGIQUET;
 precedence left OPELOGIQUE;
-precedence left OPER;
 precedence left OPERT, OPERTN;
+precedence left OPER;
 precedence left PAROUVRANTE, PARFERMANTE;
 precedence left NON;
 
@@ -89,7 +87,7 @@ precedence left NON;
 start with PROG ;
 
 PROG    ::=     PROGRAMME  IDF  DEBUT  LINST:li FIN
-                {: RESULT = li ; :}
+                {: RESULT = new Programme(lileft + 1, li) ; :}
                 ;
 
 LINST   ::=     LINST:li  INST:i
@@ -185,6 +183,10 @@ AFFECT  ::=     IDF:i EGALE EXP:e
 EXP    ::=      EXP:g OPER:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
        |
+                EXPF:g OPER:o EXP:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
+       |
+
                 EXP:g OPER:o OPERTN EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, new ExpressionBinaireNegative(dleft+1, d)); :}
        |
@@ -196,6 +198,11 @@ EXP    ::=      EXP:g OPER:o EXPF:d
        |
                 EXP:g OPERT:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
+
+       |
+                EXPF:g OPERT:o EXP:d
+                {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
+
        |
                 EXP:g OPERTN:o EXPF:d
                 {: RESULT = new ExpressionBinaire(gleft + 1, g, o, d); :}
@@ -303,7 +310,8 @@ DECL_FONCTION ::= FONCTIONT IDF:i PARAMETRES:p DEBUT LINSTF:li FIN
                 ;
 
 FONCTIONT     ::= FONCTION
-                {: TDS.getInstance().entreeBloc();:}
+                {:
+                TDS.getInstance().entreeBloc();:}
                 ;
 
 PARAMETRES    ::= PAROUVRANTE PARFERMANTE
@@ -314,7 +322,8 @@ PARAMETRES    ::= PAROUVRANTE PARFERMANTE
                 ;
 
 PARAMETRESDECL ::= ENTIER IDF:i POINTVIRGULE PARAMETRESDECL:pr
-                {:  TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc())));
+                {:
+                  TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), TDS.getInstance().getTableLocaleCourante().getNumBloc()));
                     Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
                     pr.add(new Idf(ileft+1, i));
                     RESULT = pr;
@@ -322,7 +331,7 @@ PARAMETRESDECL ::= ENTIER IDF:i POINTVIRGULE PARAMETRESDECL:pr
        |
                 ENTIER IDF:i
                 {: ArrayList<Idf> al = new ArrayList<>();
-                   TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc())));
+                   TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), TDS.getInstance().getTableLocaleCourante().getNumBloc()));
                    Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
                    al.add(new Idf(ileft+1, i));
                    RESULT = al;
@@ -330,13 +339,13 @@ PARAMETRESDECL ::= ENTIER IDF:i POINTVIRGULE PARAMETRESDECL:pr
                 ;
 
 DECL_VAR ::=    ENTIER IDF:i POINTVIRGULE
-                {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc())));
+                {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeVariable(i, ileft+1), new SymboleVariable(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), TDS.getInstance().getTableLocaleCourante().getNumBloc()));
                    Valeurs.getInstance().empiler(TDS.getInstance().getTableLocaleCourante().getNumBloc());
                    RESULT = new Declarer(ileft+1, i);
                 :}
                 |
                 ENTIER CROCHOUVRANT EXP:e CROCHFERMANT IDF:i POINTVIRGULE
-                {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeTableau(i, ileft+1), new SymboleTableau(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), 4, e));
+                {: TDS.getInstance().getTableLocaleCourante().ajouter(new EntreeTableau(i, ileft+1), new SymboleTableau(Valeurs.getInstance().getTaillePile(TDS.getInstance().getTableLocaleCourante().getNumBloc()), 4, e, TDS.getInstance().getTableLocaleCourante().getNumBloc()));
                    Valeurs.getInstance().empilerTableau(TDS.getInstance().getTableLocaleCourante().getNumBloc(), e);
                    RESULT = new DeclarerTableau(ileft+1, i, e);
                 :}

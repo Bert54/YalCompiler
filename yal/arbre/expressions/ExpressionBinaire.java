@@ -40,6 +40,7 @@ public class ExpressionBinaire extends Expression {
         string.append("lw $t8, 0($sp)\n");
         string.append("addi $sp, $sp, 4\n");
         string.append("lw $v0, 0($sp)\n");
+        System.out.println("Je suis dans expressionBinaire et mon oper :"+oper);
         switch (oper) { // opération entre les deux expressions
             case "+":
                 string.append("add $v0, $v0, $t8\n");

@@ -28,6 +28,7 @@ public class TDS {
         this.table = new HashMap<>();
         this.compteurBloc = 0;
         this.racine = new TableLocale(compteurBloc, null, 0);
+        this.racine.setPere(racine);
         this.tableLocaleCourante = this.racine;
     }
 
@@ -63,8 +64,8 @@ public class TDS {
      * @param numBloc le numéro du bloc dans lequel entrer
      */
     public void entreeBlocVerifier(int numBloc) {
-        TableLocale table = null;
-        for (TableLocale tl: this.tableLocaleCourante) {
+        TableLocale table = racine;
+        for (TableLocale tl: this.racine.getFilles()) {
             if (tl.getNumBloc() == numBloc) {
                 table = tl;
             }
